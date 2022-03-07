@@ -1,1 +1,21 @@
-Test TEXT
+Color palette: https://coolors.co/f6dfe3-fffefe-010001-fe1311-fe0150
+
+Pink Background: #f6dfe3
+White: #f6dfe3
+Black: #010001
+Main Red: #FE1311
+Main Pink: #FE0150
+
+Navigation:
+
+--- Header: ---
+Dashboard
+
+-- NavBar: ---
+Feed
+Chat
+Notifications
+
+--- Footer: ---
+Contact
+Support
