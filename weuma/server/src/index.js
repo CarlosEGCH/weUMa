@@ -19,5 +19,8 @@ app.use(express.json());
 app.use(cors({ origin: "http://localhost:4200"}));
 app.use(morgan("tiny"));
 
+//Apply routes
+app.use("/api", require("./routes/routes"));
+
 app.listen(8080);
 console.log("Server on port", 8080);
