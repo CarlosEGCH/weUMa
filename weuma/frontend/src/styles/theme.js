@@ -4,12 +4,16 @@
 import { extendTheme } from '@chakra-ui/react'
 
 // 2. Add your color mode config
-const config = {
-  initialColorMode: 'light',
-  useSystemColorMode: false,
+const colors = {
+  brand: {
+    primary: '#FCF4F5',
+    secondary: '#A3D4F1',
+    accent: '#020F5D',
+    extra: '#FCBB3F'
+  }
 }
 
 // 3. extend the theme
-const theme = extendTheme({ config })
+const theme = extendTheme({ colors })
 
 export default theme
