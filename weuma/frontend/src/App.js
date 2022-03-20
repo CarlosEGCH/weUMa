@@ -1,9 +1,11 @@
-import './App.css';
+import './styles/App.css';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { 
-  Container,
-  Menu
+
+  Container
+
  } from '@chakra-ui/react'
+ import Menu from "./components/Navbar";
 
 
 function App() {
