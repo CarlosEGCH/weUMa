@@ -3,7 +3,7 @@ import * as React from "react";
 
 import { useNavigate, Link } from "react-router-dom";
 
-import logo from '../assets/weumaLogo.png';
+import logo from '../assets/logo2SVG.svg';
 
 export default function ButtonAppBar(){
 const navigate = useNavigate();
@@ -11,7 +11,7 @@ const navigate = useNavigate();
 return (
     <Box bg="brand.primary" h="60px">
         <Grid templateColumns='repeat(12, 1fr)' gap={2} h='100%'>
-            <GridItem w='100%' h='100%' bg='red.500' colSpan={1}>
+            <GridItem w='100%' h='100%' colSpan={1}>
                 <Box h='100%'>
                     <Image boxSize='60px' marginLeft='20px' src={logo} alt='weuma logo' />
                 </Box>
