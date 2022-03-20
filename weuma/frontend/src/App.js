@@ -14,7 +14,7 @@ function App() {
       <Menu />
       <Container>
         <Routes>
-          <Route index path="/" element={"<h1>Hello</h1>"} />
+          <Route index path="/" element={"Dashboard"} />
           <Route path="/tasks/new" element={"<h1>Hello2</h1>"} />
           <Route path="/tasks/:id/edit" element={"<h1>Hello3</h1>"} />
         </Routes>
