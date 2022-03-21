@@ -1,4 +1,4 @@
-import { Image, Box, Grid, GridItem, Text, Center } from "@chakra-ui/react";
+import { Image, Box, Grid, GridItem, Text, Center, Link } from "@chakra-ui/react";
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import userImage from '../assets/user.jpg';
@@ -23,9 +23,9 @@ export default function NavUserDisplay(){
                 </GridItem>
                 <GridItem colSpan={3}>
                     <Grid templateColumns='repeat(3, 1fr)' paddingTop='10px'>
-                        <Image boxSize='40px' src={profileIcon}></Image>
-                        <Image boxSize='40px' src={storageIcon}></Image>
-                        <Image boxSize='40px' src={inboxIcon}></Image>
+                        <Link><Image boxSize='40px' src={profileIcon}></Image></Link>
+                        <Link><Image boxSize='40px' src={storageIcon}></Image></Link>
+                        <Link><Image boxSize='40px' src={inboxIcon}></Image></Link>
                     </Grid>
                 </GridItem>
             </Grid>

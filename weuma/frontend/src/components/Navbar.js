@@ -10,6 +10,7 @@ import forumIcon from '../assets/forum-icon.svg';
 import peopleIcon from '../assets/people-icon.svg';
 
 import NavUser from './NavUser';
+import LogContainer from './LogContainer'
 
 export default function ButtonAppBar(){
 const navigate = useNavigate();
@@ -61,7 +62,9 @@ return (
             <GridItem w='100%' h='100%' colSpan={3}>
                 <NavUser></NavUser>
             </GridItem>
-            <GridItem w='100%' h='100%' bg='blue.500' colSpan={2} />
+            <GridItem w='100%' h='100%' colSpan={2}>
+                <LogContainer></LogContainer>
+            </GridItem>
         </Grid>
     </Box>
 );
