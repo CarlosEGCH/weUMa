@@ -16,7 +16,7 @@ export default function ButtonAppBar(){
 const navigate = useNavigate();
 
 return (
-    <Box bg="brand.primary" h="60px">
+    <Box bg="brand.primary" h="60px" position='absolute' w='100%'>
         <Grid templateColumns='repeat(12, 1fr)' gap={2} h='100%'>
             <GridItem w='100%' h='100%' colSpan={1}>
                 <Box h='100%'>
@@ -34,7 +34,7 @@ return (
                         </Link>
                     </GridItem>
                     <GridItem>
-                        <Link to="/">
+                        <Link to="/Forum">
                             <Grid templateColumns='0.5fr 1fr'>
                                 <Image boxSize='50px' marginTop='8px' src={forumIcon} />
                                 <Text color='brand.accent' fontSize={['sm', 'md', 'lg']} marginTop='15px'>Forum</Text>

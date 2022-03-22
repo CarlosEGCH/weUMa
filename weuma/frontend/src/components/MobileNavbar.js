@@ -7,7 +7,7 @@ import logo from '../assets/logo2SVG.svg';
 export default function MobileNavbar() {
 
     return (
-        <Box bg="brand.primary">
+        <Box bg="brand.primary" position='absolute' width='100%'>
             <Flex>
                 <Center>
                     <Image src={logo} boxSize='60px' ></Image>
