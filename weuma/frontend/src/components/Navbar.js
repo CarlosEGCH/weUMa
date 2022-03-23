@@ -26,7 +26,7 @@ return (
             <GridItem w='100%' h='100%' colSpan={6}>
                 <Grid templateColumns='repeat(5, 1fr)' gap={2} h='100%'>
                     <GridItem>
-                        <Link to="/">
+                        <Link to="/faq">
                             <Grid templateColumns='0.5fr 1fr'>
                                 <Image boxSize='50px' marginTop='5px' src={mainIcon} />
                                 <Text color='brand.accent' fontSize={['sm', 'md', 'lg']} marginTop='15px'>FAQ</Text>
@@ -34,7 +34,7 @@ return (
                         </Link>
                     </GridItem>
                     <GridItem>
-                        <Link to="/Forum">
+                        <Link to="/forum">
                             <Grid templateColumns='0.5fr 1fr'>
                                 <Image boxSize='50px' marginTop='8px' src={forumIcon} />
                                 <Text color='brand.accent' fontSize={['sm', 'md', 'lg']} marginTop='15px'>Forum</Text>
@@ -42,7 +42,7 @@ return (
                         </Link>
                     </GridItem>
                     <GridItem>
-                        <Link to="/">
+                        <Link to="/people">
                             <Grid templateColumns='0.5fr 1fr'>
                                 <Image boxSize='50px' marginTop='5px' src={peopleIcon} />
                                 <Text color='brand.accent' fontSize={['sm', 'md', 'lg']} marginTop='15px'>People</Text>
@@ -50,7 +50,7 @@ return (
                         </Link>
                     </GridItem>
                     <GridItem>
-                        <Link to="/">
+                        <Link to="/tickets">
                             <Grid templateColumns='0.5fr 1fr'>
                                 <Image boxSize='50px' marginTop='5px' src={ticketIcon} />
                                 <Text color='brand.accent' fontSize={['sm', 'md', 'lg']} marginTop='15px'>Tickets</Text>

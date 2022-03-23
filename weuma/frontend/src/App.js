@@ -1,12 +1,13 @@
 import './styles/App.css';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Box, Container } from '@chakra-ui/react';
- import Menu from "./components/Navbar";
- import MobileMenu from "./components/MobileNavbar";
+import Menu from "./components/Navbar";
+import MobileMenu from "./components/MobileNavbar";
 
- import { useViewport } from './hooks/Responsive.js';
+import { useViewport } from './hooks/Responsive.js';
 
- import Dashboard from './components/Dashboard.js';
+import Dashboard from './components/Dashboard.js';
+import FAQ from './components/FAQ.js';
 
 function App() {
 
@@ -18,7 +19,7 @@ function App() {
       {width > 900 ? <Menu /> : <MobileMenu />}
         <Routes>
           <Route index path="/" element={<Dashboard />} />
-          <Route path="/tasks/new" element={"<h1>Hello2</h1>"} />
+          <Route path="/faq" element={<FAQ />} />
           <Route path="/tasks/:id/edit" element={"<h1>Hello3</h1>"} />
         </Routes>
     </BrowserRouter>
