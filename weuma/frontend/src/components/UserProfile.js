@@ -13,10 +13,8 @@ export default function UserProfile(){
 
     const { width } = useViewport();
 
-    return(<Grid h='100%' templateColumns='repeat(6, 1fr)'>
-            <Box position='relative' top={['20px', '70px', '70px']} left={['18%', '20px', '30px']}>
-                <Text fontSize={['5vw', '35px', '40px']} color='brand.accent'>Profile</Text>
-            </Box>
+    return(
+        <Grid h='100%' templateColumns='repeat(6, 1fr)'>
             <GridItem h='100%' p='150px 40px 0px 40px' colStart='1' colEnd={ width > 900 ? 5 : 7 }>
                 <Flex flexDirection='column'>
                     <Flex flexDirection={width > 900 ? 'row' : 'column'}>
