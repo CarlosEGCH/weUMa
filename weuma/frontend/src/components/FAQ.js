@@ -22,7 +22,7 @@ export default function FaqPage(){
                     <QList />
                 </Center>
             </GridItem>
-            <GridItem colStart={6} bg='red' display={ width > 900 ? 'initial' : 'none' }>
+            <GridItem colStart={6} display={ width > 900 ? 'initial' : 'none' }>
                 <RightSideBar />
             </GridItem>
         </Grid>

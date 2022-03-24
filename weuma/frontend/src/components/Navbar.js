@@ -20,7 +20,9 @@ return (
         <Grid templateColumns='repeat(12, 1fr)' gap={2} h='100%'>
             <GridItem w='100%' h='100%' colSpan={1}>
                 <Box h='100%'>
-                    <Image boxSize='60px' marginLeft='10px' src={logo} alt='weuma logo' />
+                    <Link to='/'>
+                        <Image boxSize='60px' marginLeft='10px' src={logo} alt='weuma logo' />
+                    </Link>
                 </Box>
             </GridItem>
             <GridItem w='100%' h='100%' colSpan={6}>
