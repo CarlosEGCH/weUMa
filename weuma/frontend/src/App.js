@@ -10,6 +10,7 @@ import Dashboard from './components/Dashboard.js';
 import FAQ from './components/FAQ.js';
 import Forum from './components/Forum.js';
 import People from './components/People.js';
+import Tickets from './components/Tickets.js';
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
           <Route path="/faq" element={<FAQ />} />
           <Route path="/forum" element={<Forum />} />
           <Route path="/people" element={<People />} />
+          <Route path="/tickets" element={<Tickets />} />
         </Routes>
     </BrowserRouter>
     </Box>
