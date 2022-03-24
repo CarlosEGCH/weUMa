@@ -18,7 +18,7 @@ function App() {
   const { width } = useViewport();
 
   return (
-    <Box bg='brand.primary'>
+    <Box height='100vh' bg='brand.primary'>
       <BrowserRouter>
       {width > 900 ? <Menu /> : <MobileMenu />}
         <Routes>
