@@ -11,13 +11,14 @@ import FAQ from './components/FAQ.js';
 import Forum from './components/Forum.js';
 import People from './components/People.js';
 import Tickets from './components/Tickets.js';
+import UserProfile from './components/UserProfile';
 
 function App() {
 
   const { width } = useViewport();
 
   return (
-    <Box bg='brand.primary' h='100vh'>
+    <Box bg='brand.primary'>
       <BrowserRouter>
       {width > 900 ? <Menu /> : <MobileMenu />}
         <Routes>
@@ -26,7 +27,7 @@ function App() {
           <Route path="/forum" element={<Forum />} />
           <Route path="/people" element={<People />} />
           <Route path="/tickets" element={<Tickets />} />
-          <Route path="/profile/:id" element={"Hello world"} />
+          <Route path="/profile/:id" element={<UserProfile />} />
         </Routes>
     </BrowserRouter>
     </Box>

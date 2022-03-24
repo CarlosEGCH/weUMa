@@ -9,13 +9,13 @@ import infoalunosImage from '../assets/infoalunos.png';
 export default function RightSideBar(){
 
     return(
-        <Grid autoFlow='row' templateRows='1fr 0.3fr' h='100%'>
-            <GridItem h='100%' pt='70px' borderBottom='1px solid black'>
+        <Flex flexDirection={'column'} h='800px'>
+            <Box h='100%' pt='70px' borderBottom='1px solid black'>
                 <Center borderBottom='1px solid black'>
                     <Text fontSize='20px' color='brand.accent' >Administrators</Text>
                 </Center>
                 <AdminsList></AdminsList>
-            </GridItem>
+            </Box>
             <GridItem>
                 <Center>
                     <Text fontSize='20px' color='brand.accent' >Shortcuts</Text>
@@ -37,6 +37,6 @@ export default function RightSideBar(){
                     </Link>
                 </Box>
             </GridItem>
-        </Grid>
+        </Flex>
     );
 }
