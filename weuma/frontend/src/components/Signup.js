@@ -1,0 +1,29 @@
+import * as React from 'react';
+import { Text, Center, Grid, GridItem, Box } from '@chakra-ui/react';
+
+import RightSideBar from './RightBar';
+import SignupForm from './SignupForm';
+
+import { useViewport } from '../hooks/Responsive';
+
+import ticketImage from '../assets/ticketBg.svg';
+
+export default function Signup(){
+
+    const { width } = useViewport();
+
+    return(
+        <Grid h='100%' templateColumns='repeat(6, 1fr)' backgroundImage={ticketImage} backgroundRepeat='no-repeat' backgroundPosition={['center center', '40px 80px', '100px 100px']}>
+            <GridItem h='100%' colStart={ width > 900 ? 2 : 1 } colEnd={ width > 900 ? 5 : 7 }>
+                <Center h='900px'>
+                    <Box w={['100%','60%','60%']}>
+                        <SignupForm />
+                    </Box>
+                </Center>
+            </GridItem>
+            <GridItem colStart={6} display={ width > 900 ? 'initial' : 'none' }>
+                <RightSideBar />
+            </GridItem>
+        </Grid>
+    );
+}

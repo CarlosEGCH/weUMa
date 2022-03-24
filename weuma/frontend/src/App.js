@@ -13,6 +13,7 @@ import People from './components/People.js';
 import Tickets from './components/Tickets.js';
 import UserProfile from './components/UserProfile';
 import Categories from './components/CategoryList';
+import Signup from './components/Signup';
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
           <Route path="/tickets" element={<Tickets />} />
           <Route path="/profile/:id" element={<UserProfile />} />
           <Route path="/faq/:category" element={<FAQ />} />
+          <Route path="/signup" element={<Signup />} />
         </Routes>
     </BrowserRouter>
     </Box>
