@@ -8,6 +8,7 @@ import { useViewport } from './hooks/Responsive.js';
 
 import Dashboard from './components/Dashboard.js';
 import FAQ from './components/FAQ.js';
+import Forum from './components/Forum.js';
 
 function App() {
 
@@ -20,7 +21,7 @@ function App() {
         <Routes>
           <Route index path="/" element={<Dashboard />} />
           <Route path="/faq" element={<FAQ />} />
-          <Route path="/tasks/:id/edit" element={"<h1>Hello3</h1>"} />
+          <Route path="/forum" element={<Forum />} />
         </Routes>
     </BrowserRouter>
     </Box>

@@ -13,7 +13,7 @@ export default function FaqPage(){
     const { width } = useViewport();
 
     return(
-        <Grid h='100%' templateColumns='repeat(6, 1fr)'backgroundImage={faqImage} backgroundRepeat='no-repeat' backgroundPosition={['center center', '40px 80px', '100px 100px']}>
+        <Grid h='100%' templateColumns='repeat(6, 1fr)' backgroundImage={faqImage} backgroundRepeat='no-repeat' backgroundPosition={['center center', '40px 80px', '100px 100px']}>
             <Box position='absolute' top={['20px', '70px', '70px']} left={['18%', '20px', '30px']}>
                 <Text fontSize={['5vw', '35px', '40px']} color='brand.accent'>Frequently Asked Questions</Text>
             </Box>
