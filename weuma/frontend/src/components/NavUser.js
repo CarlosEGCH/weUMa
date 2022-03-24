@@ -10,6 +10,8 @@ import inboxIcon from '../assets/inbox-icon.svg';
 export default function NavUserDisplay(){
     const navigate = useNavigate();
 
+    const userId = 2501;
+
     return (
         <Box>
             <Grid templateColumns='repeat(6, 1fr)' h='60px'>
@@ -23,9 +25,9 @@ export default function NavUserDisplay(){
                 </GridItem>
                 <GridItem colSpan={3}>
                     <Grid templateColumns='repeat(3, 1fr)' paddingTop='10px'>
-                        <Link><Image boxSize='40px' src={profileIcon}></Image></Link>
-                        <Link><Image boxSize='40px' src={storageIcon}></Image></Link>
-                        <Link><Image boxSize='40px' src={inboxIcon}></Image></Link>
+                        <Link onClick={() => {navigate(`/profile/${userId}`)}} w='40px'><Image boxSize='40px' src={profileIcon}></Image></Link>
+                        <Link w='40px'><Image boxSize='40px' src={storageIcon}></Image></Link>
+                        <Link w='40px'><Image boxSize='40px' src={inboxIcon}></Image></Link>
                     </Grid>
                 </GridItem>
             </Grid>

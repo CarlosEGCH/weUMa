@@ -26,6 +26,7 @@ function App() {
           <Route path="/forum" element={<Forum />} />
           <Route path="/people" element={<People />} />
           <Route path="/tickets" element={<Tickets />} />
+          <Route path="/profile/:id" element={"Hello world"} />
         </Routes>
     </BrowserRouter>
     </Box>

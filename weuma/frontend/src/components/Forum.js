@@ -19,21 +19,21 @@ export default function ForumPage(){
     return(
         <Grid h='100%' templateColumns='repeat(6, 1fr)' backgroundImage={forumImage} backgroundRepeat='no-repeat' backgroundPosition={['center center', '40px 80px', '100px 140px']}>
             <GridItem h='100%'>
-                <Box position='absolute' top={['20px', '70px', '70px']} left={['18%', '20px', '30px']}>
+                <Box position='absolute' top={['20px', '20px', '70px']} left={['35vw', '40vw', '30px']}>
                 <Text fontSize={['5vw', '35px', '40px']} color='brand.accent'>Live Forum</Text>
             </Box>
             </GridItem>
-            <GridItem colSpan={4} paddingTop='80px' paddingX='40px'>
+            <GridItem mt='20px' colSpan={width > 900 ? 4 : 6} padding={ width > 900 ? '80px 40px 0px 40px' : '0px 0px 0px 0px'}>
                 <Box>
-                    <Text color='brand.accent' fontSize='30px'>Admission</Text>
+                    <Text color='brand.accent' fontSize='30px' textAlign='center'>Admission</Text>
                 </Box>
-                <Box bg='pink' h='700px' mb='30px' borderBottom='2px solid black'>
+                <Box bg='pink' h={['75vh', '700px', '700px']} mb='30px' borderBottom='2px solid black'>
                     <ChatDisplay />
                 </Box>
-                <Flex flexDirection='row' px='40px'>
+                <Flex flexDirection='row' px={['5px', '40px', '40px']}>
                     <Image borderRadius='full' boxSize='40px' src={userImage} />
                     <InputGroup border='black'>
-                        <Input _hover={{border: '1px solid black'}} _placeholder={{color: 'brand.accent'}} color='brand.accent' focusBorderColor='brand.accent' ml='20px' p='20px 160px 20px 20px' placeholder='Write a message...' />
+                        <Input _hover={{border: '1px solid black'}} _placeholder={{color: 'brand.accent'}} color='brand.accent' focusBorderColor='brand.accent' ml='20px' p={['20px 105px 20px 20px','20px 160px 20px 20px','20px 160px 20px 20px']} placeholder='Write a message...' />
                         <InputRightElement 
                             mr='55px'
                             children={
