@@ -19,7 +19,7 @@ export default function TicketsPage(){
             </Box>
             <GridItem h='100%' colStart={ width > 900 ? 2 : 1 } colEnd={ width > 900 ? 5 : 7 }>
                 <Center h='900px'>
-                    <Box w='60%'>
+                    <Box w={['100%','60%','60%']}>
                         <TicketForm />
                     </Box>
                 </Center>
