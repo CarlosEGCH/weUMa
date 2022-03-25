@@ -14,6 +14,7 @@ import Tickets from './components/Tickets.js';
 import UserProfile from './components/UserProfile';
 import Categories from './components/CategoryList';
 import Signup from './components/Signup';
+import Login from './components/Login';
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
           <Route path="/profile/:id" element={<UserProfile />} />
           <Route path="/faq/:category" element={<FAQ />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path='/login' element={<Login />} />
         </Routes>
     </BrowserRouter>
     </Box>

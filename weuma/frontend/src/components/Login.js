@@ -2,11 +2,11 @@ import * as React from 'react';
 import { Text, Center, Grid, GridItem, Box } from '@chakra-ui/react';
 
 import RightSideBar from './RightBar';
-import SignupForm from './SignupForm';
+import LoginForm from './LoginForm';
 
 import { useViewport } from '../hooks/Responsive';
 
-export default function Signup(){
+export default function Login(){
 
     const { width } = useViewport();
 
@@ -15,7 +15,7 @@ export default function Signup(){
             <GridItem h='100%' colStart={ width > 900 ? 2 : 1 } colEnd={ width > 900 ? 5 : 7 }>
                 <Center h='900px'>
                     <Box w={['100%','60%','60%']}>
-                        <SignupForm />
+                        <LoginForm />
                     </Box>
                 </Center>
             </GridItem>
