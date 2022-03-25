@@ -8,7 +8,7 @@ import friendUser from '../assets/elon.jpg';
 export default function ChatDisplay(){
 
     return(
-        <Flex flexDirection='column' height='100%' bg='#FFEEF1' p='10px' overflow='auto' gap='20px'>
+        <Flex flexDirection='column' height='100%' bg='#FFEEF1' p='10px' overflow='auto' gap='20px' shadow={'inner'}>
             <Message received userImage={friendUser} />
             <Message/>
             <Message/>

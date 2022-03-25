@@ -19,7 +19,7 @@ export default function PeoplePage(){
                 <Text fontSize={['5vw', '35px', '40px']} color='brand.accent'>People</Text>
             </Box>
             <GridItem h='100%' colStart={ width > 900 ? 2 : 1 } colEnd={ width > 900 ? 5 : 7 }>
-                <Center marginTop='150px'>
+                <Center marginTop='150px' shadow={'lg'}>
                     <PeopleSearch></PeopleSearch>
                 </Center>
             </GridItem>
