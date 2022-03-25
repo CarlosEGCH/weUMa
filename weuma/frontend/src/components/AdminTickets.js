@@ -3,6 +3,7 @@ import { Text, Center, Grid, GridItem, Box } from '@chakra-ui/react';
 
 import RightSideBar from './RightBar.js';
 import TicketsList from './TicketsList';
+import AdminTicketUI from './AdminTicketUI.js';
 
 import { useViewport } from '../hooks/Responsive.js';
 
@@ -20,9 +21,11 @@ export default function AdminTickets(){
                 </Box>
                 <TicketsList />
             </GridItem>
-            <GridItem h='100%' colStart={ width > 900 ? 2 : 1 } colEnd={ width > 900 ? 5 : 7 }>
-                <Center marginTop='300px'>
-                </Center>
+            <GridItem h='100%' colStart={ width > 900 ? 2 : 1 } colEnd={ width > 900 ? 5 : 7 } pt='100px' pl='20px'>
+                    <AdminTicketUI />
+                    <AdminTicketUI />
+                    <AdminTicketUI />
+                    <AdminTicketUI />
             </GridItem>
             <GridItem colStart={6} display={ width > 900 ? 'initial' : 'none' }>
                 <RightSideBar />
