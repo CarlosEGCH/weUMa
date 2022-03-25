@@ -16,7 +16,7 @@ const bcrypt = require("bcrypt");
 
 //Apply JSON reading, CORS policy and morgan
 app.use(express.json());
-app.use(cors({ origin: "http://localhost:4200"}));
+app.use(cors({ origin: "http://localhost:3000"}));
 app.use(morgan("tiny"));
 
 //Apply routes

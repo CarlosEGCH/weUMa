@@ -14,7 +14,7 @@ export default function MobileNavbar() {
                 </Center>
                 <Spacer />
                 <Center paddingRight='10px'>
-                    <MenuDrawer></MenuDrawer>
+                    <MenuDrawer isLogged role='user'></MenuDrawer>
                 </Center>
             </Flex>
         </Box>

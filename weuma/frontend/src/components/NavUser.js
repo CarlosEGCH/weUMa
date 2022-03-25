@@ -7,12 +7,14 @@ import profileIcon from '../assets/user-icon.svg';
 import storageIcon from '../assets/storage-icon.svg';
 import inboxIcon from '../assets/inbox-icon.svg';
 
-export default function NavUserDisplay(){
+export default function NavUserDisplay(props){
     const navigate = useNavigate();
 
     const userId = 2501;
 
-    return (
+    if(props.isLogged){
+        if(props.role == 'admin'){
+            return (
         <Box>
             <Grid templateColumns='repeat(6, 1fr)' h='60px'>
                 <GridItem colSpan={1}>
@@ -31,6 +33,32 @@ export default function NavUserDisplay(){
                     </Grid>
                 </GridItem>
             </Grid>
-        </Box>
-    )
+        </Box>)
+
+        }else if(props.role == 'user'){
+            return (
+        <Box>
+            <Grid templateColumns='repeat(6, 1fr)' h='60px'>
+                <GridItem colSpan={1}>
+                    <Center h='100%'>
+                        <Image borderRadius='full' boxSize='50px' src={userImage}></Image>
+                    </Center>
+                </GridItem>
+                <GridItem colSpan={2}>
+                    <Center h='100%'><Text fontSize='20' color='brand.accent'>Carlos Gomes</Text></Center>
+                </GridItem>
+                <GridItem colSpan={3}>
+                    <Grid templateColumns='repeat(3, 1fr)' paddingTop='10px'>
+                        <Link onClick={() => {navigate(`/profile/${userId}`)}} w='40px'><Image boxSize='40px' src={profileIcon}></Image></Link>
+                    </Grid>
+                </GridItem>
+            </Grid>
+        </Box>)
+        }
+    }else{
+        return (
+        <Box>
+
+        </Box>)
+    }
 }

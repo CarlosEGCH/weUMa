@@ -15,7 +15,7 @@ export default function UserProfile(){
 
     return(
         <Grid h='100%' templateColumns='repeat(6, 1fr)'>
-            <GridItem h='100%' p='150px 40px 0px 40px' colStart='1' colEnd={ width > 900 ? 5 : 7 }>
+            <GridItem h='100%' p='100px 40px 0px 40px' colStart='1' colEnd={ width > 900 ? 5 : 7 }>
                 <Flex flexDirection='column'>
                     <Flex flexDirection={width > 900 ? 'row' : 'column'}>
                     <Image src={elonImage} boxSize='300px' borderRadius={'10px'} />

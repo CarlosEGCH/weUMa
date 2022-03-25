@@ -15,7 +15,7 @@ import inboxIcon from '../assets/inbox-icon.svg';
 import userImage from '../assets/user.jpg';
 import { useNavigate } from 'react-router-dom';
 
-export default function DrawerExample() {
+export default function DrawerExample(props) {
 
   const navigate = useNavigate();
 
@@ -37,7 +37,7 @@ export default function DrawerExample() {
         <DrawerContent bg='brand.secondary'>
           <DrawerCloseButton color='brand.accent' />
           <DrawerHeader color='brand.accent'>
-            <Center>
+                <Center display={props.isLogged ? 'flex' : 'none'}>
                   <Image boxSize='60px' borderRadius='full' src={userImage}></Image>
                   <Text color='brand.accent' ml='10px' fontSize='20px'>Carlos Gomes</Text>
                 </Center>
@@ -55,8 +55,8 @@ export default function DrawerExample() {
               <GridItem rowSpan={2}>
                 <Center h='100%'>
                   <Link onClick={()=>{navigate(`/profile/${123}`)}}><Image boxSize='60px' src={profileIcon}/></Link>
-                  <Link onClick={()=>{navigate(`/admin/tickets/${123}`)}}><Image boxSize='60px' ml='20px' mr='20px' src={storageIcon}/></Link>
-                  <Link onClick={()=>{navigate(`/admin/shortcuts/${123}`)}}><Image boxSize='60px' src={inboxIcon}/></Link>
+                  <Link display={props.role == 'admin' ? 'flex' : 'none'} onClick={()=>{navigate(`/admin/tickets/${123}`)}}><Image boxSize='60px' ml='20px' mr='20px' src={storageIcon}/></Link>
+                  <Link display={props.role == 'admin' ? 'flex' : 'none'} onClick={()=>{navigate(`/admin/shortcuts/${123}`)}}><Image boxSize='60px' src={inboxIcon}/></Link>
                 </Center>
               </GridItem>
               <GridItem rowStart='4'>
@@ -95,9 +95,17 @@ export default function DrawerExample() {
           </DrawerBody>
 
           <DrawerFooter>
-            <Button variant='outline' bg='brand.accent' mr={3} onClick={onClose}>
-              Logout
+            <Button display={props.isLogged ? 'initial' : 'none'} variant='outline' bg='brand.accent' mr={3} onClick={onClose}>
+                Logout
             </Button>
+            <Flex display={!props.isLogged ? 'flex' : 'none'} flexDirection={'row'}>
+              <Button variant='outline' bg='brand.accent' mr={3} onClick={onClose}>
+                Log In
+            </Button>
+            <Button variant='outline' bg='brand.accent' mr={3} onClick={onClose}>
+                Sign Up
+            </Button>
+            </Flex>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
