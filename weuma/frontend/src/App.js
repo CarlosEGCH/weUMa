@@ -22,7 +22,16 @@ function App() {
   const { width } = useViewport();
 
   return (
-    <Box height='100vh' bg='brand.primary' overflow='auto'>
+    <Box height='100vh' bg='brand.primary' overflow='auto' sx={{
+    '&::-webkit-scrollbar': {
+      width: '12px',
+      borderRadius: '8px',
+      backgroundColor: `rgba(0, 0, 0, 0.05)`,
+    },
+    '&::-webkit-scrollbar-thumb': {
+      backgroundColor: `rgba(0, 0, 0, 0.2)`,
+    },
+  }}>
       <BrowserRouter>
       {width > 900 ? <Menu /> : <MobileMenu />}
         <Routes>
@@ -35,7 +44,7 @@ function App() {
           <Route path="/faq/:category" element={<FAQ />} />
           <Route path="/signup" element={<Signup />} />
           <Route path='/login' element={<Login />} />
-          <Route path='/admin/tickets' element={<AdminTickets />} />
+          <Route path='/admin/tickets/:id' element={<AdminTickets />} />
         </Routes>
     </BrowserRouter>
     </Box>

@@ -26,7 +26,7 @@ export default function NavUserDisplay(){
                 <GridItem colSpan={3}>
                     <Grid templateColumns='repeat(3, 1fr)' paddingTop='10px'>
                         <Link onClick={() => {navigate(`/profile/${userId}`)}} w='40px'><Image boxSize='40px' src={profileIcon}></Image></Link>
-                        <Link w='40px'><Image boxSize='40px' src={storageIcon}></Image></Link>
+                        <Link onClick={() => {navigate(`/admin/tickets/${userId}`)}} w='40px'><Image boxSize='40px' src={storageIcon}></Image></Link>
                         <Link w='40px'><Image boxSize='40px' src={inboxIcon}></Image></Link>
                     </Grid>
                 </GridItem>

@@ -6,7 +6,7 @@ import arrowIcon from '../assets/arrow-icon.svg';
 export default function TicketItem(){
 
     return(
-        <Flex bg='brand.secondary' flexDirection={'column'} p='8px' borderBottom='1px solid black'>
+        <Flex my='16px' bg='brand.secondary' flexDirection={'column'} p='8px' shadow={'md'}>
            <Flex flexDirection='row' color='brand.accent'>
                 <Text fontSize='20px'>Where to find books</Text>
                 <Spacer />

@@ -7,7 +7,17 @@ import TicketItem from './TicketItem';
 export default function TicketsList(){
 
     return(
-        <Flex flexDirection={'column'} h='800px' overflow='auto'>
+        <Flex flexDirection={'column'} h='800px' overflow='auto' 
+    sx={{
+    '&::-webkit-scrollbar': {
+      width: '12px',
+      borderRadius: '8px',
+      backgroundColor: `rgba(0, 0, 0, 0.05)`,
+    },
+    '&::-webkit-scrollbar-thumb': {
+      backgroundColor: `rgba(0, 0, 0, 0.2)`,
+    },
+  }}>
             
                 <TicketItem />
                 <TicketItem />

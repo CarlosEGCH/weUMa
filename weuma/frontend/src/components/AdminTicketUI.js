@@ -8,7 +8,7 @@ import imageIcon from '../assets/chat-image-icon.svg'
 export default function AdminTicketUI(){
 
     return(
-        <Flex my='18px' bg='brand.secondary' flexDirection={'column'} p='10px' borderBottom='1px solid black'>
+        <Flex shadow={'lg'} my='18px' bg='brand.secondary' flexDirection={'column'} p='10px'>
            <Flex flexDirection='row' color='brand.accent'>
                 <Text fontSize='20px'>Where to find books</Text>
                 <Spacer />

@@ -13,20 +13,25 @@ export default function AdminTickets(){
 
     return(
         <Grid h='100%' templateColumns='repeat(6, 1fr)'>
-            <GridItem colStart={1} display={ width > 900 ? 'initial' : 'none' }>
+            <GridItem colStart={1} colEnd={ width > 900 ? 2 : 7}>
                 <Box pt='70px' borderBottom='1px solid black'>
-                <Center borderBottom='1px solid black'>
-                    <Text fontSize='20px' color='brand.accent' >Support Tickets</Text>
-                </Center>
+                    <Center borderBottom='1px solid black'>
+                        <Text fontSize='20px' color='brand.accent' >Support Tickets</Text>
+                    </Center>
                 </Box>
                 <TicketsList />
             </GridItem>
-            <GridItem h='100%' colStart={ width > 900 ? 2 : 1 } colEnd={ width > 900 ? 5 : 7 } pt='100px' pl='20px'>
-                    <AdminTicketUI />
-                    <AdminTicketUI />
-                    <AdminTicketUI />
-                    <AdminTicketUI />
+
+            <GridItem h='100%' colStart={ width > 900 ? 2 : 1 } colEnd={ width > 900 ? 5 : 7 } display={ width > 900 ? 'initial' : 'none' } pt='100px' pl='20px'>
+                <AdminTicketUI />
+                <AdminTicketUI />
+                <AdminTicketUI />
+                <AdminTicketUI />
+                <AdminTicketUI />
+                <AdminTicketUI />
+                <AdminTicketUI />
             </GridItem>
+
             <GridItem colStart={6} display={ width > 900 ? 'initial' : 'none' }>
                 <RightSideBar />
             </GridItem>
