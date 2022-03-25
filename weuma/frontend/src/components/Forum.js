@@ -11,6 +11,16 @@ import userImage from '../assets/user.jpg';
 import shortcutIcon from '../assets/chat-shortcut-icon.svg'
 import emoteIcon from '../assets/chat-emote-icon.svg'
 import imageIcon from '../assets/chat-image-icon.svg'
+import admissionIcon from '../assets/admission-button.svg';
+import documentsIcon from '../assets/documents-button.svg';
+import resourcesIcon from '../assets/resources-button.svg';
+import educationIcon from '../assets/education-button.svg';
+import guideIcon from '../assets/guide-button.svg';
+import lostIcon from '../assets/lost-button.svg';
+import ticketIcon from '../assets/ticket-button.svg';
+import paymentsIcon from '../assets/payments-button.svg';
+import shopIcon from '../assets/shop-button.svg';
+import transportIcon from '../assets/transport-button.svg';
 
 export default function ForumPage(){
 
@@ -20,10 +30,22 @@ export default function ForumPage(){
         <Grid h='100%' templateColumns='repeat(6, 1fr)' backgroundImage={forumImage} backgroundRepeat='no-repeat' backgroundPosition={['center center', '40px 80px', '100px 140px']}>
             <GridItem h='100%'>
                 <Box position='absolute' top={['20px', '20px', '70px']} left={['35vw', '40vw', '30px']}>
-                <Text fontSize={['5vw', '35px', '40px']} color='brand.accent'>Live Forum</Text>
-            </Box>
+                    <Text fontSize={['5vw', '35px', '40px']} color='brand.accent'>Live Forum</Text>
+                </Box>
+                <Flex flexDirection={'column'} h='100%' pt='300px' pl='20px' gap={5} display={ width > 900 ? 'flex' : 'none'}>
+                    <Text color='brand.accent' fontSize={'30px'}>Topics</Text>
+                    <Flex><Image boxSize={'40px'} src={admissionIcon} /><Text color='brand.accent' alignSelf={'center'} fontSize='20px'>Admission</Text></Flex>
+                    <Flex><Image boxSize={'40px'} src={educationIcon} /><Text color='brand.accent' alignSelf={'center'} fontSize='20px'>Education</Text></Flex>
+                    <Flex><Image boxSize={'40px'} src={resourcesIcon} /><Text color='brand.accent' alignSelf={'center'} fontSize='20px'>Resources</Text></Flex>
+                    <Flex><Image boxSize={'40px'} src={guideIcon} /><Text color='brand.accent' alignSelf={'center'} fontSize='20px'>Guide</Text></Flex>
+                    <Flex><Image boxSize={'40px'} src={paymentsIcon} /><Text color='brand.accent' alignSelf={'center'} fontSize='20px'>Payments</Text></Flex>
+                    <Flex><Image boxSize={'40px'} src={lostIcon} /><Text color='brand.accent' alignSelf={'center'} fontSize='20px'>Lost & Found</Text></Flex>
+                    <Flex><Image boxSize={'40px'} src={ticketIcon} /><Text color='brand.accent' alignSelf={'center'} fontSize='20px'>Support Tickets</Text></Flex>
+                    <Flex><Image boxSize={'40px'} src={transportIcon} /><Text color='brand.accent' alignSelf={'center'} fontSize='20px'>Transport</Text></Flex>
+                    <Flex><Image boxSize={'40px'} src={shopIcon} /><Text color='brand.accent' alignSelf={'center'} fontSize='20px'>Shop & Merch</Text></Flex>
+                </Flex>
             </GridItem>
-            <GridItem mt='20px' colSpan={width > 900 ? 4 : 6} padding={ width > 900 ? '80px 40px 0px 40px' : '0px 0px 0px 0px'}>
+            <GridItem mt='20px' colSpan={width > 900 ? 4 : 6} padding={ width > 900 ? '80px 20px 0px 20px' : '0px 0px 0px 0px'}>
                 <Box>
                     <Text color='brand.accent' fontSize='30px' textAlign='center'>Admission</Text>
                 </Box>

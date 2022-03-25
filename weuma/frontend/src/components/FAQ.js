@@ -18,7 +18,7 @@ export default function FaqPage(){
                 <Text fontSize={['5vw', '35px', '40px']} color='brand.accent'>Frequently Asked Questions</Text>
             </Box>
             <GridItem h='100%' colStart={ width > 900 ? 2 : 1 } colEnd={ width > 900 ? 5 : 7 }>
-                <Center marginTop='300px'>
+                <Center marginTop={['100px','300px','300px']}>
                     <QList />
                 </Center>
             </GridItem>

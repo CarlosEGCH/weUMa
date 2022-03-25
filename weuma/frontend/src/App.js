@@ -16,6 +16,7 @@ import Categories from './components/CategoryList';
 import Signup from './components/Signup';
 import Login from './components/Login';
 import AdminTickets from './components/AdminTickets';
+import AdminShortcuts from './components/AdminShortcuts';
 
 function App() {
 
@@ -29,7 +30,7 @@ function App() {
       backgroundColor: `rgba(0, 0, 0, 0.05)`,
     },
     '&::-webkit-scrollbar-thumb': {
-      backgroundColor: `rgba(0, 0, 0, 0.2)`,
+      backgroundColor: `rgba(0, 0, 0, 0.4)`,
     },
   }}>
       <BrowserRouter>
@@ -45,6 +46,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path='/login' element={<Login />} />
           <Route path='/admin/tickets/:id' element={<AdminTickets />} />
+          <Route path="/admin/shortcuts/:id" element={<AdminShortcuts />} />
         </Routes>
     </BrowserRouter>
     </Box>

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Text, Spacer, Flex, Center, Grid, GridItem, Button, Drawer, DrawerOverlay, DrawerCloseButton, DrawerBody, Input,
+import { Link, Text, Spacer, Flex, Center, Grid, GridItem, Button, Drawer, DrawerOverlay, DrawerCloseButton, DrawerBody, Input,
      DrawerHeader, DrawerFooter, DrawerContent, useDisclosure, Image} from '@chakra-ui/react';
 import menuIcon from '../assets/hamburger-icon.svg';
 
@@ -13,8 +13,12 @@ import storageIcon from '../assets/storage-icon.svg';
 import inboxIcon from '../assets/inbox-icon.svg';
 
 import userImage from '../assets/user.jpg';
+import { useNavigate } from 'react-router-dom';
 
 export default function DrawerExample() {
+
+  const navigate = useNavigate();
+
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = React.useRef()
 
@@ -50,34 +54,42 @@ export default function DrawerExample() {
               </GridItem>
               <GridItem rowSpan={2}>
                 <Center h='100%'>
-                  <Image boxSize='60px' src={profileIcon}></Image>
-                  <Image boxSize='60px' ml='20px' mr='20px' src={storageIcon}></Image>
-                  <Image boxSize='60px' src={inboxIcon}></Image>
+                  <Link onClick={()=>{navigate(`/profile/${123}`)}}><Image boxSize='60px' src={profileIcon}/></Link>
+                  <Link onClick={()=>{navigate(`/admin/tickets/${123}`)}}><Image boxSize='60px' ml='20px' mr='20px' src={storageIcon}/></Link>
+                  <Link onClick={()=>{navigate(`/admin/shortcuts/${123}`)}}><Image boxSize='60px' src={inboxIcon}/></Link>
                 </Center>
               </GridItem>
               <GridItem rowStart='4'>
-                <Center>
-                      <Image boxSize='60px' src={mainIcon} mr='20px'></Image>
-                      <Text fontSize='30px' color='brand.accent'>FAQ</Text>
-                </Center>
+                <Link onClick={()=>{navigate(`/faq`)}}>
+                  <Center>
+                        <Image boxSize='60px' src={mainIcon} mr='20px'></Image>
+                        <Text fontSize='30px' color='brand.accent'>FAQ</Text>
+                  </Center>
+                </Link>
               </GridItem>
               <GridItem rowStart='5'>
-                <Center>
+                <Link onClick={()=>{navigate(`/forum`)}}>
+                  <Center>
                       <Image boxSize='60px' src={ticketIcon} mr='20px'></Image>
                       <Text fontSize='30px' color='brand.accent'>Forum</Text>
-                </Center>
+                  </Center>
+                </Link>
               </GridItem>
               <GridItem rowStart='6'>
-                <Center>
+                <Link onClick={()=>{navigate(`/people`)}}>
+                  <Center>
                       <Image boxSize='60px' src={forumIcon} mr='20px'></Image>
                       <Text fontSize='30px' color='brand.accent'>People</Text>
-                </Center>
+                  </Center>
+                </Link>
               </GridItem>
               <GridItem rowStart='7'>
-                <Center>
+                <Link onClick={()=>{navigate(`/tickets`)}}>
+                  <Center>
                       <Image boxSize='60px' src={peopleIcon} mr='20px'></Image>
                       <Text fontSize='30px' color='brand.accent'>Tickets</Text>
-                </Center>
+                  </Center>
+                </Link>
               </GridItem>
             </Grid>
           </DrawerBody>
