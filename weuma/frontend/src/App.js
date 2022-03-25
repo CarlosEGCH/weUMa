@@ -15,6 +15,7 @@ import UserProfile from './components/UserProfile';
 import Categories from './components/CategoryList';
 import Signup from './components/Signup';
 import Login from './components/Login';
+import AdminTickets from './components/AdminTickets';
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
           <Route path="/faq/:category" element={<FAQ />} />
           <Route path="/signup" element={<Signup />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/admin/tickets' element={<AdminTickets />} />
         </Routes>
     </BrowserRouter>
     </Box>
