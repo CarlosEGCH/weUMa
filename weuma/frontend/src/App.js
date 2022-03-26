@@ -20,6 +20,8 @@ import AdminShortcuts from './components/AdminShortcuts';
 import { useState } from 'react';
 import Cookies from 'universal-cookie';
 
+import ProtectedRoute from './hooks/ProtectedRoute';
+
 function App() {
 
   const { width } = useViewport();
@@ -71,17 +73,41 @@ function App() {
       <BrowserRouter>
       {width > 900 ? <Menu /> : <MobileMenu />}
         <Routes>
-          <Route index path="/" onChange={() => {}} element={<Dashboard />} />
+          <Route index path="/" element={<Dashboard />} />
           <Route path="/faq" element={<Categories />} />
-          <Route path="/forum" element={<Forum isLogged={logged} />} />
-          <Route path="/people" element={<People />} />
-          <Route path="/tickets" element={<Tickets />} />
-          <Route path="/profile/:id" element={<UserProfile />} />
+          <Route path="/forum" element={
+            <ProtectedRoute logged={logged} path='/login'>
+              <Forum />
+            </ProtectedRoute>
+          } />
+          <Route path="/people" element={
+            <ProtectedRoute logged={logged} path='/login'>
+              <People />
+            </ProtectedRoute>
+          } />
+          <Route path="/tickets" element={
+            <ProtectedRoute logged={logged} path='/login'>
+              <Tickets />
+            </ProtectedRoute>
+          } />
+          <Route path="/profile/:id" element={
+            <ProtectedRoute logged={logged} path='/login'>
+              <UserProfile />
+            </ProtectedRoute>
+          } />
           <Route path="/faq/:category" element={<FAQ />} />
           <Route path="/signup" element={<Signup onRegister={handleRegister} cookies={cookies} />} />
           <Route path='/login' element={<Login />} />
-          <Route path='/admin/tickets/:id' element={<AdminTickets />} />
-          <Route path="/admin/shortcuts/:id" element={<AdminShortcuts />} />
+          <Route path='/admin/tickets/:id' element={
+            <ProtectedRoute logged={logged} path='/login'>
+              <AdminTickets />
+            </ProtectedRoute>
+          } />
+          <Route path="/admin/shortcuts/:id" element={
+            <ProtectedRoute logged={logged} path='/login'>
+              <AdminShortcuts />
+            </ProtectedRoute>
+          } />
         </Routes>
     </BrowserRouter>
     </Box>

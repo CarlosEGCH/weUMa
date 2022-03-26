@@ -27,10 +27,6 @@ export default function ForumPage(props){
 
     const { width } = useViewport();
 
-    useEffect(() => {
-        console.log(props.isLogged);
-    });
-
     return(
         <Grid h='100%' templateColumns='repeat(6, 1fr)' backgroundImage={forumImage} backgroundRepeat='no-repeat' backgroundPosition={['center center', '40px 80px', '100px 140px']}>
             <GridItem h='100%'>
