@@ -17,10 +17,45 @@ import Signup from './components/Signup';
 import Login from './components/Login';
 import AdminTickets from './components/AdminTickets';
 import AdminShortcuts from './components/AdminShortcuts';
+import { useState } from 'react';
+import Cookies from 'universal-cookie';
 
 function App() {
 
   const { width } = useViewport();
+
+  const [logged, setLogged] = useState(false);
+  const [userId, setUserId] = useState('');
+  const cookies = new Cookies();
+
+  const handleRegister = () => {
+    try {
+      
+      fetch(`http://localhost:8080/api/register`, {
+        method: 'POST',
+        body: JSON.stringify({
+          token: cookies.get('Bearer')
+        }),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + cookies.get('Bearer')
+        }
+      })
+      .then(res => res.json())
+      .then(data => {
+        setLogged(true);
+        setUserId(data._id);
+      })
+      .catch((e) => {
+        setLogged(false);
+      })
+      //console.log("My Token: ", cookies.get('Bearer'));
+
+    } catch (e) {
+      console.log('Erro encontrado: ', e);
+    }
+  }
 
   return (
     <Box height='100vh' bg='brand.primary' overflow='auto' sx={{
@@ -36,14 +71,14 @@ function App() {
       <BrowserRouter>
       {width > 900 ? <Menu /> : <MobileMenu />}
         <Routes>
-          <Route index path="/" element={<Dashboard />} />
+          <Route index path="/" onChange={() => {}} element={<Dashboard />} />
           <Route path="/faq" element={<Categories />} />
-          <Route path="/forum" element={<Forum />} />
+          <Route path="/forum" element={<Forum isLogged={logged} />} />
           <Route path="/people" element={<People />} />
           <Route path="/tickets" element={<Tickets />} />
           <Route path="/profile/:id" element={<UserProfile />} />
           <Route path="/faq/:category" element={<FAQ />} />
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/signup" element={<Signup onRegister={handleRegister} cookies={cookies} />} />
           <Route path='/login' element={<Login />} />
           <Route path='/admin/tickets/:id' element={<AdminTickets />} />
           <Route path="/admin/shortcuts/:id" element={<AdminShortcuts />} />

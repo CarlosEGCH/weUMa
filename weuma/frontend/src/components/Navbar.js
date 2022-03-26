@@ -62,10 +62,10 @@ return (
                 </Grid>
             </GridItem>
             <GridItem w='100%' h='100%' colSpan={3}>
-                <NavUser isLogged role='user'></NavUser>
+                <NavUser></NavUser>
             </GridItem>
             <GridItem w='100%' h='100%' colSpan={2}>
-                <LogContainer isLogged></LogContainer>
+                <LogContainer></LogContainer>
             </GridItem>
         </Grid>
     </Box>

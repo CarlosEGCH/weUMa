@@ -95,14 +95,14 @@ export default function DrawerExample(props) {
           </DrawerBody>
 
           <DrawerFooter>
-            <Button display={props.isLogged ? 'initial' : 'none'} variant='outline' bg='brand.accent' mr={3} onClick={onClose}>
+            <Button display={props.isLogged ? 'initial' : 'none'} variant='outline' bg='brand.accent' mr={3}>
                 Logout
             </Button>
             <Flex display={!props.isLogged ? 'flex' : 'none'} flexDirection={'row'}>
-              <Button variant='outline' bg='brand.accent' mr={3} onClick={onClose}>
+              <Button onClick={() => {navigate(`/login`)}} variant='outline' bg='brand.accent' mr={3}>
                 Log In
             </Button>
-            <Button variant='outline' bg='brand.accent' mr={3} onClick={onClose}>
+            <Button onClick={() => {navigate(`/signup`)}} variant='outline' bg='brand.accent' mr={3}>
                 Sign Up
             </Button>
             </Flex>

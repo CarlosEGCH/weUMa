@@ -6,7 +6,7 @@ import SignupForm from './SignupForm';
 
 import { useViewport } from '../hooks/Responsive';
 
-export default function Signup(){
+export default function Signup(props){
 
     const { width } = useViewport();
 
@@ -15,7 +15,7 @@ export default function Signup(){
             <GridItem h='100%' colStart={ width > 900 ? 2 : 1 } colEnd={ width > 900 ? 5 : 7 }>
                 <Center h='900px'>
                     <Box w={['100%','60%','60%']}>
-                        <SignupForm />
+                        <SignupForm onRegister={props.onRegister} cookies={props.cookies} />
                     </Box>
                 </Center>
             </GridItem>

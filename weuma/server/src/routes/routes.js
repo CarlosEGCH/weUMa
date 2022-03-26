@@ -61,6 +61,13 @@ router.post("/login", async (req, res) => {
     }
 })
 
+router.post("/register", verifyToken, async (req, res) => {
+
+    const id = 420;
+
+    return res.status(200).json({id: id});
+})
+
 function verifyToken(req, res, next){
 
     //Check if the request has the "Bearer" header
@@ -75,7 +82,7 @@ function verifyToken(req, res, next){
     }
 
     //Verify token and get the info that we introduced into it
-    const payload = jwt.verify(token, "secretKey");
+    const payload = jwt.verify(token, "SecretKey");
 
     //Introduce the payload into the request body
     req.userId = payload._id;

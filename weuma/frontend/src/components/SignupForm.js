@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import Cookies from 'universal-cookie';
+
 import {
   FormControl,
   FormLabel,
@@ -12,10 +14,11 @@ import {
   Textarea,
   Center,
   Checkbox,
-  Flex
+  Flex,
+  propNames
 } from '@chakra-ui/react'
 
-export default function SignupForm(){
+export default function SignupForm(props){
 
   const [user, setUser] = React.useState({
         name: "",
@@ -44,9 +47,10 @@ export default function SignupForm(){
       })
       .then(res => res.json())
       .then(data => {
-        console.log('Token: ' + data.token);
+        props.cookies.set('Bearer', data.token);
         setUser({});
       })
+      .then(props.onRegister)
       .catch((e) => {
         console.log("Something went wrong ", e);
       })

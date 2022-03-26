@@ -1,5 +1,6 @@
 import { Button, GridItem, Grid, Box, Text, Input, InputGroup, InputRightElement, InputLeftElement, Image, Flex } from '@chakra-ui/react';
 import * as React from 'react';
+import { useEffect } from 'react';
 
 import RightSideBar from './RightBar.js';
 import ChatDisplay from './ChatList.js';
@@ -22,9 +23,13 @@ import paymentsIcon from '../assets/payments-button.svg';
 import shopIcon from '../assets/shop-button.svg';
 import transportIcon from '../assets/transport-button.svg';
 
-export default function ForumPage(){
+export default function ForumPage(props){
 
     const { width } = useViewport();
+
+    useEffect(() => {
+        console.log(props.isLogged);
+    });
 
     return(
         <Grid h='100%' templateColumns='repeat(6, 1fr)' backgroundImage={forumImage} backgroundRepeat='no-repeat' backgroundPosition={['center center', '40px 80px', '100px 140px']}>
@@ -32,11 +37,12 @@ export default function ForumPage(){
                 <Box position='absolute' top={['20px', '20px', '70px']} left={['35vw', '40vw', '30px']}>
                     <Text fontSize={['5vw', '35px', '40px']} color='brand.accent'>Live Forum</Text>
                 </Box>
-                <Flex flexDirection={'column'} h='100%' pt='300px' pl='20px' gap={5} display={ width > 900 ? 'flex' : 'none'}>
+                <Flex flexDirection={'column'} h='100%' pt='250px' pl='20px' gap={5} display={ width > 900 ? 'flex' : 'none'}>
                     <Text color='brand.accent' fontSize={'30px'}>Topics</Text>
                     <Flex><Image boxSize={'40px'} src={admissionIcon} /><Text color='brand.accent' alignSelf={'center'} fontSize='20px'>Admission</Text></Flex>
                     <Flex><Image boxSize={'40px'} src={educationIcon} /><Text color='brand.accent' alignSelf={'center'} fontSize='20px'>Education</Text></Flex>
                     <Flex><Image boxSize={'40px'} src={resourcesIcon} /><Text color='brand.accent' alignSelf={'center'} fontSize='20px'>Resources</Text></Flex>
+                    <Flex><Image boxSize={'40px'} src={documentsIcon} /><Text color='brand.accent' alignSelf={'center'} fontSize='20px'>Documents</Text></Flex>
                     <Flex><Image boxSize={'40px'} src={guideIcon} /><Text color='brand.accent' alignSelf={'center'} fontSize='20px'>Guide</Text></Flex>
                     <Flex><Image boxSize={'40px'} src={paymentsIcon} /><Text color='brand.accent' alignSelf={'center'} fontSize='20px'>Payments</Text></Flex>
                     <Flex><Image boxSize={'40px'} src={lostIcon} /><Text color='brand.accent' alignSelf={'center'} fontSize='20px'>Lost & Found</Text></Flex>
