@@ -44,8 +44,11 @@ export default function SignupForm(){
       })
       .then(res => res.json())
       .then(data => {
-        console.log('Data sent succesfully');
+        console.log('Token: ' + data.token);
         setUser({});
+      })
+      .catch((e) => {
+        console.log("Something went wrong ", e);
       })
     }
 
