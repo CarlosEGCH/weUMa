@@ -15,7 +15,7 @@ import {
   Flex
 } from '@chakra-ui/react'
 
-export default function LoginForm(){
+export default function LoginForm(props){
 
   const [user, setUser] = React.useState({
         email: "",
@@ -36,9 +36,10 @@ export default function LoginForm(){
       })
       .then(res => res.json())
       .then(data => {
-        console.log('Token: ' + data.token);
-        setUser({});
+        props.cookies.set('Bearer', data.token);
+        setUser({email: "", password: ""});
       })
+      .then(props.onRegister)
       .catch((e) => {
         console.log("Something went wrong ", e);
       })

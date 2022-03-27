@@ -3,7 +3,43 @@ import * as React from 'react';
 import phoneImage from '../assets/spline.png';
 
 
-export default function MainPage(){
+
+export default function MainPage(props){
+
+    const [logged, setLogged] = React.useState(false);
+    const cookies = props.cookies;
+
+    const handleEnter = () => {
+    try {
+      
+      fetch(`http://localhost:8080/api/register`, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + cookies.get('Bearer')
+        }
+      })
+      .then(res => res.json())
+      .then(data => {
+        setLogged(true);
+      })
+      .catch((e) => {
+        setLogged(false);
+        console.log('Fetch error: ', e);
+      })
+      //console.log("My Token: ", cookies.get('Bearer'));
+
+    } catch (e) {
+      console.log('Erro encontrado: ', e);
+    }
+  }
+
+  React.useEffect(() => {
+      handleEnter();
+      console.log('Logger: ',logged);
+  });
+
 
     return (
         <Box h='100%' overflow='hidden' backgroundImage={phoneImage} backgroundPosition={['-620px 0px', '-500px 100px', '200px 0px']}>

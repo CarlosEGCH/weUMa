@@ -17,7 +17,7 @@ import Signup from './components/Signup';
 import Login from './components/Login';
 import AdminTickets from './components/AdminTickets';
 import AdminShortcuts from './components/AdminShortcuts';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Cookies from 'universal-cookie';
 
 import ProtectedRoute from './hooks/ProtectedRoute';
@@ -27,6 +27,7 @@ function App() {
   const { width } = useViewport();
 
   const [logged, setLogged] = useState(false);
+  const [role, setRole] = useState('user');
   const [userId, setUserId] = useState('');
   const cookies = new Cookies();
 
@@ -35,9 +36,6 @@ function App() {
       
       fetch(`http://localhost:8080/api/register`, {
         method: 'POST',
-        body: JSON.stringify({
-          token: cookies.get('Bearer')
-        }),
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
@@ -47,10 +45,11 @@ function App() {
       .then(res => res.json())
       .then(data => {
         setLogged(true);
-        setUserId(data._id);
+        setUserId(data.userId);
       })
       .catch((e) => {
         setLogged(false);
+        console.log('Fetch error: ', e);
       })
       //console.log("My Token: ", cookies.get('Bearer'));
 
@@ -58,6 +57,7 @@ function App() {
       console.log('Erro encontrado: ', e);
     }
   }
+
 
   return (
     <Box height='100vh' bg='brand.primary' overflow='auto' sx={{
@@ -71,9 +71,9 @@ function App() {
     },
   }}>
       <BrowserRouter>
-      {width > 900 ? <Menu logged={logged} role={'user'} /> : <MobileMenu logged={logged} role={'user'} />}
+      {width > 900 ? <Menu logged={logged} role={role} /> : <MobileMenu logged={logged} role={role} />}
         <Routes>
-          <Route index path="/" element={<Dashboard />} />
+          <Route index path="/" element={<Dashboard cookies={cookies} />} />
           <Route path="/faq" element={<Categories />} />
           <Route path="/forum" element={
             <ProtectedRoute logged={logged} path='/login'>
@@ -97,7 +97,7 @@ function App() {
           } />
           <Route path="/faq/:category" element={<FAQ />} />
           <Route path="/signup" element={<Signup onRegister={handleRegister} cookies={cookies} />} />
-          <Route path='/login' element={<Login />} />
+          <Route path='/login' element={<Login onRegister={handleRegister} cookies={cookies} />} />
           <Route path='/admin/tickets/:id' element={
             <ProtectedRoute logged={logged} path='/login'>
               <AdminTickets />

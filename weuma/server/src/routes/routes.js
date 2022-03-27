@@ -26,9 +26,10 @@ router.post("/signup", async (req, res) => {
             studentId : studentId,
             phone: phone,
             email: email,
-            password: hash
+            password: hash,
+            role: 'user'
         })
-        console.log(newUser);
+        await newUser.save();
 
         const token = jwt.sign({_id: newUser._id}, "SecretKey");
 
@@ -52,7 +53,7 @@ router.post("/login", async (req, res) => {
 
         //Create token after successful login
 
-        const token = jwt.sign({ _id: user._id }, "secretKey");
+        const token = jwt.sign({ _id: user._id }, "SecretKey");
 
         return res.status(200).json({ token });
 
@@ -63,9 +64,7 @@ router.post("/login", async (req, res) => {
 
 router.post("/register", verifyToken, async (req, res) => {
 
-    const id = 420;
-
-    return res.status(200).json({id: id});
+    return res.status(200).json({_id: req.userId});
 })
 
 function verifyToken(req, res, next){
