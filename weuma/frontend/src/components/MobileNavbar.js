@@ -4,7 +4,7 @@ import MenuDrawer from './Drawer';
 
 import logo from '../assets/logo2SVG.svg';
 
-export default function MobileNavbar() {
+export default function MobileNavbar(props) {
 
     return (
         <Box bg="brand.primary" position='absolute' width='100%'>
@@ -14,7 +14,7 @@ export default function MobileNavbar() {
                 </Center>
                 <Spacer />
                 <Center paddingRight='10px'>
-                    <MenuDrawer></MenuDrawer>
+                    <MenuDrawer logged={props.logged} role={props.role}></MenuDrawer>
                 </Center>
             </Flex>
         </Box>

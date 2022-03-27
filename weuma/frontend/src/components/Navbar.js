@@ -12,7 +12,7 @@ import peopleIcon from '../assets/people-icon.svg';
 import NavUser from './NavUser';
 import LogContainer from './LogContainer'
 
-export default function ButtonAppBar(){
+export default function ButtonAppBar(props){
 const navigate = useNavigate();
 
 return (
@@ -62,10 +62,10 @@ return (
                 </Grid>
             </GridItem>
             <GridItem w='100%' h='100%' colSpan={3}>
-                <NavUser></NavUser>
+                <NavUser logged={props.logged} role={props.role}></NavUser>
             </GridItem>
             <GridItem w='100%' h='100%' colSpan={2}>
-                <LogContainer></LogContainer>
+                <LogContainer logged={props.logged}></LogContainer>
             </GridItem>
         </Grid>
     </Box>

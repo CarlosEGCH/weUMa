@@ -71,7 +71,7 @@ function App() {
     },
   }}>
       <BrowserRouter>
-      {width > 900 ? <Menu /> : <MobileMenu />}
+      {width > 900 ? <Menu logged={logged} role={'user'} /> : <MobileMenu logged={logged} role={'user'} />}
         <Routes>
           <Route index path="/" element={<Dashboard />} />
           <Route path="/faq" element={<Categories />} />

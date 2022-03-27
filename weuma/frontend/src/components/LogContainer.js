@@ -7,7 +7,7 @@ export default function LogButtonContainer(props){
 
 const navigate = useNavigate();
 
-    if(props.isLogged){
+    if(props.logged){
         return(
         <Center h='100%'>
             <Button bg='brand.accent' _hover={{ bg: 'brand.extra' }} color='white'>Log Out</Button>

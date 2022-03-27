@@ -37,7 +37,7 @@ export default function DrawerExample(props) {
         <DrawerContent bg='brand.secondary'>
           <DrawerCloseButton color='brand.accent' />
           <DrawerHeader color='brand.accent'>
-                <Center display={props.isLogged ? 'flex' : 'none'}>
+                <Center display={props.logged ? 'flex' : 'none'}>
                   <Image boxSize='60px' borderRadius='full' src={userImage}></Image>
                   <Text color='brand.accent' ml='10px' fontSize='20px'>Carlos Gomes</Text>
                 </Center>
@@ -95,10 +95,10 @@ export default function DrawerExample(props) {
           </DrawerBody>
 
           <DrawerFooter>
-            <Button display={props.isLogged ? 'initial' : 'none'} variant='outline' bg='brand.accent' mr={3}>
+            <Button display={props.logged ? 'initial' : 'none'} variant='outline' bg='brand.accent' mr={3}>
                 Logout
             </Button>
-            <Flex display={!props.isLogged ? 'flex' : 'none'} flexDirection={'row'}>
+            <Flex display={!props.logged ? 'flex' : 'none'} flexDirection={'row'}>
               <Button onClick={() => {navigate(`/login`)}} variant='outline' bg='brand.accent' mr={3}>
                 Log In
             </Button>

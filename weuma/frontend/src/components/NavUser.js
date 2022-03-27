@@ -12,7 +12,7 @@ export default function NavUserDisplay(props){
 
     const userId = 2501;
 
-    if(props.isLogged){
+    if(props.logged){
         if(props.role == 'admin'){
             return (
         <Box>
