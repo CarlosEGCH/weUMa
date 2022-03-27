@@ -19,12 +19,11 @@ const storage = multer.diskStorage({
         cb(null, '../server/src/public/')
     },
     filename: (req, file, cb) => {
-        console.log("Uploading: ", file);
         cb(null, Date.now() + path.extname(file.originalname))
     }
 })
 
-const upload = multer({storage: storage})
+const upload = multer({storage: storage}).single('file')
 
 
 /**
@@ -35,13 +34,21 @@ const upload = multer({storage: storage})
 
 //https://www.youtube.com/watch?v=wIOpe8S2Mk8
 
-router.post("/upload",upload.single('file') ,(req, res) => {
-    res.send('Uploading image from server :D')
+router.post("/upload",(req, res) => {
+    upload(req, res, (err) => {
+        if (err){
+            console.log(JSON.stringify(err));
+            res.status(400).send("fail saving image");
+        } else {
+            const filename = req.file.filename;
+            res.status(200).json({ filename });
+    }
+    })
 })
 
 router.post("/signup", async (req, res) => {
     try {
-        const { name, studentId, phone, email, password } = req.body;
+        const { name, studentId, phone, email, password, image } = req.body;
         const hash = await bcrypt.hash(password, 10);
         const newUser = new User({
             name: name,
@@ -49,7 +56,8 @@ router.post("/signup", async (req, res) => {
             phone: phone,
             email: email,
             password: hash,
-            role: 'user'
+            role: 'user',
+            image: image
         })
         //await newUser.save();
 

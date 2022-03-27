@@ -15,7 +15,8 @@ import {
   Center,
   Checkbox,
   Flex,
-  propNames
+  propNames,
+  useQuery
 } from '@chakra-ui/react';
 
 import { useNavigate } from 'react-router-dom';
@@ -33,7 +34,8 @@ export default function SignupForm(props){
         phone: "",
         password: "",
         rpassword: "",
-        accept: "false"
+        accept: "false",
+        image: "basic"
     })
 
     const handleFileChange = (e) => {
@@ -43,17 +45,16 @@ export default function SignupForm(props){
     setImage(img)
   }
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
       const formData = new FormData();
       formData.append('file', image.data);
 
-      fetch('http://localhost:8080/api/upload', {
+      await fetch('http://localhost:8080/api/upload', {
       method: 'POST',
       body: formData,
-    }).then(() => {console.log("Is it working?")})
-
-
-      fetch(`http://localhost:8080/api/signup`, {
+    }).then(res => res.json())
+      .then(async (data) => {
+        await fetch(`http://localhost:8080/api/signup`, {
         method: 'POST',
         body: JSON.stringify({
           name: user.name,
@@ -61,6 +62,7 @@ export default function SignupForm(props){
           phone: user.phone,
           email: user.email,
           password: user.password,
+          image: data.filename
         }),
         headers: {
           'Accept': 'application/json',
@@ -76,6 +78,12 @@ export default function SignupForm(props){
       .catch((e) => {
         console.log("Something went wrong ", e);
       })
+      })
+      .catch((e)=> {console.log('Image not uploaded', e)})
+
+      
+
+      
     }
 
     const toggleCheck = (event) => {
