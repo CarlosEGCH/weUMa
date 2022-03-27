@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import Cookies from 'universal-cookie';
+import axios from 'axios';
 
 import {
   FormControl,
@@ -25,6 +25,7 @@ export default function SignupForm(props){
 
   const navigate = useNavigate();
 
+  const [image, setImage] = React.useState({ data: '' })
   const [user, setUser] = React.useState({
         name: "",
         studentId: "",
@@ -35,7 +36,23 @@ export default function SignupForm(props){
         accept: "false"
     })
 
+    const handleFileChange = (e) => {
+    const img = {
+      data: e.target.files[0],
+    }
+    setImage(img)
+  }
+
     const handleSubmit = () => {
+      const formData = new FormData();
+      formData.append('file', image.data);
+
+      fetch('http://localhost:8080/api/upload', {
+      method: 'POST',
+      body: formData,
+    }).then(() => {console.log("Is it working?")})
+
+
       fetch(`http://localhost:8080/api/signup`, {
         method: 'POST',
         body: JSON.stringify({
@@ -43,7 +60,7 @@ export default function SignupForm(props){
           studentId: user.studentId,
           phone: user.phone,
           email: user.email,
-          password: user.password
+          password: user.password,
         }),
         headers: {
           'Accept': 'application/json',
@@ -102,6 +119,9 @@ export default function SignupForm(props){
 
   <FormLabel mt='10px' htmlFor='rpassword' color='brand.accent'>Repeat Your Password</FormLabel>
   <Input value={user.rpassword} onChange={handleChange} name='rpassword' bg='white' color='brand.accent' id='rpassword' type='password' width='100%' placeholder='Do it again...' _placeholder={{color: 'gray'}}/>
+
+  <FormLabel mt='10px' htmlFor='rpassword' color='brand.accent'>Upload a Profile Picture</FormLabel>
+  <Input onChange={handleFileChange} name='image' bg='white' color='brand.accent' id='image' type='file' width='100%' placeholder='Upload' _placeholder={{color: 'gray'}}/>
 
 <Center h='40px' mt='20px' w='100%'>
       <Flex w='100%' flexDir={'column'}>

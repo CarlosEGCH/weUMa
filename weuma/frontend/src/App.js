@@ -38,7 +38,7 @@ function App() {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + cookies.get('Bearer')
+          'Authorization': `Bearer ${cookies.get('Bearer')}`
         }
       })
       .then(res => res.json())
@@ -47,7 +47,7 @@ function App() {
         setUserId(data.userId);
       })
       .catch((e) => {
-        console.log('Fetch error: ', e);
+        console.log('Fetching error: ', e);
       })
       //console.log("My Token: ", cookies.get('Bearer'));
 

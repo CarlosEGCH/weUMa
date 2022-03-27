@@ -16,10 +16,10 @@ const path = require("path");
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, '../public')
+        cb(null, '../server/src/public/')
     },
     filename: (req, file, cb) => {
-        console.log(file);
+        console.log("Uploading: ", file);
         cb(null, Date.now() + path.extname(file.originalname))
     }
 })
@@ -35,8 +35,8 @@ const upload = multer({storage: storage})
 
 //https://www.youtube.com/watch?v=wIOpe8S2Mk8
 
-router.post("/upload",upload.single('image') ,(req, res) => {
-    res.render("upload")
+router.post("/upload",upload.single('file') ,(req, res) => {
+    res.send('Uploading image from server :D')
 })
 
 router.post("/signup", async (req, res) => {
@@ -51,7 +51,7 @@ router.post("/signup", async (req, res) => {
             password: hash,
             role: 'user'
         })
-        await newUser.save();
+        //await newUser.save();
 
         const token = jwt.sign({_id: newUser._id}, "SecretKey");
 
