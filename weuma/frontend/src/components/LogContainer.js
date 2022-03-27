@@ -10,7 +10,7 @@ const navigate = useNavigate();
     if(props.logged){
         return(
         <Center h='100%'>
-            <Button bg='brand.accent' _hover={{ bg: 'brand.extra' }} color='white'>Log Out</Button>
+            <Button onClick={() => {props.cookies.remove('Bearer'); navigate(`/`); window.location.reload(false);}} bg='brand.accent' _hover={{ bg: 'brand.extra' }} color='white'>Log Out</Button>
         </Center>
     );
     }else{

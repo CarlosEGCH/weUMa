@@ -95,7 +95,7 @@ export default function DrawerExample(props) {
           </DrawerBody>
 
           <DrawerFooter>
-            <Button display={props.logged ? 'initial' : 'none'} variant='outline' bg='brand.accent' mr={3}>
+            <Button display={props.logged ? 'initial' : 'none'} onClick={() => {props.cookies.remove('Bearer'); navigate(`/`); window.location.reload(false);}} variant='outline' bg='brand.accent' mr={3}>
                 Logout
             </Button>
             <Flex display={!props.logged ? 'flex' : 'none'} flexDirection={'row'}>

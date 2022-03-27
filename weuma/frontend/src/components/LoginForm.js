@@ -15,7 +15,11 @@ import {
   Flex
 } from '@chakra-ui/react'
 
+import { useNavigate } from 'react-router-dom';
+
 export default function LoginForm(props){
+
+  const navigate = useNavigate();
 
   const [user, setUser] = React.useState({
         email: "",
@@ -39,7 +43,7 @@ export default function LoginForm(props){
         props.cookies.set('Bearer', data.token);
         setUser({email: "", password: ""});
       })
-      .then(props.onRegister)
+      .then(() => {props.onRegister(); navigate('/faq');})
       .catch((e) => {
         console.log("Something went wrong ", e);
       })

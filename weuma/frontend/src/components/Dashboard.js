@@ -35,10 +35,7 @@ export default function MainPage(props){
     }
   }
 
-  React.useEffect(() => {
-      handleEnter();
-      console.log('Logger: ',logged);
-  });
+  
 
 
     return (

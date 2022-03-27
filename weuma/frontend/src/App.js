@@ -20,8 +20,6 @@ import AdminShortcuts from './components/AdminShortcuts';
 import { useEffect, useState } from 'react';
 import Cookies from 'universal-cookie';
 
-import ProtectedRoute from './hooks/ProtectedRoute';
-
 function App() {
 
   const { width } = useViewport();
@@ -48,7 +46,6 @@ function App() {
         setUserId(data.userId);
       })
       .catch((e) => {
-        setLogged(false);
         console.log('Fetch error: ', e);
       })
       //console.log("My Token: ", cookies.get('Bearer'));
@@ -58,6 +55,9 @@ function App() {
     }
   }
 
+  useEffect(() => {
+    handleRegister();
+  });
 
   return (
     <Box height='100vh' bg='brand.primary' overflow='auto' sx={{
@@ -71,43 +71,19 @@ function App() {
     },
   }}>
       <BrowserRouter>
-      {width > 900 ? <Menu logged={logged} role={role} /> : <MobileMenu logged={logged} role={role} />}
+      {width > 900 ? <Menu logged={logged} role={role} cookies={cookies} /> : <MobileMenu logged={logged} role={role} cookies={cookies} />}
         <Routes>
           <Route index path="/" element={<Dashboard cookies={cookies} />} />
           <Route path="/faq" element={<Categories />} />
-          <Route path="/forum" element={
-            <ProtectedRoute logged={logged} path='/login'>
-              <Forum />
-            </ProtectedRoute>
-          } />
-          <Route path="/people" element={
-            <ProtectedRoute logged={logged} path='/login'>
-              <People />
-            </ProtectedRoute>
-          } />
-          <Route path="/tickets" element={
-            <ProtectedRoute logged={logged} path='/login'>
-              <Tickets />
-            </ProtectedRoute>
-          } />
-          <Route path="/profile/:id" element={
-            <ProtectedRoute logged={logged} path='/login'>
-              <UserProfile />
-            </ProtectedRoute>
-          } />
+          <Route path="/forum" element={logged ? <Forum /> : <Login onRegister={handleRegister} cookies={cookies} />} />
+          <Route path="/people" element={logged ? <People /> : <Login onRegister={handleRegister} cookies={cookies} />} />
+          <Route path="/tickets" element={logged ? <Tickets /> : <Login onRegister={handleRegister} cookies={cookies} />} />
+          <Route path="/profile/:id" element={logged ? <UserProfile /> : <Login onRegister={handleRegister} cookies={cookies} />} />
           <Route path="/faq/:category" element={<FAQ />} />
           <Route path="/signup" element={<Signup onRegister={handleRegister} cookies={cookies} />} />
           <Route path='/login' element={<Login onRegister={handleRegister} cookies={cookies} />} />
-          <Route path='/admin/tickets/:id' element={
-            <ProtectedRoute logged={logged} path='/login'>
-              <AdminTickets />
-            </ProtectedRoute>
-          } />
-          <Route path="/admin/shortcuts/:id" element={
-            <ProtectedRoute logged={logged} path='/login'>
-              <AdminShortcuts />
-            </ProtectedRoute>
-          } />
+          <Route path='/admin/tickets/:id' element={logged ? <AdminTickets /> : <Login onRegister={handleRegister} cookies={cookies} />} />
+          <Route path="/admin/shortcuts/:id" element={logged ? <AdminShortcuts /> : <Login onRegister={handleRegister} cookies={cookies} />} />
         </Routes>
     </BrowserRouter>
     </Box>

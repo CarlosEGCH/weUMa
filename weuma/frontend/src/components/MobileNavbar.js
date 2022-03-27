@@ -14,7 +14,7 @@ export default function MobileNavbar(props) {
                 </Center>
                 <Spacer />
                 <Center paddingRight='10px'>
-                    <MenuDrawer logged={props.logged} role={props.role}></MenuDrawer>
+                    <MenuDrawer logged={props.logged} role={props.role} cookies={props.cookies}></MenuDrawer>
                 </Center>
             </Flex>
         </Box>

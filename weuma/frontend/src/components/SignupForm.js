@@ -16,9 +16,14 @@ import {
   Checkbox,
   Flex,
   propNames
-} from '@chakra-ui/react'
+} from '@chakra-ui/react';
+
+import { useNavigate } from 'react-router-dom';
+
 
 export default function SignupForm(props){
+
+  const navigate = useNavigate();
 
   const [user, setUser] = React.useState({
         name: "",
@@ -50,7 +55,7 @@ export default function SignupForm(props){
         props.cookies.set('Bearer', data.token);
         setUser({});
       })
-      .then(props.onRegister)
+      .then(() => {props.onRegister(); navigate('/faq');})
       .catch((e) => {
         console.log("Something went wrong ", e);
       })
