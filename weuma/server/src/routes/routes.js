@@ -10,12 +10,34 @@ const User = require("../models/user");
 //Import JSON Web Token
 const jwt = require("jsonwebtoken");
 
+//Import Multer for file uploading
+const multer = require("multer");
+const path = require("path");
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, '../public')
+    },
+    filename: (req, file, cb) => {
+        console.log(file);
+        cb(null, Date.now() + path.extname(file.originalname))
+    }
+})
+
+const upload = multer({storage: storage})
+
 
 /**
  * -----------------------
  *          Routes
  * -----------------------
  */
+
+//https://www.youtube.com/watch?v=wIOpe8S2Mk8
+
+router.post("/upload",upload.single('image') ,(req, res) => {
+    res.render("upload")
+})
 
 router.post("/signup", async (req, res) => {
     try {

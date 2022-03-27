@@ -20,6 +20,7 @@ import AdminShortcuts from './components/AdminShortcuts';
 import { useEffect, useState } from 'react';
 import Cookies from 'universal-cookie';
 
+
 function App() {
 
   const { width } = useViewport();

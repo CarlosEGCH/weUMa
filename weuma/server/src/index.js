@@ -11,8 +11,6 @@ const morgan = require("morgan");
 //Import CORS
 const cors = require("cors");
 
-//Import bcrypt
-const bcrypt = require("bcrypt");
 
 //Apply JSON reading, CORS policy and morgan
 app.use(express.json());
