@@ -13,7 +13,6 @@ import NavUser from './NavUser';
 import LogContainer from './LogContainer'
 
 export default function ButtonAppBar(props){
-const navigate = useNavigate();
 
 return (
     <Box bg="brand.primary" h="60px" position='absolute' w='100%'>
@@ -62,7 +61,7 @@ return (
                 </Grid>
             </GridItem>
             <GridItem w='100%' h='100%' colSpan={3}>
-                <NavUser logged={props.logged} role={props.role}></NavUser>
+                <NavUser userId={props.userId} logged={props.logged} role={props.role} username={props.username} userImage={props.userImage}></NavUser>
             </GridItem>
             <GridItem w='100%' h='100%' colSpan={2}>
                 <LogContainer logged={props.logged} cookies={props.cookies}></LogContainer>

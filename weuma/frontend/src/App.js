@@ -17,7 +17,7 @@ import Signup from './components/Signup';
 import Login from './components/Login';
 import AdminTickets from './components/AdminTickets';
 import AdminShortcuts from './components/AdminShortcuts';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Cookies from 'universal-cookie';
 
 
@@ -25,15 +25,21 @@ function App() {
 
   const { width } = useViewport();
 
+  const didMount = useRef(false);
+
   const [logged, setLogged] = useState(false);
   const [role, setRole] = useState('user');
   const [userId, setUserId] = useState('');
+  const [userImage, setUserImage] = useState('');
+  const [username, setUsername] = useState('');
   const cookies = new Cookies();
 
-  const handleRegister = () => {
+  const handleRegister = async () => {
     try {
       
-      fetch(`http://localhost:8080/api/register`, {
+      if(cookies.get('Bearer') != null){
+
+        await fetch(`http://localhost:8080/api/register`, {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -44,12 +50,16 @@ function App() {
       .then(res => res.json())
       .then(data => {
         setLogged(true);
-        setUserId(data.userId);
+        setUserId(data._id);
+        setUserImage(data.image);
+        setRole(data.role);
+        setUsername(data.name);
       })
       .catch((e) => {
         console.log('Fetching error: ', e);
       })
       //console.log("My Token: ", cookies.get('Bearer'));
+      }
 
     } catch (e) {
       console.log('Erro encontrado: ', e);
@@ -57,8 +67,8 @@ function App() {
   }
 
   useEffect(() => {
-    handleRegister();
-  });
+      handleRegister();
+  })
 
   return (
     <Box height='100vh' bg='brand.primary' overflow='auto' sx={{
@@ -72,7 +82,7 @@ function App() {
     },
   }}>
       <BrowserRouter>
-      {width > 900 ? <Menu logged={logged} role={role} cookies={cookies} /> : <MobileMenu logged={logged} role={role} cookies={cookies} />}
+      {width > 900 ? <Menu userId={userId} logged={logged} role={role} cookies={cookies} username={username} userImage={userImage} /> : <MobileMenu logged={logged} role={role} cookies={cookies} />}
         <Routes>
           <Route index path="/" element={<Dashboard cookies={cookies} />} />
           <Route path="/faq" element={<Categories />} />

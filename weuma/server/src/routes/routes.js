@@ -59,7 +59,7 @@ router.post("/signup", async (req, res) => {
             role: 'user',
             image: image
         })
-        //await newUser.save();
+        await newUser.save();
 
         const token = jwt.sign({_id: newUser._id}, "SecretKey");
 
@@ -93,8 +93,10 @@ router.post("/login", async (req, res) => {
 })
 
 router.post("/register", verifyToken, async (req, res) => {
+    const {userId} = req;
+    const user = await User.findOne({ _id: userId}, { _id: 1, name: 1, image: 1, role: 1})
 
-    return res.status(200).json({_id: req.userId});
+    res.status(200).json(user);
 })
 
 function verifyToken(req, res, next){
