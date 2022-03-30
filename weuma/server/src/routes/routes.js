@@ -94,9 +94,15 @@ router.post("/login", async (req, res) => {
 
 router.post("/register", verifyToken, async (req, res) => {
     const {userId} = req;
-    const user = await User.findOne({ _id: userId}, { _id: 1, name: 1, image: 1, role: 1})
+    const user = await User.findOne({ _id: userId}, { _id: 1, name: 1, image: 1, role: 1});
 
     res.status(200).json(user);
+})
+
+router.get("/admins", async (req, res) => {
+    const admins = await User.find({ role: "admin"}, { _id: 1, name: 1, image: 1, role: 1 });
+
+    res.status(200).json({"admins": admins});
 })
 
 function verifyToken(req, res, next){

@@ -8,13 +8,39 @@ import infoalunosImage from '../assets/infoalunos.png';
 
 export default function RightSideBar(){
 
+    const [admins, setAdmins] = React.useState([]);
+
+
+    const fetchAdmins = async () => {
+        try {
+            await fetch('http://localhost:8080/api/admins',
+        {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        })
+        .then((res) => res.json())
+        .then((data) => { 
+            setAdmins(data.admins);
+        })
+    } catch (e) {
+            console.log('Admins fetch error: ', e);
+        }}
+
+        
+    React.useEffect(() => {
+            fetchAdmins();
+    }, []);
+
     return(
         <Flex flexDirection={'column'} h='800px'>
             <Box h='100%' pt='70px' borderBottom='1px solid black'>
                 <Center borderBottom='1px solid black'>
                     <Text fontSize='20px' color='brand.accent' >Administrators</Text>
                 </Center>
-                <AdminsList></AdminsList>
+                <AdminsList admins={admins}></AdminsList>
             </Box>
             <GridItem>
                 <Center>

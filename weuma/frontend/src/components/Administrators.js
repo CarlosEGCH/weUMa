@@ -3,7 +3,13 @@ import * as React from 'react';
 
 import AdminItem from './AdminItem.js';
 
-export default function AdminsList(){
+export default function AdminsList(props){
+
+const admins = props.admins.map((admin, key) => {
+    return(
+      <AdminItem key={key} admin={admin}></AdminItem>
+    );
+  });    
 
     return(
         <Box overflow='auto' h='620px' sx={{
@@ -16,20 +22,7 @@ export default function AdminsList(){
       backgroundColor: `rgba(0, 0, 0, 0.2)`,
     },
   }}>
-            <AdminItem></AdminItem>
-            <AdminItem></AdminItem>
-            <AdminItem></AdminItem>
-            <AdminItem></AdminItem>
-            <AdminItem></AdminItem>
-            <AdminItem></AdminItem>
-            <AdminItem></AdminItem>
-            <AdminItem></AdminItem>
-            <AdminItem></AdminItem>
-            <AdminItem></AdminItem>
-            <AdminItem></AdminItem>
-            <AdminItem></AdminItem>
-            <AdminItem></AdminItem>
-            <AdminItem></AdminItem>
+            {admins}
 
         </Box>
     );
