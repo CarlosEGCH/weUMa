@@ -10,8 +10,6 @@ import inboxIcon from '../assets/inbox-icon.svg';
 export default function NavUserDisplay(props){
     const navigate = useNavigate();
 
-    const userId = props.userId;
-
     if(props.logged){
         if(props.role == 'admin'){
             return (
