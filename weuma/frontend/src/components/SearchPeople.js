@@ -8,6 +8,30 @@ import SearchIcon from '../assets/search-icon.svg';
 
 export default function PeopleSearch(){
 
+    const [users, setUsers] = React.useState([]);
+
+    const fetchUsers = async () => {
+        try {
+            await fetch('http://localhost:8080/api/users',{
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then((res) => res.json())
+            .then((data) => {
+                setUsers(data.users);
+            })
+        }catch (error) {
+            console.log('Users fetch error: ', error);
+        }
+    }
+
+    React.useEffect(() => {
+        fetchUsers();
+    }, []);
+
     return(
     <Box width='100%'>
             <InputGroup width='100%'  bg='brand.extra'>
@@ -18,7 +42,11 @@ export default function PeopleSearch(){
             </InputGroup>
         <Box w='100%' bg='#FFEEF1'>
             <Flex flexDirection='column'>
-                <SearchItem></SearchItem>
+                {users.map((user, key) => {
+                    return(
+                        <SearchItem key={key} user={user}></SearchItem>
+                    );
+                })}
             </Flex>
         </Box>
     </Box>

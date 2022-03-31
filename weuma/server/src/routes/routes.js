@@ -6,6 +6,7 @@ const bcrypt = require("bcrypt");
 
 //Import user model
 const User = require("../models/user");
+const Ticket = require("../models/ticket");
 
 //Import JSON Web Token
 const jwt = require("jsonwebtoken");
@@ -92,6 +93,28 @@ router.post("/login", async (req, res) => {
     }
 })
 
+router.post("/ticket-submit", async (req, res) => {
+    try {
+        const { email, category, title, message, senderId, adminId } = req.body;
+
+        const newTicket = new Ticket({
+            email: email,
+            category: category,
+            title: title,
+            message: message,
+            senderId: senderId,
+            adminId: adminId
+        })
+
+        await newTicket.save();
+
+        res.status(200).json({ message: "Ticket submitted successfully" });
+
+    } catch (error) {
+        console.log("Request error: " + error);
+    }
+})
+
 router.post("/register", verifyToken, async (req, res) => {
     const {userId} = req;
     const user = await User.findOne({ _id: userId}, { _id: 1, name: 1, image: 1, role: 1});
@@ -103,6 +126,18 @@ router.get("/admins", async (req, res) => {
     const admins = await User.find({ role: "admin"}, { _id: 1, name: 1, image: 1, role: 1 });
 
     res.status(200).json({"admins": admins});
+})
+
+router.get("/users", async (req, res) => {
+    const users = await User.find({}, { _id: 1, name: 1, image: 1, role: 1 });
+
+    res.status(200).json({"users": users});
+})
+
+router.get("/tickets", async (req, res) => {
+    const tickets = await Ticket.find({adminId : {$eq : ''}}, { _id: 1, email: 1, category: 1, title: 1, message: 1, senderId: 1});
+
+    res.status(200).json({"tickets": tickets});
 })
 
 function verifyToken(req, res, next){

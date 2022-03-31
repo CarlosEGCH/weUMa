@@ -14,6 +14,7 @@ import LogContainer from './LogContainer'
 
 export default function ButtonAppBar(props){
 
+
 return (
     <Box bg="brand.primary" h="60px" position='absolute' w='100%'>
         <Grid templateColumns='repeat(12, 1fr)' gap={2} h='100%'>
@@ -51,7 +52,7 @@ return (
                         </Link>
                     </GridItem>
                     <GridItem>
-                        <Link to="/tickets">
+                        <Link to={`/tickets/${props.userId}`}>
                             <Grid templateColumns='0.5fr 1fr'>
                                 <Image boxSize='50px' marginTop='5px' src={ticketIcon} />
                                 <Text color='brand.accent' fontSize={['sm', 'md', 'lg']} marginTop='15px'>Tickets</Text>
