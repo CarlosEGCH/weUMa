@@ -4,7 +4,7 @@ import * as React from 'react';
 import TicketItem from './TicketItem';
 
 
-export default function TicketsList(){
+export default function TicketsList(props){
 
     return(
         <Flex flexDirection={'column'} h='800px' overflow='auto' 
@@ -19,24 +19,11 @@ export default function TicketsList(){
     },
   }}>
             
-                <TicketItem />
-                <TicketItem />
-                <TicketItem />
-                <TicketItem />
-                <TicketItem />
-                <TicketItem />
-                <TicketItem />
-                <TicketItem />
-                <TicketItem />
-                <TicketItem />
-                <TicketItem />
-                <TicketItem />
-                <TicketItem />
-                <TicketItem />
-                <TicketItem />
-                <TicketItem />
-                <TicketItem />
-                <TicketItem />
+            {props.tickets.map((ticket, index) => {
+                return(
+                    <TicketItem key={index} ticket={ticket} handleStage={props.handleStage} />
+                )
+            })}
         </Flex>
     );
 }

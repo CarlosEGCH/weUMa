@@ -4,21 +4,24 @@ import * as React from 'react';
 import shortcutIcon from '../assets/chat-shortcut-icon.svg'
 import emoteIcon from '../assets/chat-emote-icon.svg'
 import imageIcon from '../assets/chat-image-icon.svg'
+import crossIcon from '../assets/cross-icon.svg'
 
-export default function AdminTicketUI(){
+export default function AdminTicketUI(props){
+
 
     return(
         <Flex shadow={'lg'} my='18px' bg='brand.secondary' flexDirection={'column'} p='10px'>
            <Flex flexDirection='row' color='brand.accent'>
-                <Text fontSize='20px'>Where to find books</Text>
+                <Text fontSize='20px'>{props.ticket.title}</Text>
                 <Spacer />
-                <Text fontSize='15px'>3 days ago</Text>
+                <Text pr='10px' fontSize='15px'>3 days ago</Text>
+                <Link onClick={() => {props.handleUnstage(props.ticket);}}><Image src={crossIcon}></Image></Link>
            </Flex>
            <Text color='brand.accent' p='8px'>
-               Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum commodi tenetur hic eligendi incidunt voluptatem placeat harum! Enim dicta aspernatur dolorem dolor molestias, excepturi hic? Optio molestias amet esse assumenda?
+                {props.ticket.message}
            </Text>
            <Flex flexDirection='row' py='5px'>
-                <Text color='brand.accent' fontSize='13px'>2075320@student.uma.pt</Text>
+                <Text color='brand.accent' fontSize='13px'>{props.ticket.email}</Text>
            </Flex>
             <Flex flexDirection={'row'}>
                 <InputGroup border='black'>
