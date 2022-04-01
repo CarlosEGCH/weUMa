@@ -70,6 +70,28 @@ router.post("/signup", async (req, res) => {
     }
 })
 
+router.post("/get-user", verifyToken, async (req, res) => {
+
+        console.log('Owner?', req.userId == req.body.profileId);
+
+    try {
+        const userId = req.userId;
+        const { profileId } = req.body;
+
+
+        const user = await User.findById({_id: profileId}, {password: 0});
+
+        if(userId == profileId){
+            res.status(200).json({user, owner: true});
+        }else{
+            res.status(200).json({user, owner: false});
+        }
+
+    } catch (error) {
+        console.log("Request error: " + error);
+    }
+})
+
 router.post("/login", async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -158,6 +180,7 @@ function verifyToken(req, res, next){
 
     //Introduce the payload into the request body
     req.userId = payload._id;
+
     next();
 }
 
