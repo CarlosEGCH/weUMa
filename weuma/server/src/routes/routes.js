@@ -117,15 +117,15 @@ router.post("/login", async (req, res) => {
 
 router.post("/ticket-submit", async (req, res) => {
     try {
-        const { email, category, title, message, senderId, adminId } = req.body;
+        const { email, category, title, message, adminId, response } = req.body;
 
         const newTicket = new Ticket({
             email: email,
             category: category,
             title: title,
             message: message,
-            senderId: senderId,
-            adminId: adminId
+            adminId: adminId,
+            response: response
         })
 
         await newTicket.save();

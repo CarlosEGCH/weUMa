@@ -8,7 +8,7 @@ import { useViewport } from '../hooks/Responsive';
 
 import ticketImage from '../assets/ticketBg.svg';
 
-export default function TicketsPage(props){
+export default function TicketsPage(){
 
     const { width } = useViewport();
 
@@ -20,7 +20,7 @@ export default function TicketsPage(props){
             <GridItem h='100%' colStart={ width > 900 ? 2 : 1 } colEnd={ width > 900 ? 5 : 7 }>
                 <Center h='900px'>
                     <Box w={['100%','60%','60%']} shadow={'lg'}>
-                        <TicketForm userId={props.userId} />
+                        <TicketForm />
                     </Box>
                 </Center>
             </GridItem>

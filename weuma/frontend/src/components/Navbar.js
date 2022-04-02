@@ -52,7 +52,7 @@ return (
                         </Link>
                     </GridItem>
                     <GridItem>
-                        <Link to={`/tickets/${props.userId}`}>
+                        <Link to={`/tickets`}>
                             <Grid templateColumns='0.5fr 1fr'>
                                 <Image boxSize='50px' marginTop='5px' src={ticketIcon} />
                                 <Text color='brand.accent' fontSize={['sm', 'md', 'lg']} marginTop='15px'>Tickets</Text>

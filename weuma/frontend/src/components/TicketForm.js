@@ -14,15 +14,15 @@ import {
   propNames
 } from '@chakra-ui/react'
 
-export default function TicketForm(props){
+export default function TicketForm(){
   
     const [ticket, setTicket] = React.useState({
       email: '',
       category: '',
       title: '',
       message: '',
-      senderId: props.userId,
-      adminId: ''
+      adminId: '',
+      response: ''
     });
 
     const handleSubmit = async () => {

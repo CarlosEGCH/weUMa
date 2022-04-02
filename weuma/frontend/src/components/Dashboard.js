@@ -2,12 +2,15 @@ import { Grid, GridItem, Text, Container, Box, Center, Button } from '@chakra-ui
 import * as React from 'react';
 import phoneImage from '../assets/spline.png';
 
+import { useNavigate } from 'react-router-dom';
 
 
 export default function MainPage(props){
 
     const [logged, setLogged] = React.useState(false);
     const cookies = props.cookies;
+
+    const navigate = useNavigate();
 
     const handleEnter = () => {
     try {
@@ -44,7 +47,7 @@ export default function MainPage(props){
                 <Text fontSize={['40px', '50px', '100px']}>Helpdesk for UMa Students</Text>
                 <Text fontSize={['15px', '20px', '40px']}>by students, for students</Text>
             </Box>
-            <Button _hover={{backgroundColor: 'brand.extra'}} left={['12%', '5%', '11%']} bottom='100px' position='absolute' size='lg' fontSize='20px' bg='brand.accent' color='white'>Ask Something!</Button>
+            <Button onClick={() => {navigate(`/tickets`)}} _hover={{backgroundColor: 'brand.extra'}} left={['12%', '5%', '11%']} bottom='100px' position='absolute' size='lg' fontSize='20px' bg='brand.accent' color='white'>Ask Something!</Button>
         </Box>
     );
 }
