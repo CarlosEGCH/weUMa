@@ -8,8 +8,12 @@ const { Schema, model } = require('mongoose');
  */
 
 const messageSchema = new Schema({
-    senderId: String,
-    username: String,
-    email: String,
+    room: String,
+    author: String,
     message: String,
+    image: String
+},{
+    timestamps: true
 })
+
+module.exports = model('Message', messageSchema);

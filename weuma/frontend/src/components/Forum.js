@@ -56,7 +56,24 @@ export default function ForumPage(props){
             await socket.emit("send_message", messageData);
             setChat(chat => [...chat, messageData]);
             setMessage('');
-            console.log('SendMessage: ', messageData);
+            
+            await fetch('http://localhost:8080/api/save-message', {
+                method: 'POST',
+                body: JSON.stringify({
+                    room: currentRoom,
+                    message: message,
+                    author: props.userId,
+                    image: props.userImage 
+                }),
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+            })
         }else{
             console.log('No message');
         }
@@ -67,11 +84,27 @@ export default function ForumPage(props){
         setMessage(event.target.value);
     }
 
-    useEffect(() => {
+    useEffect(async () => {
+
+        await fetch('http://localhost:8080/api/get-messages', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data.messages)
+            setChat(data.messages);
+        })
+
         socket.on("receive_message", (data) => {
             setChat(chat => [...chat, data]);
             console.log("UseEffect: ", data);
         })
+
     }, [socket])
 
 

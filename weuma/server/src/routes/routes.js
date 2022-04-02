@@ -7,6 +7,7 @@ const bcrypt = require("bcrypt");
 //Import user model
 const User = require("../models/user");
 const Ticket = require("../models/ticket");
+const Message = require("../models/message");
 
 //Import JSON Web Token
 const jwt = require("jsonwebtoken");
@@ -69,6 +70,34 @@ router.post("/signup", async (req, res) => {
         console.log("Request error: " + e);
     }
 })
+
+router.post("/save-message", async (req, res) => {
+    try {
+        const { message, author, room, image } = req.body;
+        const newMessage = new Message({
+            message: message,
+            author: author,
+            room: room,
+            image: image
+        })
+        await newMessage.save();
+
+        res.status(200).json({ message: "Message saved" });
+    } catch (e) {
+        console.log("Request error: " + e);
+    }
+})
+
+router.get("/get-messages", async (req, res) => {
+    await Message.find({}).sort({createdAt: 1}).exec(function(err, messages){
+        if(err){
+            console.log(err);
+        } else {
+            res.status(200).json({ messages });
+        }
+    })
+})
+
 
 router.post("/get-user", verifyToken, async (req, res) => {
     try {
