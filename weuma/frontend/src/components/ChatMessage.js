@@ -10,12 +10,7 @@ export default function Message(props){
                 <Image src={props.userImage} boxSize='50px' borderRadius='full' />
                 <Box bg='brand.secondary' mx='20px' p='5px' borderRadius='10px'>
                     <Text color='brand.accent'>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur optio quia, facilis culpa amet temporibus ea nihil maxime dolor harum eveniet qui nostrum facere esse, dolorem unde beatae tempora tenetur?
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur optio quia, facilis culpa amet temporibus ea nihil maxime dolor harum eveniet qui nostrum facere esse, dolorem unde beatae tempora tenetur?
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur optio quia, facilis culpa amet temporibus ea nihil maxime dolor harum eveniet qui nostrum facere esse, dolorem unde beatae tempora tenetur?
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur optio quia, facilis culpa amet temporibus ea nihil maxime dolor harum eveniet qui nostrum facere esse, dolorem unde beatae tempora tenetur?
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur optio quia, facilis culpa amet temporibus ea nihil maxime dolor harum eveniet qui nostrum facere esse, dolorem unde beatae tempora tenetur?
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur optio quia, facilis culpa amet temporibus ea nihil maxime dolor harum eveniet qui nostrum facere esse, dolorem unde beatae tempora tenetur?
+                        {props.message}
                     </Text>
                 </Box>
             </Flex>
@@ -25,7 +20,7 @@ export default function Message(props){
             <Flex justifyContent='end' flexDirection='row' w='100%'>
                 <Box bg='brand.extra' mx='20px' p='5px' borderRadius='10px' maxW='1000px'>
                     <Text color='brand.accent'>
-                        Lorem ipsum dolor sitculpa amet temporibus ea nihil maxime dolor harum eveniet qui nostrum facere esse, dolorem unde beatae tempora tenetur?
+                        {props.message}
                     </Text>
                 </Box>
             </Flex>

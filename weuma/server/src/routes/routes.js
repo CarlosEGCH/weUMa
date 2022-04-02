@@ -71,9 +71,6 @@ router.post("/signup", async (req, res) => {
 })
 
 router.post("/get-user", verifyToken, async (req, res) => {
-
-        console.log('Owner?', req.userId == req.body.profileId);
-
     try {
         const userId = req.userId;
         const { profileId } = req.body;
