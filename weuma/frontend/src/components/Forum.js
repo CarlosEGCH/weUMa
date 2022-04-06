@@ -2,6 +2,7 @@ import { Button, GridItem, Grid, Box, Text, Link, Input, InputGroup, InputRightE
 import * as React from 'react';
 import { useEffect } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
+import Picker from 'emoji-picker-react';
 
 import RightSideBar from './RightBar.js';
 import ChatDisplay from './ChatList.js';
@@ -35,6 +36,8 @@ export default function ForumPage(props){
 
     const { width } = useViewport();
     const [currentRoom, setCurrentRoom] = React.useState('admission')
+
+    const [emojiToggle, setEmojiToggle] = React.useState(false)
 
     const joinRoom = (roomName) => {
         socket.emit('join_room', { room: roomName });
@@ -83,6 +86,10 @@ export default function ForumPage(props){
     const handleChange = (event) => {
         setMessage(event.target.value);
     }
+
+    const onEmojiClick = (event, emojiObject) => {
+        setMessage(message + emojiObject.emoji);
+  };
 
     useEffect(async () => {
 
@@ -141,7 +148,8 @@ export default function ForumPage(props){
                             children={
                                 <Flex flexDirection='row'>
                                     <Image mr='5px' src={shortcutIcon} />
-                                    <Image mr='5px' src={emoteIcon} />
+                                    <Image onClick={() => {setEmojiToggle(!emojiToggle)}} mr='5px' src={emoteIcon} />
+                                    <Box position='absolute' top="-320" left="-120" display={emojiToggle ? "none" : "initial"}><Picker onEmojiClick={onEmojiClick}></Picker></Box>
                                     <Image mr='5px' src={imageIcon} />
                                 </Flex>
                             }
