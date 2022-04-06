@@ -96,13 +96,11 @@ export default function ForumPage(props){
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data.messages)
             setChat(data.messages);
         })
 
         socket.on("receive_message", (data) => {
             setChat(chat => [...chat, data]);
-            console.log("UseEffect: ", data);
         })
 
     }, [socket])
