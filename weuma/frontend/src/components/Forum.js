@@ -116,14 +116,13 @@ export default function ForumPage(props){
                     <Text color='brand.accent' fontSize={'30px'}>Topics</Text>
                     <Link onClick={() => { setCurrentRoom('admission');joinRoom('admission');}}><Flex><Image boxSize={'40px'} src={admissionIcon} /><Text color='brand.accent' alignSelf={'center'} fontSize='20px'>Admission</Text></Flex></Link>
                     <Link onClick={() => {joinRoom('education'); setCurrentRoom('education')}}><Flex><Image boxSize={'40px'} src={educationIcon} /><Text color='brand.accent' alignSelf={'center'} fontSize='20px'>Education</Text></Flex></Link>
-                    <Flex><Image boxSize={'40px'} src={resourcesIcon} /><Text color='brand.accent' alignSelf={'center'} fontSize='20px'>Resources</Text></Flex>
-                    <Flex><Image boxSize={'40px'} src={documentsIcon} /><Text color='brand.accent' alignSelf={'center'} fontSize='20px'>Documents</Text></Flex>
-                    <Flex><Image boxSize={'40px'} src={guideIcon} /><Text color='brand.accent' alignSelf={'center'} fontSize='20px'>Guide</Text></Flex>
-                    <Flex><Image boxSize={'40px'} src={paymentsIcon} /><Text color='brand.accent' alignSelf={'center'} fontSize='20px'>Payments</Text></Flex>
-                    <Flex><Image boxSize={'40px'} src={lostIcon} /><Text color='brand.accent' alignSelf={'center'} fontSize='20px'>Lost & Found</Text></Flex>
-                    <Flex><Image boxSize={'40px'} src={ticketIcon} /><Text color='brand.accent' alignSelf={'center'} fontSize='20px'>Support Tickets</Text></Flex>
-                    <Flex><Image boxSize={'40px'} src={transportIcon} /><Text color='brand.accent' alignSelf={'center'} fontSize='20px'>Transport</Text></Flex>
-                    <Flex><Image boxSize={'40px'} src={shopIcon} /><Text color='brand.accent' alignSelf={'center'} fontSize='20px'>Shop & Merch</Text></Flex>
+                    <Link onClick={() => {joinRoom('documents'); setCurrentRoom('documents')}}><Flex><Image boxSize={'40px'} src={documentsIcon} /><Text color='brand.accent' alignSelf={'center'} fontSize='20px'>Documents</Text></Flex></Link>
+                    <Link onClick={() => {joinRoom('guide'); setCurrentRoom('guide')}}><Flex><Image boxSize={'40px'} src={guideIcon} /><Text color='brand.accent' alignSelf={'center'} fontSize='20px'>Guide</Text></Flex></Link>
+                    <Link onClick={() => {joinRoom('payments'); setCurrentRoom('payments')}}><Flex><Image boxSize={'40px'} src={paymentsIcon} /><Text color='brand.accent' alignSelf={'center'} fontSize='20px'>Payments</Text></Flex></Link>
+                    <Link onClick={() => {joinRoom('lost'); setCurrentRoom('lost')}}><Flex><Image boxSize={'40px'} src={lostIcon} /><Text color='brand.accent' alignSelf={'center'} fontSize='20px'>Lost & Found</Text></Flex></Link>
+                    <Link onClick={() => {joinRoom('ticket'); setCurrentRoom('ticket')}}><Flex><Image boxSize={'40px'} src={ticketIcon} /><Text color='brand.accent' alignSelf={'center'} fontSize='20px'>Support Tickets</Text></Flex></Link>
+                    <Link onClick={() => {joinRoom('transport'); setCurrentRoom('transport')}}><Flex><Image boxSize={'40px'} src={transportIcon} /><Text color='brand.accent' alignSelf={'center'} fontSize='20px'>Transport</Text></Flex></Link>
+                    <Link onClick={() => {joinRoom('shop'); setCurrentRoom('shop')}}><Flex><Image boxSize={'40px'} src={shopIcon} /><Text color='brand.accent' alignSelf={'center'} fontSize='20px'>Shop & Merch</Text></Flex></Link>
                 </Flex>
             </GridItem>
             <GridItem mt='20px' colSpan={width > 900 ? 4 : 6} padding={ width > 900 ? '80px 20px 0px 20px' : '0px 0px 0px 0px'}>
