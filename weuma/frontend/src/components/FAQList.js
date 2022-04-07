@@ -1,4 +1,5 @@
 import {
+  Text,
   Box,
   Accordion,
   AccordionItem,
@@ -9,136 +10,40 @@ import {
 
 import * as React from 'react';
 
-export default function QuestionsList(){
+export default function QuestionsList(props){
 
-    return(
+    if(props.tickets.length !== 0){
+      return(
         <Accordion defaultIndex={[0]} allowMultiple width='100%' color='brand.accent'>
-  <AccordionItem>
+        {
+          props.tickets.solvedTickets.map((ticket, index) => {
+          return (
+            <AccordionItem key={index}>
     <h2>
       <AccordionButton _hover={{bg: 'brand.extra'}} bg='brand.secondary' _expanded={{bg: 'brand.extra'}} >
         <Box flex='1' textAlign='left' fontSize='20px'>
-          Section 1 title
+          {ticket.title}
         </Box>
         <AccordionIcon />
       </AccordionButton>
     </h2>
     <AccordionPanel pb={4} backgroundColor='rgba(255, 255, 255, 0.6)'>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat.
+     {ticket.response}
     </AccordionPanel>
   </AccordionItem>
+          )
+        })
+        }
 
-  <AccordionItem>
-    <h2>
-      <AccordionButton _hover={{bg: 'brand.extra'}} bg='brand.secondary' _expanded={{bg: 'brand.extra'}}>
-        <Box flex='1' textAlign='left' fontSize='20px'>
-          Section 2 title
-        </Box>
-        <AccordionIcon />
-      </AccordionButton>
-    </h2>
-    <AccordionPanel pb={4} backgroundColor='rgba(255, 255, 255, 0.6)'>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat.
-    </AccordionPanel>
-  </AccordionItem>
-  <AccordionItem>
-    <h2>
-      <AccordionButton _hover={{bg: 'brand.extra'}} bg='brand.secondary' _expanded={{bg: 'brand.extra'}}>
-        <Box flex='1' textAlign='left' fontSize='20px'>
-          Section 2 title
-        </Box>
-        <AccordionIcon />
-      </AccordionButton>
-    </h2>
-    <AccordionPanel pb={4} backgroundColor='rgba(255, 255, 255, 0.6)'>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat.
-    </AccordionPanel>
-  </AccordionItem><AccordionItem>
-    <h2>
-      <AccordionButton _hover={{bg: 'brand.extra'}} bg='brand.secondary' _expanded={{bg: 'brand.extra'}}>
-        <Box flex='1' textAlign='left' fontSize='20px'>
-          Section 2 title
-        </Box>
-        <AccordionIcon />
-      </AccordionButton>
-    </h2>
-    <AccordionPanel pb={4} backgroundColor='rgba(255, 255, 255, 0.6)'>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat.
-    </AccordionPanel>
-  </AccordionItem><AccordionItem>
-    <h2>
-      <AccordionButton _hover={{bg: 'brand.extra'}} bg='brand.secondary' _expanded={{bg: 'brand.extra'}}>
-        <Box flex='1' textAlign='left' fontSize='20px'>
-          Section 2 title
-        </Box>
-        <AccordionIcon />
-      </AccordionButton>
-    </h2>
-    <AccordionPanel pb={4} backgroundColor='rgba(255, 255, 255, 0.6)'>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat.
-    </AccordionPanel>
-  </AccordionItem><AccordionItem>
-    <h2>
-      <AccordionButton _hover={{bg: 'brand.extra'}} bg='brand.secondary' _expanded={{bg: 'brand.extra'}}>
-        <Box flex='1' textAlign='left' fontSize='20px'>
-          Section 2 title
-        </Box>
-        <AccordionIcon />
-      </AccordionButton>
-    </h2>
-    <AccordionPanel pb={4} backgroundColor='rgba(255, 255, 255, 0.6)'>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat.
-    </AccordionPanel>
-  </AccordionItem><AccordionItem>
-    <h2>
-      <AccordionButton _hover={{bg: 'brand.extra'}} bg='brand.secondary' _expanded={{bg: 'brand.extra'}}>
-        <Box flex='1' textAlign='left' fontSize='20px'>
-          Section 2 title
-        </Box>
-        <AccordionIcon />
-      </AccordionButton>
-    </h2>
-    <AccordionPanel pb={4} backgroundColor='rgba(255, 255, 255, 0.6)'>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat.
-    </AccordionPanel>
-  </AccordionItem><AccordionItem>
-    <h2>
-      <AccordionButton _hover={{bg: 'brand.extra'}} bg='brand.secondary' _expanded={{bg: 'brand.extra'}}>
-        <Box flex='1' textAlign='left' fontSize='20px'>
-          Section 2 title
-        </Box>
-        <AccordionIcon />
-      </AccordionButton>
-    </h2>
-    <AccordionPanel pb={4} backgroundColor='rgba(255, 255, 255, 0.6)'>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat.
-    </AccordionPanel>
-  </AccordionItem>
-  
-</Accordion>
+        </Accordion>
     );
+    }
+    else{
+      return(
+        <Box>
+          <Text>No tickets to display</Text>
+        </Box>
+      );
+    }
 
 }

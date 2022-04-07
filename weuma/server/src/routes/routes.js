@@ -157,6 +157,22 @@ router.post("/answer-ticket", async (req, res) => {
     }
 })
 
+router.post("/get-solved-tickets", async (req, res) => {
+    try {
+        
+        const { profileId } = req.body;
+
+        const solvedTickets = await Ticket.find({ adminId: profileId }).sort({createdAt: -1});
+
+        if(!solvedTickets) return res.status(401).send("No tickets found");
+
+        return res.status(200).json({ solvedTickets });
+
+    } catch (error) {
+        console.log(error)
+    }
+})
+
 router.post("/ticket-submit", async (req, res) => {
     try {
         const { email, category, title, message, adminId, response } = req.body;

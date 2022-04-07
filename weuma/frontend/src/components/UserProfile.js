@@ -17,6 +17,7 @@ export default function UserProfile(props){
     const { id } = useParams();
 
     const [owner, setOwner] = React.useState('');
+    const [solvedTickets, setSolvedTickets] = React.useState([]);
 
     const [user, setUser] = React.useState({
         name: '',
@@ -58,9 +59,35 @@ export default function UserProfile(props){
         }
     }
 
+    const fetchSolvedTickets = async () => {
+        try {
+            await fetch('http://localhost:8080/api/get-solved-tickets',{
+                method: 'POST',
+                body: JSON.stringify({
+                    profileId: user.profileId
+                }),
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                setSolvedTickets(data);
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     React.useEffect(
         async () => {
             await fetchUser();
+            await fetchSolvedTickets();
         }, [id]);
 
     return(
@@ -81,7 +108,7 @@ export default function UserProfile(props){
                 </Flex>
                 <Flex mt='20px' mb='100px' w='100%' flexDirection='column'>
                     <Text color='black' fontSize={'25px'} mb='10px' w='100%' borderBottom={'2px solid black'}>Solved Questions</Text>
-                    <QList />
+                    <QList tickets={solvedTickets} />
                 </Flex>
                 </Flex>
             </GridItem>
