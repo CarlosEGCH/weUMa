@@ -141,6 +141,22 @@ router.post("/login", async (req, res) => {
     }
 })
 
+router.post("/answer-ticket", async (req, res) => {
+    try {
+        
+        const { ticketId, email, response, adminId } = req.body;
+
+        const ticket = await Ticket.findOneAndUpdate({ _id: ticketId }, { $set: { response: response, adminId: adminId } }, { new: true });
+
+        if(!ticket) return res.status(401).send("Ticket not found");
+
+        return res.status(200).json({ ticket });
+
+    } catch (error) {
+        console.log(error)
+    }
+})
+
 router.post("/ticket-submit", async (req, res) => {
     try {
         const { email, category, title, message, adminId, response } = req.body;

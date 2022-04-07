@@ -37,7 +37,7 @@ export default function ForumPage(props){
     const { width } = useViewport();
     const [currentRoom, setCurrentRoom] = React.useState('admission')
 
-    const [emojiToggle, setEmojiToggle] = React.useState(false)
+    const [emojiToggle, setEmojiToggle] = React.useState(true)
 
     const joinRoom = (roomName) => {
         socket.emit('join_room', { room: roomName });

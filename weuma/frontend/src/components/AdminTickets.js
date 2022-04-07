@@ -62,7 +62,34 @@ export default function AdminTickets(){
         if(tickets.length == 0){
             getTickets();
         }
-    });
+        
+    }, []);
+
+    const handleAnswerSubmit = async (ticketId, email, response, adminId) => {
+        try {
+            await fetch(`http://localhost:8080/api/answer-ticket`, {
+                method: 'POST',
+                body: JSON.stringify(
+                    {ticketId, email, response, adminId}
+                ),
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                getTickets();
+                console.log(data);
+            })
+            .catch((e) => {
+                console.log('Fetching error: ', e);
+            })
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
 
     return(
@@ -77,7 +104,7 @@ export default function AdminTickets(){
             </GridItem>
 
             <GridItem h='100%' colStart={ width > 900 ? 2 : 1 } colEnd={ width > 900 ? 5 : 7 } display={ width > 900 ? 'initial' : 'none' } pt='100px' pl='20px'>
-                {stagedTickets.length > 0 ? <TicketDetailsList tickets={stagedTickets} handleUnstage={unstageTicket}/> : <Text>No staged tickets</Text>}
+                {stagedTickets.length > 0 ? <TicketDetailsList handleAnswerSubmit={handleAnswerSubmit} tickets={stagedTickets} handleUnstage={unstageTicket}/> : <Text>No staged tickets</Text>}
             </GridItem>
 
             <GridItem colStart={6} display={ width > 900 ? 'initial' : 'none' }>

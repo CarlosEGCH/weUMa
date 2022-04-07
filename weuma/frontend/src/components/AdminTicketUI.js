@@ -5,8 +5,16 @@ import shortcutIcon from '../assets/chat-shortcut-icon.svg'
 import emoteIcon from '../assets/chat-emote-icon.svg'
 import imageIcon from '../assets/chat-image-icon.svg'
 import crossIcon from '../assets/cross-icon.svg'
+import {useParams} from 'react-router-dom';
 
 export default function AdminTicketUI(props){
+
+    const [adminId, setAdminId] = React.useState(useParams().id);
+    const [response, setResponse] = React.useState('');
+
+    const handleChange = (e) => {
+        setResponse(e.target.value);
+    }
 
 
     return(
@@ -25,7 +33,7 @@ export default function AdminTicketUI(props){
            </Flex>
             <Flex flexDirection={'row'}>
                 <InputGroup border='black'>
-                        <Input bg='white' _hover={{border: '1px solid black'}} _placeholder={{color: 'brand.accent'}} color='brand.accent' focusBorderColor='brand.accent' ml='20px' p={['20px 105px 20px 20px','20px 160px 20px 20px','20px 160px 20px 20px']} placeholder='Write a message...' />
+                        <Input onChange={handleChange} bg='white' _hover={{border: '1px solid black'}} _placeholder={{color: 'brand.accent'}} color='brand.accent' focusBorderColor='brand.accent' ml='20px' p={['20px 105px 20px 20px','20px 160px 20px 20px','20px 160px 20px 20px']} placeholder='Write a message...' />
                         <InputRightElement 
                             mr='55px'
                             children={
@@ -37,7 +45,7 @@ export default function AdminTicketUI(props){
                             }
                         />
             </InputGroup>
-            <Button _hover={{bg: 'brand.extra'}} ml='15px' bg='brand.accent' color='white'>Submit</Button>
+            <Button onClick={() => {props.handleAnswerSubmit(props.ticket.id, props.ticket.email, response, adminId); props.handleUnstage(props.ticket)}} _hover={{bg: 'brand.extra'}} ml='15px' bg='brand.accent' color='white'>Submit</Button>
             </Flex>
         </Flex>
     );
