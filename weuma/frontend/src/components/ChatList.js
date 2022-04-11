@@ -1,4 +1,4 @@
-import { Flex, Spacer, Image, Text, Box } from '@chakra-ui/react';
+import { Flex, Spacer, Button, Image, Text, Box, Popover, PopoverTrigger, PopoverContent, PopoverArrow, PopoverCloseButton, PopoverHeader, PopoverBody } from '@chakra-ui/react';
 import * as React from 'react';
 
 import Message from './ChatMessage';

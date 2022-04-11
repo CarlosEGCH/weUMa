@@ -1,4 +1,6 @@
 import {
+  Button,
+  Flex,
   Text,
   Box,
   Accordion,
@@ -7,6 +9,9 @@ import {
   AccordionPanel,
   AccordionIcon,
 } from '@chakra-ui/react'
+
+import UserEditModal from './UserEditModal';
+import UserDeleteModal from './UserDeleteModal';
 
 import * as React from 'react';
 
@@ -18,25 +23,29 @@ export default function QuestionsList(props){
         {
           props.tickets.solvedTickets.map((ticket, index) => {
           return (
-            <AccordionItem key={index}>
-    <h2>
-      <AccordionButton _hover={{bg: 'brand.extra'}} bg='brand.secondary' _expanded={{bg: 'brand.extra'}} >
-        <Box flex='1' textAlign='left' fontSize='20px'>
-          {ticket.title}
-        </Box>
-        <AccordionIcon />
-      </AccordionButton>
-    </h2>
-    <AccordionPanel pb={4} backgroundColor='rgba(255, 255, 255, 0.6)'>
-     {ticket.response}
-    </AccordionPanel>
-  </AccordionItem>
-          )
-        })
-        }
+            <Flex flexFlow={"row"} >
+              <AccordionItem key={index} width="100%">
+              <h2>
+                <AccordionButton _hover={{bg: 'brand.extra'}} bg='brand.secondary' _expanded={{bg: 'brand.extra'}} >
+                  <Box flex='1' textAlign='left' fontSize='20px'>{ticket.title}</Box>
+                  <AccordionIcon />
+                </AccordionButton>
+              </h2>
+              <AccordionPanel pb={4} backgroundColor='rgba(255, 255, 255, 0.6)'>{ticket.response}
+              </AccordionPanel>
+            </AccordionItem>
 
-        </Accordion>
-    );
+            {/*------------ Edit Modal ------------*/}
+            
+            <UserEditModal />
+
+            {/*------------ Delete Modal ------------*/}
+
+            <UserDeleteModal />
+
+            </Flex>)})
+        }
+        </Accordion>);
     }
     else{
       return(

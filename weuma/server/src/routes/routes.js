@@ -173,6 +173,15 @@ router.post("/get-solved-tickets", async (req, res) => {
     }
 })
 
+router.post("/faq-submit", async (req, res) => {
+    try {
+        console.log("Submitting FAQ: ", req)
+        res.status(201).json("FAQ submitted");
+    } catch (error) {
+        console.log(error)
+    }
+})
+
 router.post("/ticket-submit", async (req, res) => {
     try {
         const { email, category, title, message, adminId, response } = req.body;

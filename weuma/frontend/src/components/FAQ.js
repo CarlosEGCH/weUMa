@@ -5,12 +5,17 @@ import QList from './FAQList.js';
 import RightSideBar from './RightBar.js';
 
 import { useViewport } from '../hooks/Responsive.js';
+import { useParams } from 'react-router-dom';
 
 import faqImage from '../assets/faqBg.png';
 
 export default function FaqPage(){
 
     const { width } = useViewport();
+
+    const category = useParams().category;
+
+    const fetchFaq = []
 
     return(
         <Grid h='100%' templateColumns='repeat(6, 1fr)' backgroundImage={faqImage} backgroundRepeat='no-repeat' backgroundPosition={['center center', '40px 80px', '100px 100px']}>
@@ -19,7 +24,7 @@ export default function FaqPage(){
             </Box>
             <GridItem h='100%' colStart={ width > 900 ? 2 : 1 } colEnd={ width > 900 ? 5 : 7 }>
                 <Center marginTop={['100px','300px','300px']}>
-                    <QList />
+                    <QList tickets={fetchFaq} />
                 </Center>
             </GridItem>
             <GridItem colStart={6} display={ width > 900 ? 'initial' : 'none' }>
