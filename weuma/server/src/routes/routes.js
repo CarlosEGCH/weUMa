@@ -90,15 +90,21 @@ router.post("/save-message", async (req, res) => {
 })
 
 router.get("/get-messages", async (req, res) => {
-    await Message.find({}).sort({createdAt: 1}).exec(function(err, messages){
-        if(err){
-            console.log(err);
-        } else {
-            res.status(200).json({ messages });
-        }
-    })
+    const messages = await Message.find({}).sort({createdAt: 1});
+
+    res.status(200).json({ messages });
 })
 
+router.post("/delete-message", async (req, res) => {
+    try {
+        const { id } = req.body;
+        await Message.deleteOne({_id: id});
+
+        res.status(200).json({ message: "Message deleted" });
+    } catch (e) {
+        console.log("Request error: " + e);
+    }
+})
 
 router.post("/get-user", verifyToken, async (req, res) => {
     try {

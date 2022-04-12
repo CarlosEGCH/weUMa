@@ -85,7 +85,7 @@ function App() {
         <Routes>
           <Route index path="/" element={<Dashboard cookies={cookies} />} />
           <Route path="/faq" element={<Categories />} />
-          <Route path="/forum" element={logged ? <Forum userImage={userImage} username={username} userId={userId} /> : <Login onRegister={handleRegister} cookies={cookies} />} />
+          <Route path="/forum" element={logged ? <Forum role={role} userImage={userImage} username={username} userId={userId} /> : <Login onRegister={handleRegister} cookies={cookies} />} />
           <Route path="/people" element={logged ? <People /> : <Login onRegister={handleRegister} cookies={cookies} />} />
           <Route path="/tickets" element={ <Tickets /> } />
           <Route path="/profile/:id" element={logged ? <UserProfile cookies={cookies} /> : <Login onRegister={handleRegister} cookies={cookies} />} />

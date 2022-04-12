@@ -39,11 +39,15 @@ export default function ForumPage(props){
 
     const [emojiToggle, setEmojiToggle] = React.useState(true)
 
+    const [chatChange, setChatChange] = React.useState(true)
+
     const joinRoom = (roomName) => {
         socket.emit('join_room', { room: roomName });
     }
 
     const sendMessage = async () => {
+
+        setChatChange(true)
 
         const messageData = {
                 room: currentRoom,
@@ -89,11 +93,35 @@ export default function ForumPage(props){
 
     const onEmojiClick = (event, emojiObject) => {
         setMessage(message + emojiObject.emoji);
-  };
+    };
+
+    const handleDelete = (id) => {
+
+        setChatChange(true)
+
+        setChat(chat => chat.filter(message => message.id !== id));
+
+        fetch('http://localhost:8080/api/delete-message', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: id
+            })
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+        })
+        .catch((e) => {console.log('Something went wrong ' + e)});
+    }
 
     useEffect(async () => {
 
-        await fetch('http://localhost:8080/api/get-messages', {
+        if(chatChange){
+            await fetch('http://localhost:8080/api/get-messages', {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
@@ -110,8 +138,9 @@ export default function ForumPage(props){
             setChat(chat => [...chat, data]);
         })
 
-    }, [socket])
-
+        setChatChange(false)
+        } 
+    }, [socket, chat])
 
     return(
         <Grid h='100%' templateColumns='repeat(6, 1fr)' backgroundImage={forumImage} backgroundRepeat='no-repeat' backgroundPosition={['center center', '40px 80px', '100px 140px']}>
@@ -137,7 +166,7 @@ export default function ForumPage(props){
                     <Text color='brand.accent' fontSize='30px' textAlign='center'>Admission</Text>
                 </Box>
                 <Box bg='pink' h={['75vh', '700px', '700px']} mb='30px' borderBottom='2px solid black'>
-                    <ChatDisplay userId={props.userId} chat={chat} socket={socket} room={currentRoom} username={props.username} />
+                    <ChatDisplay handleDelete={handleDelete} role={props.role} userId={props.userId} chat={chat} socket={socket} room={currentRoom} username={props.username} />
                 </Box>
                 <Flex flexDirection='row' px={['5px', '40px', '40px']}>
                     <Image borderRadius='full' boxSize='40px' src={userImage} />
