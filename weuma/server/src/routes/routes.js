@@ -8,6 +8,7 @@ const bcrypt = require("bcrypt");
 const User = require("../models/user");
 const Ticket = require("../models/ticket");
 const Message = require("../models/message");
+const Faq = require("../models/faq");
 
 //Import JSON Web Token
 const jwt = require("jsonwebtoken");
@@ -173,14 +174,41 @@ router.post("/get-solved-tickets", async (req, res) => {
     }
 })
 
+router.post("/get-faq", async (req, res) => {
+    try {
+        
+        const { category } = req.body;
+
+        const faq = await Faq.find({ category: category }).sort({createdAt: -1});
+
+        if(!faq) return res.status(401).json({ message: "No faq found" });
+
+        return res.status(201).json({ faq });
+
+    } catch (error) {
+        console.log(error)
+    }
+})
+
 router.post("/faq-submit", async (req, res) => {
     try {
-        console.log("Submitting FAQ: ", req)
+        
+        const { question, answer, category } = req.body;
+
+        const newFaq = new Faq({
+            title: question,
+            response: answer,
+            category: category
+        })
+
+        await newFaq.save();
+
         res.status(201).json("FAQ submitted");
     } catch (error) {
         console.log(error)
     }
 })
+
 
 router.post("/ticket-submit", async (req, res) => {
     try {
@@ -188,7 +216,7 @@ router.post("/ticket-submit", async (req, res) => {
 
         const newTicket = new Ticket({
             email: email,
-            category: category,
+            category: category.toLowerCase(),
             title: title,
             message: message,
             adminId: adminId,

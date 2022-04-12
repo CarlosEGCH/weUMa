@@ -8,6 +8,7 @@ import RightSideBar from './RightBar.js';
 import { useViewport } from '../hooks/Responsive.js';
 
 import elonImage from '../assets/elon.jpg';
+import editIcon from "../assets/edit-icon.svg";
 
 import QList from './FAQList.js';
 
@@ -84,6 +85,8 @@ export default function UserProfile(props){
         }
     }
 
+    {/* Put this component in the main one, so the useParams is always called on render */}
+
     React.useEffect(
         async () => {
             await fetchUser();
@@ -96,19 +99,25 @@ export default function UserProfile(props){
                 <Flex flexDirection='column'>
                     <Flex flexDirection={width > 900 ? 'row' : 'column'}>
                     <Image src={user.image !== '' ? require(`../../../server/src/public/${user.image}`) : elonImage} boxSize='300px' borderRadius={'10px'} />
+                    <Image margin='10px' paddingTop='250px' display={owner ? 'initial' : 'none'} src={editIcon} />
                     <Flex flexDirection='column' pl='40px'>
-                        <Text color='brand.accent' fontSize={'60px'}>{user.name !== '' || user.name !== undefined ? user.name : 'User Name'}</Text>
+                        <Text color='brand.accent' fontSize={'60px'}>
+                            {user.name !== '' || user.name !== undefined ? user.name : 'User Name'}
+                            <Image margin='10px' display={owner ? 'initial' : 'none'} src={editIcon} />
+                        </Text>
                         <Text color='brand.accent' fontSize='20px'>
                             {user.description || 'No description'}
+                            <Image margin='10px' display={owner ? 'initial' : 'none'} src={editIcon} />
                         </Text>
                         <Text color='brand.accent' fontSize='20px' mt='40px'>
                             {'Email: ' + (user.email || 'No email')}
+                            <Image margin='10px' display={owner ? 'initial' : 'none'} src={editIcon} />
                         </Text>
                     </Flex>
                 </Flex>
                 <Flex mt='20px' mb='100px' w='100%' flexDirection='column'>
                     <Text color='black' fontSize={'25px'} mb='10px' w='100%' borderBottom={'2px solid black'}>Solved Questions</Text>
-                    <QList tickets={solvedTickets} />
+                    <QList owner={owner} tickets={solvedTickets} />
                 </Flex>
                 </Flex>
             </GridItem>

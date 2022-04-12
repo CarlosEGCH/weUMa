@@ -4,7 +4,6 @@ const faqSchema = new Schema({
     title: String,
     response: String,
     category: String,
-    adminId: String
 }, {
     timestamps: true
 })

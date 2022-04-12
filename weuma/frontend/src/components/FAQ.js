@@ -1,7 +1,19 @@
-import { Text, Center, Grid, GridItem, Box } from '@chakra-ui/react';
+import {
+  Text, 
+  Center, 
+  Grid, 
+  GridItem, 
+  Box,
+  Button,
+  Flex,
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon, } from '@chakra-ui/react';
 import * as React from 'react';
 
-import QList from './FAQList.js';
+import UserDeleteModal from './UserDeleteModal.js';
 import RightSideBar from './RightBar.js';
 
 import { useViewport } from '../hooks/Responsive.js';
@@ -15,7 +27,31 @@ export default function FaqPage(){
 
     const category = useParams().category;
 
-    const fetchFaq = []
+    const [faq, setFaq] = React.useState([]);
+
+    const fetchFAQ = async () => {
+        try {
+            await fetch('http://localhost:8080/api/get-faq',{
+            method: 'POST',
+            body: JSON.stringify({
+                category: category
+            }),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            setFaq(data.faq);
+        })
+        .catch((e) => {console.log("Something went wrong ", e);})
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    React.useEffect(fetchFAQ, [])
 
     return(
         <Grid h='100%' templateColumns='repeat(6, 1fr)' backgroundImage={faqImage} backgroundRepeat='no-repeat' backgroundPosition={['center center', '40px 80px', '100px 100px']}>
@@ -24,7 +60,29 @@ export default function FaqPage(){
             </Box>
             <GridItem h='100%' colStart={ width > 900 ? 2 : 1 } colEnd={ width > 900 ? 5 : 7 }>
                 <Center marginTop={['100px','300px','300px']}>
-                    <QList tickets={fetchFaq} />
+                    <Accordion defaultIndex={[0]} allowMultiple width='100%' color='brand.accent'>
+        {
+          faq.map((ticket, index) => {
+          return (
+            <Flex key={index} flexFlow={"row"} >
+              <AccordionItem width="100%">
+              <h2>
+                <AccordionButton _hover={{bg: 'brand.extra'}} bg='brand.secondary' _expanded={{bg: 'brand.extra'}} >
+                  <Box flex='1' textAlign='left' fontSize='20px'>{ticket.title}</Box>
+                  <AccordionIcon />
+                </AccordionButton>
+              </h2>
+              <AccordionPanel pb={4} backgroundColor='rgba(255, 255, 255, 0.6)'>{ticket.response}
+              </AccordionPanel>
+            </AccordionItem>
+
+            {/*------------ Delete Modal ------------*/}
+
+            <Box><UserDeleteModal /></Box>
+
+            </Flex>)})
+        }
+        </Accordion>
                 </Center>
             </GridItem>
             <GridItem colStart={6} display={ width > 900 ? 'initial' : 'none' }>

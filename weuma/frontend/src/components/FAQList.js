@@ -12,6 +12,7 @@ import {
 
 import UserEditModal from './UserEditModal';
 import UserDeleteModal from './UserDeleteModal';
+import SendFaqModal from './SendFaqModal';
 
 import * as React from 'react';
 
@@ -23,8 +24,8 @@ export default function QuestionsList(props){
         {
           props.tickets.solvedTickets.map((ticket, index) => {
           return (
-            <Flex flexFlow={"row"} >
-              <AccordionItem key={index} width="100%">
+            <Flex key={index} flexFlow={"row"} >
+              <AccordionItem width="100%">
               <h2>
                 <AccordionButton _hover={{bg: 'brand.extra'}} bg='brand.secondary' _expanded={{bg: 'brand.extra'}} >
                   <Box flex='1' textAlign='left' fontSize='20px'>{ticket.title}</Box>
@@ -37,11 +38,14 @@ export default function QuestionsList(props){
 
             {/*------------ Edit Modal ------------*/}
             
-            <UserEditModal />
+            <Box display={props.owner ? 'initial' : 'none'}><UserEditModal /></Box>
 
             {/*------------ Delete Modal ------------*/}
 
-            <UserDeleteModal />
+            <Box display={props.owner ? 'initial' : 'none'}><UserDeleteModal /></Box>
+
+            {/*------------ Send FAQ Modal ------------*/}
+            <Box><SendFaqModal category={ticket.category} question={ticket.title} answer={ticket.response} /></Box>
 
             </Flex>)})
         }
