@@ -37,7 +37,7 @@ export default function QuestionsList(props){
 
             {/*------------ Edit Modal ------------*/}
             
-            <Box display={props.owner ? 'initial' : 'none'}><UserEditModal /></Box>
+            <Box display={props.owner ? 'initial' : 'none'}><UserEditModal ticketId={ticket._id} content={ticket.title} handleEdit={props.handleEdit} /></Box>
 
             {/*------------ Delete Modal ------------*/}
 

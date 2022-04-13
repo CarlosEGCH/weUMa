@@ -61,6 +61,37 @@ export default function UserProfile(props){
         }
     }
 
+    const handleEdit = async (id, content) => {
+        console.log(id, content);
+        setTicketsChange(true);
+        setSolvedTickets(solvedTickets.map(ticket => {
+            if(ticket._id === id){
+                return {
+                    ...ticket,
+                    title: content
+                }
+            }
+            return ticket;
+        }));
+    
+        await fetch('http://localhost:8080/api/edit-ticket',{
+            method: 'POST',
+            body: JSON.stringify({
+                id: id,
+                content: content
+                }),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+        })
+        .catch((e) => {console.log("Something went wrong ", e);})
+}
+
     const fetchSolvedTickets = async () => {
         try {
             await fetch('http://localhost:8080/api/get-solved-tickets',{
@@ -143,7 +174,7 @@ export default function UserProfile(props){
                 </Flex>
                 <Flex mt='20px' mb='100px' w='100%' flexDirection='column'>
                     <Text color='black' fontSize={'25px'} mb='10px' w='100%' borderBottom={'2px solid black'}>Solved Questions</Text>
-                    <QList handleDelete={handleDelete} owner={owner} tickets={solvedTickets} />
+                    <QList handleEdit={handleEdit} handleDelete={handleDelete} owner={owner} tickets={solvedTickets} />
                 </Flex>
                 </Flex>
             </GridItem>

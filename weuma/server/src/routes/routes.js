@@ -103,6 +103,20 @@ router.post("/edit-message", async (req, res) => {
     }
 })
 
+router.post("/edit-ticket", async (req, res) => {
+    try {
+        
+        const { id, content } = req.body;
+
+        await Ticket.updateOne({_id: id}, {$set : {title: content}});
+
+        res.status(200).json({ message: "Ticket updated" });
+
+    } catch (error) {
+        console.log(error)
+    }
+})
+
 router.get("/get-messages", async (req, res) => {
     const messages = await Message.find({}).sort({createdAt: 1});
 
