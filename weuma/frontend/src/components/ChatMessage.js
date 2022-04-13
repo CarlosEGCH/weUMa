@@ -33,6 +33,7 @@ export default function Message(props){
       adminId: '',
       response: ''
     });
+    const [edit, setEdit] = React.useState(message)
 
     const handleSubmit = async () => {
       try {
@@ -63,6 +64,10 @@ export default function Message(props){
         ...ticket,
         [e.target.name]: e.target.value
       });
+    }
+
+    const handleEditChange = (e) => {
+        setEdit(e.target.value);
     }
 
     const handleReset = () => {
@@ -184,14 +189,22 @@ export default function Message(props){
                         <FormLabel>Email: </FormLabel>
                         <Input value={ticket.email} onChange={handleChange} placeholder='1110000@student.uma.pt...' />
                     </FormControl>
+
+                    <FormControl mt={4}>
+                        <FormLabel pt='10px' borderTop={'1px solid gray'}>Edit: </FormLabel>
+                        <Input value={edit} onChange={handleEditChange} placeholder='Edit your message...' />
+                    </FormControl>
                 </ModalBody>
 
                 <ModalFooter>
                     <Button onClick={() => {onClose(); handleSubmit();}} colorScheme='blue' mr={3}>
                         Send Ticket
                     </Button>
+                    <Button colorScheme='yellow' mr={3} onClick={() => {props.handleEdit(props.msgId, edit); onClose();}}>
+                        Edit
+                    </Button>
                     <Button colorScheme='red' mr={3} onClick={() => {props.handleDelete(props.msgId); onClose();}}>
-                        Delete Message
+                        Delete
                     </Button>
                     <Button variant='ghost' onClick={() => {onClose(); handleReset();}}>
                         Cancel
