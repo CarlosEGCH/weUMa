@@ -44,6 +44,34 @@ export default function AdminShortcuts(){
         }
     }
 
+    const handleEdit = async (id, content) => {
+        setShortcuts(shortcuts.map(shortcut => {
+            if(shortcut._id === id){
+                return {
+                    ...shortcut,
+                    message: content
+                }
+            }
+            return shortcut;
+        }))
+
+        await fetch('http://localhost:8080/api/edit-shortcut', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id: id,
+                    content: content
+                })
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+        })
+        .catch(error => console.log(error));
+    }
+
     const handleDelete = (id) => {
         fetch('http://localhost:8080/api/delete-shortcut', {
             method: 'POST',
@@ -114,7 +142,7 @@ export default function AdminShortcuts(){
 
             <GridItem h='100%' colStart={ width > 900 ? 2 : 1 } colEnd={ width > 900 ? 5 : 7 } rowStart={ width > 900 ? 1 : 2} pt={['10px', '100px', '100px']} pl='20px'>
                 {shortcuts.map((shortcut, index) => (
-                    <ShortcutItem handleDelete={handleDelete} shortcutId={shortcut._id} message={shortcut.message} category={shortcut.category} key={index} />
+                    <ShortcutItem handleEdit={handleEdit} handleDelete={handleDelete} shortcutId={shortcut._id} message={shortcut.message} category={shortcut.category} key={index} />
                 ))}
             </GridItem>
 

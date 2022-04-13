@@ -158,7 +158,6 @@ export default function UserProfile(props){
                 <Flex flexDirection='column'>
                     <Flex flexDirection={width > 900 ? 'row' : 'column'}>
                     <Image src={user.image !== '' ? require(`../../../server/src/public/${user.image}`) : elonImage} boxSize='300px' borderRadius={'10px'} />
-                    <Image margin='10px' paddingTop='250px' display={owner ? 'initial' : 'none'} src={editIcon} />
                     <Flex flexDirection='column' pl='40px'>
                         <Text color='brand.accent' fontSize={'60px'}>
                             {user.name !== '' || user.name !== undefined ? user.name : 'User Name'}

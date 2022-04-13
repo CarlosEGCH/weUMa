@@ -117,6 +117,18 @@ router.post("/edit-ticket", async (req, res) => {
     }
 })
 
+router.post("/edit-shortcut", async (req, res) => {
+    try {
+        
+        const { id, content } = req.body;
+
+        await Shortcut.updateOne({_id: id}, {$set : {message: content}});
+
+    } catch (error) {
+        console.log(error)
+    }
+})
+
 router.get("/get-messages", async (req, res) => {
     const messages = await Message.find({}).sort({createdAt: 1});
 
