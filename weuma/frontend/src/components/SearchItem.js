@@ -16,7 +16,7 @@ export default function SearchItem(props){
             <Image src={image != '' ? require(`../../../server/src/public/${image}`) : userImage} boxSize='60px' borderRadius='full'></Image>
             <Flex ml='20px' flexDirection='column'>
                 <Link onClick={() => {navigate(`/profile/${props.user._id}`)}}><Text color='brand.accent' fontSize='20px'>{name != '' ? name : 'Username'}</Text></Link>
-                <Text color='brand.accent' fontSize='15px'>Software engineering, CEO of too many companies. Love dogs.</Text>
+                <Text color='brand.accent' fontSize='15px'>{props.user.description || 'No Description.'}</Text>
             </Flex>
         </Flex>
     );

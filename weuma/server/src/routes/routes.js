@@ -188,6 +188,19 @@ router.post("/login", async (req, res) => {
     }
 })
 
+router.post("/edit-description", async (req, res) => {
+    try {
+        const { id, content } = req.body;
+
+        await User.updateOne({_id: id}, {$set : {description: content}});
+
+        res.status(200).json({ message: "Description updated" });
+
+    } catch (error) {
+        console.log(error)
+    }
+})
+
 router.post("/answer-ticket", async (req, res) => {
     try {
         
@@ -363,7 +376,7 @@ router.get("/admins", async (req, res) => {
 })
 
 router.get("/users", async (req, res) => {
-    const users = await User.find({}, { _id: 1, name: 1, image: 1, role: 1 });
+    const users = await User.find({});
 
     res.status(200).json({"users": users});
 })

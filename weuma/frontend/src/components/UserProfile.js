@@ -2,10 +2,28 @@ import * as React from 'react';
 
 import {useParams} from 'react-router-dom';
 
-import { Text, Center, Grid, GridItem, Box, Flex, Image } from '@chakra-ui/react';
+import { Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Button,
+  Input,
+  Text, 
+  Center, 
+  Grid, 
+  GridItem, 
+  Box, 
+  Flex,
+  FormControl,
+  FormLabel, 
+  Image } from '@chakra-ui/react';
 import RightSideBar from './RightBar.js';
 
 import { useViewport } from '../hooks/Responsive.js';
+import { useDisclosure } from '@chakra-ui/react';
 
 import elonImage from '../assets/elon.jpg';
 import editIcon from "../assets/edit-icon.svg";
@@ -20,6 +38,9 @@ export default function UserProfile(props){
     const [owner, setOwner] = React.useState('');
     const [solvedTickets, setSolvedTickets] = React.useState([]);
     const [ticketsChange, setTicketsChange] = React.useState(true);
+    const { isOpen, onOpen, onClose } = useDisclosure()
+
+    const [edit, setEdit] = React.useState('');
 
     const [user, setUser] = React.useState({
         name: '',
@@ -53,12 +74,17 @@ export default function UserProfile(props){
                 description: data.user.description || 'No description',
                 image: data.user.image,
                 });
+            setEdit(data.user.description);
             setOwner(data.owner);
         })
         .catch((e) => {console.log("Something went wrong ", e);})
         } catch (error) {
             console.log(error);
         }
+    }
+
+    const handleDescriptionChange = async (e) => {
+        setEdit(e.target.value);
     }
 
     const handleEdit = async (id, content, response) => {
@@ -119,6 +145,36 @@ export default function UserProfile(props){
         }
     }
 
+    const handleDescriptionEdit = async (id, content) => {
+        try {
+            
+            await fetch('http://localhost:8080/api/edit-description',{
+                method: 'POST',
+                body: JSON.stringify({
+                    id: id,
+                    content: content
+                }),
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+            })
+            .catch((e) => {console.log("Something went wrong ", e);})
+
+            setUser({
+                ...user,
+                description: content
+                });
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     const handleDelete = (id) => {
         try {
             setTicketsChange(true);
@@ -161,15 +217,38 @@ export default function UserProfile(props){
                     <Flex flexDirection='column' pl='40px'>
                         <Text color='brand.accent' fontSize={'60px'}>
                             {user.name !== '' || user.name !== undefined ? user.name : 'User Name'}
-                            <Image margin='10px' display={owner ? 'initial' : 'none'} src={editIcon} />
                         </Text>
                         <Text color='brand.accent' fontSize='20px'>
                             {user.description || 'No description'}
-                            <Image margin='10px' display={owner ? 'initial' : 'none'} src={editIcon} />
+                            <Image margin='10px' display={owner ? 'initial' : 'none'} src={editIcon} cursor={'pointer'} onClick={onOpen} />
+
+                                <Modal isOpen={isOpen} onClose={onClose}>
+                                    <ModalOverlay />
+                                    <ModalContent>
+                                    <ModalHeader>Description Edit</ModalHeader>
+                                    <ModalCloseButton />
+                                    <ModalBody>
+                                        <Text fontSize={20}>Description: </Text>
+                                        <Text my='10px'>{user.description || 'No Description.'}</Text>
+                                        <FormControl mt={4}>
+                                            <FormLabel fontSize={20}>Edit Description: </FormLabel>
+                                            <Input onChange={handleDescriptionChange} placeholder='Description...' />
+                                        </FormControl>
+                                    </ModalBody>
+
+                                    <ModalFooter>
+                                        <Button colorScheme='blue' mr={3} onClick={() => {handleDescriptionEdit(id, edit); onClose();}}>
+                                        Edit
+                                        </Button>
+                                        <Button variant='ghost' onClick={onClose}>
+                                            Cancel
+                                        </Button>
+                                    </ModalFooter>
+                                    </ModalContent>
+                                </Modal>
                         </Text>
                         <Text color='brand.accent' fontSize='20px' mt='40px'>
                             {'Email: ' + (user.email || 'No email')}
-                            <Image margin='10px' display={owner ? 'initial' : 'none'} src={editIcon} />
                         </Text>
                     </Flex>
                 </Flex>
