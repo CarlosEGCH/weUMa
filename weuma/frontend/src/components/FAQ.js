@@ -87,7 +87,7 @@ export default function FaqPage(){
             </Box>
             <GridItem h='100%' colStart={ width > 900 ? 2 : 1 } colEnd={ width > 900 ? 5 : 7 }>
                 <Center marginTop={['100px','300px','300px']}>
-                    <Accordion defaultIndex={[0]} allowMultiple width='100%' color='brand.accent'>
+                    <Accordion allowMultiple width='100%' color='brand.accent'>
         {
           faq.map((ticket, index) => {
           return (

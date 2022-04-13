@@ -9,6 +9,7 @@ const User = require("../models/user");
 const Ticket = require("../models/ticket");
 const Message = require("../models/message");
 const Faq = require("../models/faq");
+const Shortcut = require("../models/Shortcut");
 
 //Import JSON Web Token
 const jwt = require("jsonwebtoken");
@@ -200,6 +201,38 @@ router.post("/delete-ticket", async (req, res) => {
         await Ticket.findByIdAndDelete({ _id: id });
 
         return res.status(200).json({ message: "Ticket deleted" });
+
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+router.post("/submit-shortcut", async (req, res) => {
+    try {
+        const {message, category, adminId} = req.body;
+        console.log(category.toLowerCase())
+        const newShortcut = new Shortcut({
+            message: message,
+            category: category.toLowerCase(),
+            adminId: adminId
+        })
+
+        await newShortcut.save();
+
+        return res.status(200).json(newShortcut);
+
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+router.post("/get-shortcuts", async (req, res) => {
+    try {
+        
+        const { id } = req.body;
+        const shortcuts = await Shortcut.find({ adminId: id }).sort({createdAt: -1});
+
+        return res.status(200).json({ shortcuts });
 
     } catch (error) {
         console.log(error)
