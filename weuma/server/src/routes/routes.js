@@ -226,6 +226,19 @@ router.post("/submit-shortcut", async (req, res) => {
     }
 })
 
+router.post("/delete-shortcut", async (req, res) => {
+    try {
+        
+        const { id } = req.body;
+        await Shortcut.findByIdAndDelete({ _id: id });
+
+        return res.status(200).json({ message: "Shortcut deleted" });
+
+    } catch (error) {
+        console.log(error)
+    }
+})
+
 router.post("/get-shortcuts", async (req, res) => {
     try {
         

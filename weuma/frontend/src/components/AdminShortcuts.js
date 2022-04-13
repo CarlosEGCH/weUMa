@@ -44,6 +44,23 @@ export default function AdminShortcuts(){
         }
     }
 
+    const handleDelete = (id) => {
+        fetch('http://localhost:8080/api/delete-shortcut', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id: id
+                })
+        })
+        .then(res => res.json())
+        .then(data => {
+            setShortcuts([...shortcuts.filter(shortcut => shortcut._id !== id)]);
+        })
+        .catch(error => console.log(error));
+    }
+
     React.useEffect(async () => {
         await fetchShortcuts();
     }, [])
@@ -97,7 +114,7 @@ export default function AdminShortcuts(){
 
             <GridItem h='100%' colStart={ width > 900 ? 2 : 1 } colEnd={ width > 900 ? 5 : 7 } rowStart={ width > 900 ? 1 : 2} pt={['10px', '100px', '100px']} pl='20px'>
                 {shortcuts.map((shortcut, index) => (
-                    <ShortcutItem message={shortcut.message} category={shortcut.category} key={index} />
+                    <ShortcutItem handleDelete={handleDelete} shortcutId={shortcut._id} message={shortcut.message} category={shortcut.category} key={index} />
                 ))}
             </GridItem>
 
