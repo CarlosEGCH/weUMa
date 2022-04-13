@@ -19,6 +19,7 @@ export default function UserProfile(props){
 
     const [owner, setOwner] = React.useState('');
     const [solvedTickets, setSolvedTickets] = React.useState([]);
+    const [ticketsChange, setTicketsChange] = React.useState(true);
 
     const [user, setUser] = React.useState({
         name: '',
@@ -74,7 +75,7 @@ export default function UserProfile(props){
             })
             .then(res => res.json())
             .then(data => {
-                setSolvedTickets(data);
+                setSolvedTickets(data.solvedTickets);
             })
             .catch((err) => {
                 console.log(err)
@@ -85,13 +86,38 @@ export default function UserProfile(props){
         }
     }
 
-    {/* Put this component in the main one, so the useParams is always called on render */}
+    const handleDelete = (id) => {
+        try {
+            setTicketsChange(true);
+            setSolvedTickets(solvedTickets.filter(ticket => ticket._id !== id));
+            fetch('http://localhost:8080/api/delete-ticket',{
+            method: 'POST',
+            body: JSON.stringify({
+                id: id
+            }),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+        })
+        .catch((e) => {console.log('Something went wrong ' + e)});
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     React.useEffect(
         async () => {
-            await fetchUser();
-            await fetchSolvedTickets();
-        }, [id]);
+            if(ticketsChange){
+                await fetchUser();
+                await fetchSolvedTickets();
+                setTicketsChange(false);
+            }
+        }, [id, solvedTickets]);
 
     return(
         <Grid h='100%' templateColumns='repeat(6, 1fr)'>
@@ -117,7 +143,7 @@ export default function UserProfile(props){
                 </Flex>
                 <Flex mt='20px' mb='100px' w='100%' flexDirection='column'>
                     <Text color='black' fontSize={'25px'} mb='10px' w='100%' borderBottom={'2px solid black'}>Solved Questions</Text>
-                    <QList owner={owner} tickets={solvedTickets} />
+                    <QList handleDelete={handleDelete} owner={owner} tickets={solvedTickets} />
                 </Flex>
                 </Flex>
             </GridItem>

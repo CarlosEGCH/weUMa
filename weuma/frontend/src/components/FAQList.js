@@ -17,12 +17,11 @@ import SendFaqModal from './SendFaqModal';
 import * as React from 'react';
 
 export default function QuestionsList(props){
-
     if(props.tickets.length !== 0){
       return(
-        <Accordion defaultIndex={[0]} allowMultiple width='100%' color='brand.accent'>
+        <Accordion allowMultiple width='100%' color='brand.accent'>
         {
-          props.tickets.solvedTickets.map((ticket, index) => {
+          props.tickets.map((ticket, index) => {
           return (
             <Flex key={index} flexFlow={"row"} >
               <AccordionItem width="100%">
@@ -42,7 +41,7 @@ export default function QuestionsList(props){
 
             {/*------------ Delete Modal ------------*/}
 
-            <Box display={props.owner ? 'initial' : 'none'}><UserDeleteModal /></Box>
+            <Box display={props.owner ? 'initial' : 'none'}><UserDeleteModal handleDelete={props.handleDelete} faqId={ticket._id} /></Box>
 
             {/*------------ Send FAQ Modal ------------*/}
             <Box><SendFaqModal category={ticket.category} question={ticket.title} answer={ticket.response} /></Box>

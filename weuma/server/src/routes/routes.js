@@ -180,6 +180,32 @@ router.post("/get-solved-tickets", async (req, res) => {
     }
 })
 
+router.post("/delete-faq", async (req, res) => {
+    try {
+        
+        const { id } = req.body;
+        await Faq.findByIdAndDelete({ _id: id });
+
+        return res.status(200).json({ message: "FAQ deleted" });
+
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+router.post("/delete-ticket", async (req, res) => {
+    try {
+        
+        const { id } = req.body;
+        await Ticket.findByIdAndDelete({ _id: id });
+
+        return res.status(200).json({ message: "Ticket deleted" });
+
+    } catch (error) {
+        console.log(error)
+    }
+})
+
 router.post("/get-faq", async (req, res) => {
     try {
         

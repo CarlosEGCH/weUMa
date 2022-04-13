@@ -16,9 +16,9 @@ import {
 import deleteIcon from "../assets/delete-icon.svg";
 import { useDisclosure } from '@chakra-ui/react';
 
-export default function UserDeleteModal() {
+export default function UserDeleteModal(props) {
   const { isOpen, onOpen, onClose } = useDisclosure()
-
+  
     return(<Box>
         <Button onClick={onOpen}>
               <Image src={deleteIcon} />
@@ -32,7 +32,7 @@ export default function UserDeleteModal() {
                   <ModalBody>Are you sure?</ModalBody>
 
                   <ModalFooter>
-                    <Button colorScheme='blue' mr={3} onClick={onClose}>Delete</Button>
+                    <Button colorScheme='blue' mr={3} onClick={() => {props.handleDelete(props.faqId); onClose();}}>Delete</Button>
                     <Button variant='ghost' onClick={onClose}>Cancel</Button>
                   </ModalFooter>
                 </ModalContent>

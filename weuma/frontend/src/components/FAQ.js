@@ -28,6 +28,7 @@ export default function FaqPage(){
     const category = useParams().category;
 
     const [faq, setFaq] = React.useState([]);
+    const [faqChange, setFaqChange] = React.useState(true);
 
     const fetchFAQ = async () => {
         try {
@@ -51,7 +52,33 @@ export default function FaqPage(){
         }
     }
 
-    React.useEffect(fetchFAQ, [])
+    const handleDelete = async (id) => {
+        setFaqChange(true);
+
+        setFaq(faq.filter(faq => faq.id !== id));
+        await fetch('http://localhost:8080/api/delete-faq',{
+            method: 'POST',
+            body: JSON.stringify({
+                id: id
+                }),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+        })
+        .catch((e) => {console.log('Something went wrong ' + e)});
+    }
+
+    React.useEffect(() => {
+        if(faqChange){
+            fetchFAQ();
+            setFaqChange(false);
+        }
+    }, [faq])
 
     return(
         <Grid h='100%' templateColumns='repeat(6, 1fr)' backgroundImage={faqImage} backgroundRepeat='no-repeat' backgroundPosition={['center center', '40px 80px', '100px 100px']}>
@@ -78,7 +105,7 @@ export default function FaqPage(){
 
             {/*------------ Delete Modal ------------*/}
 
-            <Box><UserDeleteModal /></Box>
+            <Box><UserDeleteModal faqId={ticket._id} handleDelete={handleDelete} /></Box>
 
             </Flex>)})
         }
