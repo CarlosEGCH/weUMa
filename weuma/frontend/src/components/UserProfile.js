@@ -61,14 +61,15 @@ export default function UserProfile(props){
         }
     }
 
-    const handleEdit = async (id, content) => {
+    const handleEdit = async (id, content, response) => {
         console.log(id, content);
         setTicketsChange(true);
         setSolvedTickets(solvedTickets.map(ticket => {
             if(ticket._id === id){
                 return {
                     ...ticket,
-                    title: content
+                    title: content,
+                    response: response
                 }
             }
             return ticket;
@@ -78,7 +79,8 @@ export default function UserProfile(props){
             method: 'POST',
             body: JSON.stringify({
                 id: id,
-                content: content
+                content: content,
+                response: response
                 }),
             headers: {
                 'Accept': 'application/json',

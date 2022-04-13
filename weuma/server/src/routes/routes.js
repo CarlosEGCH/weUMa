@@ -106,9 +106,9 @@ router.post("/edit-message", async (req, res) => {
 router.post("/edit-ticket", async (req, res) => {
     try {
         
-        const { id, content } = req.body;
+        const { id, content, response } = req.body;
 
-        await Ticket.updateOne({_id: id}, {$set : {title: content}});
+        await Ticket.updateOne({_id: id}, {$set : {title: content, response: response}});
 
         res.status(200).json({ message: "Ticket updated" });
 

@@ -23,10 +23,10 @@ import { useDisclosure } from '@chakra-ui/react';
 export default function UserEditModal(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const [edit, setEdit] = React.useState(props.content)
+  const [edit, setEdit] = React.useState({edit: props.content, response: props.response});
 
   const handleChange = (e) => {
-    setEdit(e.target.value)
+    setEdit({...edit, [e.target.name]: e.target.value});
   }
 
     return(<Box>
@@ -44,12 +44,19 @@ export default function UserEditModal(props) {
                       <Text fontSize={20}>Title:</Text>
                       <Text my='5px'>{props.content}</Text>
                       <FormLabel>Ticket Title</FormLabel>
-                      <Input onChange={handleChange} value={edit} placeholder='Ticket title...' />
+                      <Input onChange={handleChange} name='edit' value={edit.edit} placeholder='Ticket title...' />
+                    </FormControl>
+
+                    <FormControl mt={4}>
+                      <Text fontSize={20}>Response:</Text>
+                      <Text my='5px'>{props.response}</Text>
+                      <FormLabel>Ticket Response</FormLabel>
+                      <Input onChange={handleChange} name='response' value={edit.response} placeholder='Ticket response...' />
                     </FormControl>
                   </ModalBody>
 
                   <ModalFooter>
-                    <Button colorScheme='blue' mr={3} onClick={() => {props.handleEdit(props.ticketId, edit); onClose();}}>Submit</Button>
+                    <Button colorScheme='blue' mr={3} onClick={() => {props.handleEdit(props.ticketId, edit.edit, edit.response); onClose();}}>Submit</Button>
                     <Button variant='ghost' onClick={onClose}>Cancel</Button>
                   </ModalFooter>
                 </ModalContent>
