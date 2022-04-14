@@ -81,7 +81,6 @@ export default function ForumPage(props){
 
   const handleImageSubmit = async () => {
 
-    setChatChange(true)
     const formData = new FormData();
     formData.append('file', image.data);
 
@@ -103,7 +102,8 @@ export default function ForumPage(props){
             }
         
         await socket.emit('send_message', messageData);
-        setChat(chat => [...chat, messageData])
+        setChatChange(true)
+        setChat(chat => [...chat])
         setImage({ data: '' })
 
         await fetch('http://localhost:8080/api/save-message', {
@@ -125,8 +125,11 @@ export default function ForumPage(props){
             console.log(data)
         })
         .catch(err => console.log('Got an error:' + err))
+
+
     })
     .catch((e) => {console.log('Uploading error : ' + e)})
+
 
 }
 
@@ -160,8 +163,6 @@ export default function ForumPage(props){
 
     const sendMessage = async () => {
 
-        setChatChange(true)
-
         const messageData = {
                 room: currentRoom,
                 author: props.userId,
@@ -175,6 +176,7 @@ export default function ForumPage(props){
         
         if(message !== ""){
             await socket.emit("send_message", messageData);
+            setChatChange(true)
             setChat(chat => [...chat, messageData]);
             setMessage('');
             
@@ -265,6 +267,11 @@ export default function ForumPage(props){
     useEffect(async () => {
 
         if(chatChange){
+
+            socket.on("receive_message", (data) => {
+            setChat(chat => [...chat, data]);
+            })
+
             await fetch('http://localhost:8080/api/get-messages', {
             method: 'GET',
             headers: {
@@ -278,13 +285,9 @@ export default function ForumPage(props){
             setChat(data.messages);
         })
 
-        socket.on("receive_message", (data) => {
-            setChat(chat => [...chat, data]);
-        })
-
         setChatChange(false)
         } 
-    }, [])
+    }, [socket, chat])
 
     return(
         <Grid h='100%' templateColumns='repeat(6, 1fr)' backgroundImage={forumImage} backgroundRepeat='no-repeat' backgroundPosition={['center center', '40px 80px', '100px 140px']}>

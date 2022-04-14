@@ -21,6 +21,8 @@ import {
 
 import { useDisclosure } from '@chakra-ui/react';
 
+import elonImage from '../assets/elon.jpg';
+
 export default function Message(props){
 
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -87,7 +89,7 @@ export default function Message(props){
             <Flex flexDirection='row' maxW='1000px'>
                 <Image src={props.userImage} boxSize='50px' borderRadius='full' />
                 <Box shadow={'md'} bg='brand.secondary' mx='20px' p='5px' borderRadius='10px' cursor={'pointer'} onClick={onOpen}>
-                    {props.isImage ? <Image src={require(`../../../server/src/public/${props.message}`)} boxSize='200px' borderRadius='full' /> : <Text color='brand.accent'>{props.message}</Text>}
+                    {props.isImage ? <Image src={require(`../../../server/src/public/${props.message}`) || elonImage} boxSize='200px' borderRadius='full' /> : <Text color='brand.accent'>{props.message}</Text>}
                 </Box>
             </Flex>
 
@@ -143,11 +145,29 @@ export default function Message(props){
         </>
         )
     }else{
+        if(props.isImage){
+            console.log('-----------------------------------------------')
+            console.log('URL: ../../../server/src/public/' + props.message)
+        }
+
+        const handleImage = () => {
+            try {
+                if(props.isImage){
+                    const img = require(`../../../server/src/public/${props.message}`);
+                    return <Image src={img} boxSize='200px' borderRadius='full' />
+                }else{
+                    return <Text color='brand.accent'>{props.message}</Text>
+                }
+            } catch (error) {
+                    return <Text color='brand.accent'>{props.message}</Text>
+            }
+        }
+
         return(
             <>
             <Flex justifyContent='end' flexDirection='row' w='100%'>
                 <Box shadow={'md'} bg='brand.extra' mx='20px' p='5px' borderRadius='10px' cursor={'pointer'} onClick={onOpen}>
-                    {props.isImage ? <Image src={require(`../../../server/src/public/${props.message}`)} boxSize='200px' borderRadius='full' /> : <Text color='brand.accent'>{props.message}</Text>}
+                    {handleImage()}
                 </Box>
             </Flex>
 
