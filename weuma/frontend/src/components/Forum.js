@@ -19,6 +19,8 @@ import {
     ModalFooter,
     ModalBody,
     ModalCloseButton,
+    FormControl,
+    FormLabel,
 } from '@chakra-ui/react';
 
 import * as React from 'react';
@@ -69,6 +71,65 @@ export default function ForumPage(props){
 
     const [shortcuts, setShortcuts] = React.useState([]);
 
+    const [image, setImage] = React.useState({ data: '' });
+
+    const handleFileChange = (e) => {
+    setImage({
+        data: e.target.files[0],
+    })
+  }
+
+  const handleImageSubmit = async () => {
+
+    setChatChange(true)
+    const formData = new FormData();
+    formData.append('file', image.data);
+
+    await fetch('http://localhost:8080/api/upload', {
+    method: 'POST',
+    body: formData,
+    }).then(res => res.json())
+      .then(async (data) => {
+        
+        const messageData = {
+                room: currentRoom,
+                author: props.userId,
+                image: props.userImage,
+                isImage: false,
+                message: data.filename,
+                time: new Date(Date.now()).getHours() +
+                 ":" +
+                 new Date(Date.now()).getMinutes()
+            }
+        
+        await socket.emit('send_message', messageData);
+        setChat(chat => [...chat, messageData])
+        setImage({ data: '' })
+
+        await fetch('http://localhost:8080/api/save-message', {
+        method: 'POST',
+        body: JSON.stringify({
+            room: currentRoom,
+            message: data.filename,
+            author: props.userId,
+            image: props.userImage,
+            isImage: true
+        }),
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+        })
+        .catch(err => console.log('Got an error:' + err))
+    })
+    .catch((e) => {console.log('Uploading error : ' + e)})
+
+}
+
     const fetchShortcuts = async () => {
         const id = props.userId;
         try {
@@ -105,6 +166,7 @@ export default function ForumPage(props){
                 room: currentRoom,
                 author: props.userId,
                 image: props.userImage,
+                isImage: false,
                 message: message,
                 time: new Date(Date.now()).getHours() +
                  ":" +
@@ -122,7 +184,8 @@ export default function ForumPage(props){
                     room: currentRoom,
                     message: message,
                     author: props.userId,
-                    image: props.userImage 
+                    image: props.userImage,
+                    isImage: false 
                 }),
                 headers: {
                     'Accept': 'application/json',
@@ -221,7 +284,7 @@ export default function ForumPage(props){
 
         setChatChange(false)
         } 
-    }, [socket, chat])
+    }, [])
 
     return(
         <Grid h='100%' templateColumns='repeat(6, 1fr)' backgroundImage={forumImage} backgroundRepeat='no-repeat' backgroundPosition={['center center', '40px 80px', '100px 140px']}>
@@ -287,7 +350,30 @@ export default function ForumPage(props){
 
                                     <Image cursor={'pointer'} onClick={() => {setEmojiToggle(!emojiToggle)}} mr='5px' src={emoteIcon} />
                                     <Box position='absolute' top="-320" left="-120" display={emojiToggle ? "none" : "initial"}><Picker onEmojiClick={onEmojiClick}></Picker></Box>
-                                    <Image mr='5px' src={imageIcon} />
+                                    <Image mr='5px' src={imageIcon} onClick={onOpen} cursor='pointer' />
+
+                                    <Modal isOpen={isOpen} onClose={onClose}>
+                                        <ModalOverlay />
+                                        <ModalContent>
+                                        <ModalHeader>Send Image</ModalHeader>
+                                        <ModalCloseButton />
+                                        <ModalBody>
+                                            <FormControl>
+                                                <FormLabel fontSize={20} my='10px'>Select a File</FormLabel>
+                                                <Input type={'file'} onChange={handleFileChange} name={'image'} id='image' placeholder='Select an Image' />
+                                            </FormControl>
+                                        </ModalBody>
+
+                                        <ModalFooter>
+                                            <Button colorScheme='blue' mr={3} onClick={() => {handleImageSubmit(); onClose();}}>
+                                                Send
+                                            </Button>
+                                            <Button variant='ghost' onClick={onClose}>
+                                                Cancel
+                                            </Button>
+                                        </ModalFooter>
+                                        </ModalContent>
+                                    </Modal>
                                 </Flex>
                             }
                         />

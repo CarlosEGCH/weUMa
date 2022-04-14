@@ -75,12 +75,13 @@ router.post("/signup", async (req, res) => {
 
 router.post("/save-message", async (req, res) => {
     try {
-        const { message, author, room, image } = req.body;
+        const { message, author, room, image, isImage } = req.body;
         const newMessage = new Message({
             message: message,
             author: author,
             room: room,
-            image: image
+            image: image,
+            isImage: isImage
         })
         await newMessage.save();
 

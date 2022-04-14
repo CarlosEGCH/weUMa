@@ -11,7 +11,8 @@ const messageSchema = new Schema({
     room: String,
     author: String,
     message: String,
-    image: String
+    image: String,
+    isImage: Boolean
 },{
     timestamps: true
 })

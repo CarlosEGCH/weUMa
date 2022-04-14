@@ -87,9 +87,7 @@ export default function Message(props){
             <Flex flexDirection='row' maxW='1000px'>
                 <Image src={props.userImage} boxSize='50px' borderRadius='full' />
                 <Box shadow={'md'} bg='brand.secondary' mx='20px' p='5px' borderRadius='10px' cursor={'pointer'} onClick={onOpen}>
-                    <Text color='brand.accent'>
-                        {props.message}
-                    </Text>
+                    {props.isImage ? <Image src={require(`../../../server/src/public/${props.message}`)} boxSize='200px' borderRadius='full' /> : <Text color='brand.accent'>{props.message}</Text>}
                 </Box>
             </Flex>
 
@@ -149,9 +147,7 @@ export default function Message(props){
             <>
             <Flex justifyContent='end' flexDirection='row' w='100%'>
                 <Box shadow={'md'} bg='brand.extra' mx='20px' p='5px' borderRadius='10px' cursor={'pointer'} onClick={onOpen}>
-                    <Text color='brand.accent'>
-                        {props.message}
-                    </Text>
+                    {props.isImage ? <Image src={require(`../../../server/src/public/${props.message}`)} boxSize='200px' borderRadius='full' /> : <Text color='brand.accent'>{props.message}</Text>}
                 </Box>
             </Flex>
 
