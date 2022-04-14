@@ -52,8 +52,16 @@ router.post("/upload",(req, res) => {
 
 router.post("/signup", async (req, res) => {
     try {
+
         const { name, studentId, phone, email, password, image } = req.body;
         const hash = await bcrypt.hash(password, 10);
+
+        const user = await User.findOne({ email });
+
+        if (user) {
+            return res.status(400).json({error: "User already exists"});
+        }
+
         const newUser = new User({
             name: name,
             studentId : studentId,

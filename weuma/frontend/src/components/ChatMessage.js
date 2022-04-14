@@ -83,13 +83,26 @@ export default function Message(props){
         });
     }
 
+    const handleImage = () => {
+            try {
+                if(props.isImage){
+                    const img = require(`../../../server/src/public/${props.message}`);
+                    return <Image src={img} boxSize='200px' />
+                }else{
+                    return <Text color='brand.accent'>{props.message}</Text>
+                }
+            } catch (error) {
+                    return <Text color='brand.accent'>{props.message}</Text>
+            }
+        }
+
     if(props.received){
         return(
         <>
             <Flex flexDirection='row' maxW='1000px'>
                 <Image src={props.userImage} boxSize='50px' borderRadius='full' />
                 <Box shadow={'md'} bg='brand.secondary' mx='20px' p='5px' borderRadius='10px' cursor={'pointer'} onClick={onOpen}>
-                    {props.isImage ? <Image src={require(`../../../server/src/public/${props.message}`) || elonImage} boxSize='200px' borderRadius='full' /> : <Text color='brand.accent'>{props.message}</Text>}
+                    {handleImage()}
                 </Box>
             </Flex>
 
@@ -145,23 +158,6 @@ export default function Message(props){
         </>
         )
     }else{
-        if(props.isImage){
-            console.log('-----------------------------------------------')
-            console.log('URL: ../../../server/src/public/' + props.message)
-        }
-
-        const handleImage = () => {
-            try {
-                if(props.isImage){
-                    const img = require(`../../../server/src/public/${props.message}`);
-                    return <Image src={img} boxSize='200px' borderRadius='full' />
-                }else{
-                    return <Text color='brand.accent'>{props.message}</Text>
-                }
-            } catch (error) {
-                    return <Text color='brand.accent'>{props.message}</Text>
-            }
-        }
 
         return(
             <>

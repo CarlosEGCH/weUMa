@@ -20,6 +20,7 @@ import {
 } from '@chakra-ui/react';
 
 import { useNavigate } from 'react-router-dom';
+import { useToast } from '@chakra-ui/react';
 
 
 export default function SignupForm(props){
@@ -37,6 +38,7 @@ export default function SignupForm(props){
         accept: "false",
         image: "basic"
     })
+    const toast = useToast();
 
     const handleFileChange = (e) => {
     const img = {
@@ -48,6 +50,66 @@ export default function SignupForm(props){
     const handleSubmit = async () => {
       const formData = new FormData();
       formData.append('file', image.data);
+
+      if(user.name === "" || user.studentId === "" || user.email === "" || user.phone === "" || user.password === "" || user.rpassword === ""){
+        toast({
+          title: "Missing Fields",
+          description: "Please fill all the fields",
+          position: "bottom-left",
+          status: "warning",
+          duration: 9000,
+          isClosable: true
+        })
+        return
+      }
+
+      if(user.email !== "" && !user.email.includes("@")){
+        toast({
+          title: "Invalid Email",
+          description: "Please enter a valid email",
+          position: "bottom-left",
+          status: "warning",
+          duration: 9000,
+          isClosable: true
+        })
+        return
+      }
+
+      if(user.password !== user.rpassword){
+        toast({
+          title: 'Password Warning',
+          description: "Passwords must be equal",
+          position: 'bottom-left',
+          status: 'warning',
+          duration: 9000,
+          isClosable: true,
+        })
+        return
+      }
+
+      if(user.accept !== "true"){
+        toast({
+          title: 'Accept Warning',
+          description: "You must accept the terms and conditions",
+          position: 'bottom-left',
+          status: 'warning',
+          duration: 9000,
+          isClosable: true,
+        })
+        return
+      }
+
+      if(image.data === ""){
+        toast({
+          title: 'Image Warning',
+          description: "You must select an image",
+          position: 'bottom-left',
+          status: 'warning',
+          duration: 9000,
+          isClosable: true,
+        })
+        return
+      }
 
       await fetch('http://localhost:8080/api/upload', {
       method: 'POST',
@@ -76,7 +138,7 @@ export default function SignupForm(props){
       })
       .then(() => {props.onRegister(); navigate('/faq');})
       .catch((e) => {
-        console.log("Something went wrong ", e);
+        console.log('Something went wrong',e);
       })
       })
       .catch((e)=> {console.log('Image not uploaded', e)})
@@ -106,7 +168,7 @@ export default function SignupForm(props){
     }
 
     return(
-<FormControl bg='brand.secondary' p='20px' width='100%' height='760px'>
+<FormControl bg='brand.secondary' mt='40px' p='20px' width='100%' height='820px'>
     <Text color='brand.accent' fontSize='35px' borderBottom='2px solid black' mb='20px'>SignUp</Text>
   <FormLabel mt='10px' htmlFor='name' color='brand.accent'>Full Name</FormLabel>
   <Input value={user.name} onChange={handleChange} name='name' bg='white' color='brand.accent' id='name' type='text' width='100%' placeholder='John Doe' _placeholder={{color: 'gray'}}/>

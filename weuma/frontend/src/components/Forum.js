@@ -269,6 +269,7 @@ export default function ForumPage(props){
         if(chatChange){
 
             socket.on("receive_message", (data) => {
+                console.log('Receiving message')
             setChat(chat => [...chat, data]);
             })
 
