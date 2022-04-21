@@ -375,7 +375,7 @@ router.post("/ticket-submit", async (req, res) => {
 router.post("/register", verifyToken, async (req, res) => {
     const {userId} = req;
     const user = await User.findOne({ _id: userId}, { _id: 1, name: 1, image: 1, role: 1});
-
+console.log(userId)
     res.status(200).json(user);
 })
 

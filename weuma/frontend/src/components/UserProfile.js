@@ -51,13 +51,12 @@ export default function UserProfile(props){
         profileId: id,
     });
 
-
     const fetchUser = async () => {
         try {
             await fetch('http://localhost:8080/api/get-user',{
             method: 'POST',
             body: JSON.stringify({
-                profileId: user.profileId
+                profileId: id
             }),
             headers: {
                 'Accept': 'application/json',
@@ -88,7 +87,6 @@ export default function UserProfile(props){
     }
 
     const handleEdit = async (id, content, response) => {
-        console.log(id, content);
         setTicketsChange(true);
         setSolvedTickets(solvedTickets.map(ticket => {
             if(ticket._id === id){
@@ -201,12 +199,10 @@ export default function UserProfile(props){
 
     React.useEffect(
         async () => {
-            if(ticketsChange){
                 await fetchUser();
                 await fetchSolvedTickets();
-                setTicketsChange(false);
-            }
-        }, [id, solvedTickets]);
+            
+        }, [id]);
 
     return(
         <Grid h='100%' templateColumns='repeat(6, 1fr)'>
