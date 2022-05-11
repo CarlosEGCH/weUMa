@@ -65,8 +65,6 @@ export default function ForumPage(props){
 
     const [emojiToggle, setEmojiToggle] = React.useState(true)
 
-    const [chatChange, setChatChange] = React.useState(true)
-
     const { isOpen, onOpen, onClose } = useDisclosure()
 
     const [shortcuts, setShortcuts] = React.useState([]);
@@ -102,7 +100,6 @@ export default function ForumPage(props){
             }
         
         await socket.emit('send_message', messageData);
-        setChatChange(true)
         setChat(chat => [...chat])
         setImage({ data: '' })
 
@@ -176,7 +173,6 @@ export default function ForumPage(props){
         
         if(message !== ""){
             await socket.emit("send_message", messageData);
-            setChatChange(true)
             setChat(chat => [...chat, messageData]);
             setMessage('');
             
@@ -213,7 +209,6 @@ export default function ForumPage(props){
     };
 
     const handleEdit = async (id, content) => {
-        setChatChange(true)
         await fetch('http://localhost:8080/api/edit-message', {
             method: 'POST',
             body: JSON.stringify({
@@ -238,8 +233,6 @@ export default function ForumPage(props){
     }
 
     const handleDelete = (id) => {
-
-        setChatChange(true)
 
         setChat(chat => chat.filter(message => message.id !== id));
 
@@ -266,7 +259,7 @@ export default function ForumPage(props){
 
     useEffect(async () => {
 
-        if(chatChange){
+            console.log('Receiving message')
 
             socket.on("receive_message", (data) => {
                 console.log('Receiving message')
@@ -286,9 +279,7 @@ export default function ForumPage(props){
             setChat(data.messages);
         })
 
-        setChatChange(false)
-        } 
-    }, [socket, chat])
+    }, [socket])
 
     return(
         <Grid h='100%' templateColumns='repeat(6, 1fr)' backgroundImage={forumImage} backgroundRepeat='no-repeat' backgroundPosition={['center center', '40px 80px', '100px 140px']}>
