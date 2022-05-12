@@ -87,12 +87,11 @@ export default function ForumPage(props){
     body: formData,
     }).then(res => res.json())
       .then(async (data) => {
-        
         const messageData = {
                 room: currentRoom,
                 author: props.userId,
                 image: props.userImage,
-                isImage: false,
+                isImage: true,
                 message: data.filename,
                 time: new Date(Date.now()).getHours() +
                  ":" +
@@ -100,7 +99,7 @@ export default function ForumPage(props){
             }
         
         await socket.emit('send_message', messageData);
-        setChat(chat => [...chat])
+        setChat(chat => [...chat, messageData])
         setImage({ data: '' })
 
         await fetch('http://localhost:8080/api/save-message', {
@@ -233,8 +232,7 @@ export default function ForumPage(props){
     }
 
     const handleDelete = (id) => {
-
-        setChat(chat => chat.filter(message => message.id !== id));
+        setChat(chat => chat.filter(message => message._id !== id))
 
         fetch('http://localhost:8080/api/delete-message', {
             method: 'POST',
@@ -259,10 +257,7 @@ export default function ForumPage(props){
 
     useEffect(async () => {
 
-            console.log('Receiving message')
-
             socket.on("receive_message", (data) => {
-                console.log('Receiving message')
             setChat(chat => [...chat, data]);
             })
 
