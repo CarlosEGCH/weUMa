@@ -8,12 +8,13 @@ import {
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
+  Image
 } from '@chakra-ui/react'
 
 import UserEditModal from './UserEditModal';
 import UserDeleteModal from './UserDeleteModal';
 import SendFaqModal from './SendFaqModal';
-
+import ReopenTicketModal from './ReopenTicketModal';
 import * as React from 'react';
 
 export default function QuestionsList(props){
@@ -45,6 +46,9 @@ export default function QuestionsList(props){
 
             {/*------------ Send FAQ Modal ------------*/}
             <Box><SendFaqModal category={ticket.category} question={ticket.title} answer={ticket.response} /></Box>
+
+            {/*------------ Reopen Ticket -------------*/}
+            <Box><ReopenTicketModal category={ticket.category} question={ticket.title} ticketId={ticket._id} /></Box>
 
             </Flex>)})
         }

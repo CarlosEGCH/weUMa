@@ -50,6 +50,26 @@ router.post("/upload",(req, res) => {
     })
 })
 
+router.post("/reopen-ticket", async (req, res) => {
+    const { ticketId, category, title, description, email } = req.body;
+    console.log('ID: ', req.body.ticketId)
+    const newTicket = new Ticket({
+        category,
+        title,
+        message: description,
+        email,
+        adminId: '',
+        response: ''
+    })
+
+
+    await Ticket.findByIdAndDelete({ _id: ticketId });
+
+    await newTicket.save();
+
+    res.status(200).json({"message": "Ticket reopened"})
+})
+
 router.post("/signup", async (req, res) => {
     try {
 

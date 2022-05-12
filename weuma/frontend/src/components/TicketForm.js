@@ -61,7 +61,7 @@ export default function TicketForm(){
     <Text color='brand.accent' fontSize='35px' borderBottom='2px solid black' mb='20px'>Ticket</Text>
   <FormLabel htmlFor='email' color='brand.accent'>Email address</FormLabel>
   <Input value={ticket.email} onChange={handleChange} name='email' bg='white' color='brand.accent' id='email' type='email' width='100%' placeholder='1110000@student.uma.pt' _placeholder={{color: 'gray'}}/>
-  <FormHelperText>We'll never share your email.</FormHelperText>
+  <FormHelperText color={'black'}>We'll never share your email with anyone else</FormHelperText>
 
   <FormLabel htmlFor='category' color='black' mt='20px'>Select a Category</FormLabel>
   <Select value={ticket.category} onChange={handleChange} name='category' bg='white' id='category' placeholder='Select category' color='gray'>
