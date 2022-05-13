@@ -1,7 +1,6 @@
-import { Image, Box, Grid, GridItem, Text, Center, Link } from "@chakra-ui/react";
+import { Image, Box, Grid, GridItem, Text, Center, Link, Badge } from "@chakra-ui/react";
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
-import userImage from '../assets/elon.jpg';
 
 import profileIcon from '../assets/user-icon.svg';
 import storageIcon from '../assets/storage-icon.svg';
@@ -9,6 +8,39 @@ import inboxIcon from '../assets/inbox-icon.svg';
 
 export default function NavUserDisplay(props){
     const navigate = useNavigate();
+
+    const renders = React.useRef(0);
+
+    const [amtTickets, setAmtTickets] = React.useState(0);
+
+    const getAmountOfTickets = async () => {
+        try {
+            await fetch(`http://localhost:8080/api/tickets-amount`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    userId: props.userId
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                setAmtTickets(data.amount);
+                console.log(data)
+                renders.current = renders.current + 1;
+            })
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    React.useEffect(() => {
+        if(renders.current < 3){
+            getAmountOfTickets();
+        }
+    })
 
     if(props.logged){
         if(props.role == 'admin'){
@@ -25,9 +57,14 @@ export default function NavUserDisplay(props){
                 </GridItem>
                 <GridItem colSpan={3}>
                     <Grid templateColumns='repeat(3, 1fr)' paddingTop='10px'>
-                        <Link onClick={() => {navigate(`/profile/${props.userId}`);}} w='40px'><Image boxSize='40px' src={profileIcon}></Image></Link>
-                        <Link onClick={() => {navigate(`/admin/tickets/${props.userId}`)}} w='40px'><Image boxSize='40px' src={storageIcon}></Image></Link>
-                        <Link onClick={() => {navigate(`/admin/shortcuts/${props.userId}`)}} w='40px'><Image boxSize='40px' src={inboxIcon}></Image></Link>
+                        <Link onClick={() => {navigate(`/profile/${props.userId}`);}} w='40px'>
+                            <Image boxSize='40px' src={profileIcon}></Image></Link>
+                        <Link display={'flex'} flexDir={'row'} onClick={() => {navigate(`/admin/tickets/${props.userId}`)}} w='40px'>
+                            <Image boxSize='40px' src={storageIcon}></Image>
+                            <Badge height={'50%'} colorScheme={'red'} variant={'solid'}>{amtTickets}</Badge>
+                        </Link>
+                        <Link onClick={() => {navigate(`/admin/shortcuts/${props.userId}`)}} w='40px'>
+                            <Image boxSize='40px' src={inboxIcon}></Image></Link>
                     </Grid>
                 </GridItem>
             </Grid>

@@ -32,6 +32,7 @@ function App() {
   const [userId, setUserId] = useState('');
   const [userImage, setUserImage] = useState('');
   const [username, setUsername] = useState('');
+  const [categories, setCategories] = useState([])
   const cookies = new Cookies();
 
   const handleRegister = async () => {
@@ -54,6 +55,7 @@ function App() {
         setUserImage(data.image);
         setRole(data.role);
         setUsername(data.name);
+        setCategories(data.categories);
       })
       .catch((e) => {
         console.log('Fetching error: ', e);
@@ -67,7 +69,7 @@ function App() {
 
   useEffect(() => {
       handleRegister();
-  })
+  }, [])
 
   return (
     <Box height='100vh' bg='brand.primary' overflow='auto' sx={{
@@ -92,7 +94,7 @@ function App() {
           <Route path="/faq/:category" element={<FAQ />} />
           <Route path="/signup" element={<Signup onRegister={handleRegister} cookies={cookies} />} />
           <Route path='/login' element={<Login onRegister={handleRegister} cookies={cookies} />} />
-          <Route path='/admin/tickets/:id' element={logged ? <AdminTickets /> : <Login onRegister={handleRegister} cookies={cookies} />} />
+          <Route path='/admin/tickets/:id' element={logged ? <AdminTickets categories={categories} /> : <Login onRegister={handleRegister} cookies={cookies} />} />
           <Route path="/admin/shortcuts/:id" element={logged ? <AdminShortcuts /> : <Login onRegister={handleRegister} cookies={cookies} />} />
         </Routes>
     </BrowserRouter>

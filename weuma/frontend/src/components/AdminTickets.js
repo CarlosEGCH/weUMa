@@ -7,22 +7,25 @@ import TicketDetailsList from './TicketDetailsList.js';
 
 import { useViewport } from '../hooks/Responsive.js';
 
-export default function AdminTickets(){
+export default function AdminTickets(props){
 
     const { width } = useViewport();
+    const renders = React.useRef(0);
 
     const [tickets, setTickets] = React.useState([]);
     const [stagedTickets, setStagedTickets] = React.useState([]);
 
     const getTickets = async () => {
         try {
-            
             await fetch(`http://localhost:8080/api/tickets`, {
-                method: 'GET',
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'
-                }
+                },
+                body: JSON.stringify({
+                    categories: props.categories
+                })
             })
             .then(res => res.json())
             .then(data => {
@@ -32,10 +35,12 @@ export default function AdminTickets(){
                         title: ticket.title,
                         message: ticket.message,
                         email: ticket.email,
-                        staged: false
+                        staged: false,
+                        category: ticket.category,
                     }
             })
             setTickets(newTickets);
+            renders.current = renders.current + 1;
         })
             .catch((e) => {
                 console.log('Fetching error: ', e);
@@ -59,11 +64,10 @@ export default function AdminTickets(){
 
 
     React.useEffect(() => {
-        if(tickets.length == 0){
-            getTickets();
-        }
-        
-    }, []);
+            if(renders.current < 3){
+                getTickets();
+            }
+    });
 
     const handleAnswerSubmit = async (ticketId, email, response, adminId) => {
         try {

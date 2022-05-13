@@ -8,7 +8,8 @@ const userSchema = new Schema({
     email: String,
     password: String,
     role: String,
-    image: String
+    image: String,
+    categories: [String],
 }, {
     timestamps: true
 });

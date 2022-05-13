@@ -416,7 +416,7 @@ router.post("/ticket-submit", async (req, res) => {
 
 router.post("/register", verifyToken, async (req, res) => {
     const {userId} = req;
-    const user = await User.findOne({ _id: userId}, { _id: 1, name: 1, image: 1, role: 1});
+    const user = await User.findOne({ _id: userId}, { _id: 1, name: 1, image: 1, role: 1, categories: 1});
 console.log(userId)
     res.status(200).json(user);
 })
@@ -433,10 +433,26 @@ router.get("/users", async (req, res) => {
     res.status(200).json({"users": users});
 })
 
-router.get("/tickets", async (req, res) => {
-    const tickets = await Ticket.find({adminId : {$eq : ''}}, { _id: 1, email: 1, category: 1, title: 1, message: 1, senderId: 1});
+router.post("/tickets", async (req, res) => {
+    const { categories } = req.body;
+
+    const tickets = await Ticket.find({adminId : {$eq : ''}, category: {$in : categories}}, { _id: 1, email: 1, category: 1, title: 1, message: 1, senderId: 1});
 
     res.status(200).json({"tickets": tickets});
+})
+
+router.post("/tickets-amount", async (req, res) => {
+    const { userId } = req.body;
+
+    try {
+        const user = await User.findOne({ _id: userId });
+
+        const tickets = await Ticket.find({category: {$in : user.categories}, adminId: ""}, { _id: 1});
+
+        res.status(200).json({"amount": tickets.length});
+    } catch (error) {
+        console.log(error)
+    }
 })
 
 function verifyToken(req, res, next){

@@ -14,7 +14,6 @@ import LogContainer from './LogContainer'
 
 export default function ButtonAppBar(props){
 
-
 return (
     <Box bg="brand.primary" h="60px" position='absolute' w='100%'>
         <Grid templateColumns='repeat(12, 1fr)' gap={2} h='100%'>
