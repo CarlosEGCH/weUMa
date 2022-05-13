@@ -15,6 +15,7 @@ import * as React from 'react';
 
 import UserDeleteModal from './UserDeleteModal.js';
 import RightSideBar from './RightBar.js';
+import ReopenFAQ from './ReopenFAQ.js';
 
 import { useViewport } from '../hooks/Responsive.js';
 import { useParams } from 'react-router-dom';
@@ -106,6 +107,10 @@ export default function FaqPage(){
             {/*------------ Delete Modal ------------*/}
 
             <Box><UserDeleteModal faqId={ticket._id} handleDelete={handleDelete} /></Box>
+
+            {/*------------ Reopen Modal ------------*/}
+
+            <Box><ReopenFAQ fetchFAQ={fetchFAQ} ticketId={ticket._id} title={ticket.title} /></Box>
 
             </Flex>)})
         }

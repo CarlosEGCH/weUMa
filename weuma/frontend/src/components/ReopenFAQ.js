@@ -23,13 +23,13 @@ import { useDisclosure } from '@chakra-ui/react';
 
 
 
-export default function ReopenTicketModal(props) {
+export default function ReopenFAQ(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [ticket, setTicket] = React.useState({
     ticketId: props.ticketId,
     email: '',
-    category: props.category || '',
-    title: props.question || '',
+    category: '',
+    title: props.title,
     description: '',
   });
 
@@ -37,7 +37,7 @@ export default function ReopenTicketModal(props) {
 
     try {
         
-        await fetch('http://localhost:8080/api/reopen-ticket',{
+        await fetch('http://localhost:8080/api/reopen-faq',{
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -53,7 +53,8 @@ export default function ReopenTicketModal(props) {
     })})
     .then(res => res.json())
     .then(data => {
-        console.log(data)
+        console.log(data);
+        props.fetchFAQ();
     })
     .catch((e) => {console.log("Something went wrong ", e);})
 

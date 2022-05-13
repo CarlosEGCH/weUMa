@@ -50,9 +50,31 @@ router.post("/upload",(req, res) => {
     })
 })
 
+router.post("/reopen-faq", async (req, res) => {
+    const { ticketId, email, category, title, description } = req.body;
+
+    try {
+        const newTicket = new Ticket({
+            category,
+            title,
+            message: description,
+            email,
+            adminId: '',
+            response: ''
+        })
+
+        await Faq.findByIdAndDelete({_id: ticketId});
+
+        await newTicket.save();
+
+        res.status(200).json({ message: "Ticket re-opened" });
+    } catch (error) {
+        res.status(500).json({ message: "Something went wrong" });
+    }
+})
+
 router.post("/reopen-ticket", async (req, res) => {
     const { ticketId, category, title, description, email } = req.body;
-    console.log('ID: ', req.body.ticketId)
     const newTicket = new Ticket({
         category,
         title,
@@ -360,7 +382,7 @@ router.post("/faq-submit", async (req, res) => {
             response: answer,
             category: category
         })
-
+        
         await newFaq.save();
 
         res.status(201).json("FAQ submitted");
