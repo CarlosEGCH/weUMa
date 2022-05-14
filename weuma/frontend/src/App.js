@@ -1,6 +1,6 @@
 import './styles/App.css';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Box, Container } from '@chakra-ui/react';
+import { Box, Container, propNames } from '@chakra-ui/react';
 import Menu from "./components/Navbar";
 import MobileMenu from "./components/MobileNavbar";
 
@@ -20,6 +20,9 @@ import AdminShortcuts from './components/AdminShortcuts';
 import { useEffect, useState, useRef } from 'react';
 import Cookies from 'universal-cookie';
 
+import io from 'socket.io-client';
+
+const socket = io.connect('http://localhost:8080');
 
 function App() {
 
@@ -83,15 +86,15 @@ function App() {
     },
   }}>
       <BrowserRouter>
-      {width > 900 ? <Menu userId={userId} logged={logged} role={role} cookies={cookies} username={username} userImage={userImage} /> : <MobileMenu logged={logged} role={role} cookies={cookies} />}
+      {width > 900 ? <Menu socket={socket} userId={userId} logged={logged} role={role} cookies={cookies} username={username} userImage={userImage} /> : <MobileMenu socket={socket} logged={logged} role={role} cookies={cookies} />}
         <Routes>
           <Route index path="/" element={<Dashboard cookies={cookies} />} />
           <Route path="/faq" element={<Categories />} />
-          <Route path="/forum" element={logged ? <Forum role={role} userImage={userImage} username={username} userId={userId} /> : <Login onRegister={handleRegister} cookies={cookies} />} />
+          <Route path="/forum" element={logged ? <Forum socket={socket} role={role} userImage={userImage} username={username} userId={userId} /> : <Login onRegister={handleRegister} cookies={cookies} />} />
           <Route path="/people" element={logged ? <People /> : <Login onRegister={handleRegister} cookies={cookies} />} />
-          <Route path="/tickets" element={ <Tickets /> } />
-          <Route path="/profile/:id" element={logged ? <UserProfile cookies={cookies} /> : <Login onRegister={handleRegister} cookies={cookies} />} />
-          <Route path="/faq/:category" element={<FAQ />} />
+          <Route path="/tickets" element={ <Tickets socket={socket} /> } />
+          <Route path="/profile/:id" element={logged ? <UserProfile socket={socket} cookies={cookies} /> : <Login onRegister={handleRegister} cookies={cookies} />} />
+          <Route path="/faq/:category" element={<FAQ socket={socket} />} />
           <Route path="/signup" element={<Signup onRegister={handleRegister} cookies={cookies} />} />
           <Route path='/login' element={<Login onRegister={handleRegister} cookies={cookies} />} />
           <Route path='/admin/tickets/:id' element={logged ? <AdminTickets categories={categories} /> : <Login onRegister={handleRegister} cookies={cookies} />} />

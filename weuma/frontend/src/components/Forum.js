@@ -51,11 +51,9 @@ import transportIcon from '../assets/transport-button.svg';
 
 import { useDisclosure } from '@chakra-ui/react';
 
-import io from 'socket.io-client';
-
-const socket = io.connect('http://localhost:8080');
-
 export default function ForumPage(props){
+
+    const socket = props.socket;
 
     const [ message, setMessage ] = React.useState('');
     const [ chat, setChat ] = React.useState([]);

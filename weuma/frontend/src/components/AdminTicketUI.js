@@ -9,6 +9,8 @@ import {useParams} from 'react-router-dom';
 
 export default function AdminTicketUI(props){
 
+    const socket = props.socket;
+
     const [adminId, setAdminId] = React.useState(useParams().id);
     const [response, setResponse] = React.useState('');
 
@@ -45,7 +47,7 @@ export default function AdminTicketUI(props){
                             }
                         />
             </InputGroup>
-            <Button onClick={() => {props.handleAnswerSubmit(props.ticket.id, props.ticket.email, response, adminId); props.handleUnstage(props.ticket)}} _hover={{bg: 'brand.extra'}} ml='15px' bg='brand.accent' color='white'>Submit</Button>
+            <Button onClick={async () => {props.handleAnswerSubmit(props.ticket.id, props.ticket.email, response, adminId); props.handleUnstage(props.ticket); await socket.emit('send_ticket');}} _hover={{bg: 'brand.extra'}} ml='15px' bg='brand.accent' color='white'>Submit</Button>
             </Flex>
         </Flex>
     );

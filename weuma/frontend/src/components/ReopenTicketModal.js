@@ -21,9 +21,10 @@ import {
 import reopenIcon from "../assets/reopen-ticket.svg";
 import { useDisclosure } from '@chakra-ui/react';
 
-
-
 export default function ReopenTicketModal(props) {
+
+  const socket = props.socket;
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [ticket, setTicket] = React.useState({
     ticketId: props.ticketId,
@@ -53,7 +54,7 @@ export default function ReopenTicketModal(props) {
     })})
     .then(res => res.json())
     .then(data => {
-        console.log(data)
+      socket.emit('send_ticket')
     })
     .catch((e) => {console.log("Something went wrong ", e);})
 

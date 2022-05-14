@@ -22,7 +22,7 @@ import { useParams } from 'react-router-dom';
 
 import faqImage from '../assets/faqBg.png';
 
-export default function FaqPage(){
+export default function FaqPage(props){
 
     const { width } = useViewport();
 
@@ -110,7 +110,7 @@ export default function FaqPage(){
 
             {/*------------ Reopen Modal ------------*/}
 
-            <Box><ReopenFAQ fetchFAQ={fetchFAQ} ticketId={ticket._id} title={ticket.title} /></Box>
+            <Box><ReopenFAQ socket={props.socket} fetchFAQ={fetchFAQ} ticketId={ticket._id} title={ticket.title} /></Box>
 
             </Flex>)})
         }

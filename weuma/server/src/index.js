@@ -1,6 +1,7 @@
 //Import database
 require("./database");
 
+
 //Import express
 const express = require("express");
 const app = express();
@@ -36,6 +37,10 @@ io.on("connection", (socket) => {
     socket.on("send_message", (data) => {
         socket.to(data.room).emit("receive_message", data)
     })
+
+    socket.on("send_ticket", (() => {
+        socket.broadcast.emit("receive_ticket")
+    }))
 
     socket.on("disconnect", () => {
         console.log("Client disconnected", socket.id);

@@ -14,7 +14,9 @@ import {
   propNames
 } from '@chakra-ui/react'
 
-export default function TicketForm(){
+export default function TicketForm(props){
+
+    const socket = props.socket;
   
     const [ticket, setTicket] = React.useState({
       email: '',
@@ -37,8 +39,9 @@ export default function TicketForm(){
           }
         })
         .then(res => res.json())
-        .then(data => {
-          console.log(data.message)
+        .then(async () => {
+          await socket.emit('send_ticket');
+
         })
         .catch((e) => {
           console.log('Fetching error: ', e);

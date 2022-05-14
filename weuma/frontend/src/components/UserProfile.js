@@ -250,7 +250,7 @@ export default function UserProfile(props){
                 </Flex>
                 <Flex mt='20px' mb='100px' w='100%' flexDirection='column'>
                     <Text color='black' fontSize={'25px'} mb='10px' w='100%' borderBottom={'2px solid black'}>Solved Questions</Text>
-                    <QList handleEdit={handleEdit} handleDelete={handleDelete} owner={owner} tickets={solvedTickets} />
+                    <QList socket={props.socket} handleEdit={handleEdit} handleDelete={handleDelete} owner={owner} tickets={solvedTickets} />
                 </Flex>
                 </Flex>
             </GridItem>

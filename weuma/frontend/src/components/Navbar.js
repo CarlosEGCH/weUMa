@@ -61,7 +61,7 @@ return (
                 </Grid>
             </GridItem>
             <GridItem w='100%' h='100%' colSpan={3}>
-                <NavUser userId={props.userId} logged={props.logged} role={props.role} username={props.username} userImage={props.userImage}></NavUser>
+                <NavUser socket={props.socket} userId={props.userId} logged={props.logged} role={props.role} username={props.username} userImage={props.userImage}></NavUser>
             </GridItem>
             <GridItem w='100%' h='100%' colSpan={2}>
                 <LogContainer logged={props.logged} cookies={props.cookies}></LogContainer>

@@ -108,7 +108,7 @@ export default function AdminTickets(props){
             </GridItem>
 
             <GridItem h='100%' colStart={ width > 900 ? 2 : 1 } colEnd={ width > 900 ? 5 : 7 } display={ width > 900 ? 'initial' : 'none' } pt='100px' pl='20px'>
-                {stagedTickets.length > 0 ? <TicketDetailsList handleAnswerSubmit={handleAnswerSubmit} tickets={stagedTickets} handleUnstage={unstageTicket}/> : <Text>No staged tickets</Text>}
+                {stagedTickets.length > 0 ? <TicketDetailsList socket={props.socket} handleAnswerSubmit={handleAnswerSubmit} tickets={stagedTickets} handleUnstage={unstageTicket}/> : <Text>No staged tickets</Text>}
             </GridItem>
 
             <GridItem colStart={6} display={ width > 900 ? 'initial' : 'none' }>

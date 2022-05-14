@@ -48,7 +48,7 @@ export default function QuestionsList(props){
             <Box><SendFaqModal category={ticket.category} question={ticket.title} answer={ticket.response} /></Box>
 
             {/*------------ Reopen Ticket -------------*/}
-            <Box><ReopenTicketModal category={ticket.category} question={ticket.title} ticketId={ticket._id} /></Box>
+            <Box><ReopenTicketModal socket={props.socket} category={ticket.category} question={ticket.title} ticketId={ticket._id} /></Box>
 
             </Flex>)})
         }

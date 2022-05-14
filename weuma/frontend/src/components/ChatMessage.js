@@ -21,8 +21,6 @@ import {
 
 import { useDisclosure } from '@chakra-ui/react';
 
-import elonImage from '../assets/elon.jpg';
-
 export default function Message(props){
 
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -49,8 +47,8 @@ export default function Message(props){
           }
         })
         .then(res => res.json())
-        .then(data => {
-          console.log(data.message)
+        .then(() => {
+            props.socket.emit('send_ticket')
         })
         .catch((e) => {
           console.log('Fetching error: ', e);
@@ -194,12 +192,12 @@ export default function Message(props){
 
                     <FormControl mt={4}>
                         <FormLabel>Question Description: </FormLabel>
-                        <Input value={ticket.message} onChange={handleChange} placeholder='Description...' />
+                        <Input value={ticket.message} onChange={handleChange} name={"message"} placeholder='Description...' />
                     </FormControl>
 
                     <FormControl mt={4}>
                         <FormLabel>Email: </FormLabel>
-                        <Input value={ticket.email} onChange={handleChange} placeholder='1110000@student.uma.pt...' />
+                        <Input value={ticket.email} onChange={handleChange} name={"email"} placeholder='1110000@student.uma.pt...' />
                     </FormControl>
 
                     <FormControl mt={4}>

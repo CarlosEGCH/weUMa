@@ -7,6 +7,9 @@ import storageIcon from '../assets/storage-icon.svg';
 import inboxIcon from '../assets/inbox-icon.svg';
 
 export default function NavUserDisplay(props){
+
+    const socket = props.socket;
+
     const navigate = useNavigate();
 
     const renders = React.useRef(0);
@@ -28,7 +31,6 @@ export default function NavUserDisplay(props){
             .then(res => res.json())
             .then(data => {
                 setAmtTickets(data.amount);
-                console.log(data)
                 renders.current = renders.current + 1;
             })
         } catch (e) {
@@ -37,8 +39,14 @@ export default function NavUserDisplay(props){
     }
 
     React.useEffect(() => {
-        if(renders.current < 3){
+        socket.on("receive_ticket", () =>{
             getAmountOfTickets();
+        })
+
+        if(renders.current < 3){
+            if(props.userId != undefined && props.userId != null && props.userId != ""){
+                getAmountOfTickets();
+            }
         }
     })
 
