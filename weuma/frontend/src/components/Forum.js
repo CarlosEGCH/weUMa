@@ -296,13 +296,12 @@ export default function ForumPage(props){
             </GridItem>
             <GridItem mt='20px' colSpan={width > 900 ? 4 : 6} padding={ width > 900 ? '80px 20px 0px 20px' : '0px 0px 0px 0px'}>
                 <Box>
-                    <Text color='brand.accent' fontSize='30px' textAlign='center'>Admission</Text>
+                    <Text color='brand.accent' fontSize='30px' textAlign='center'>{currentRoom[0].toLocaleUpperCase() + currentRoom.slice(1)}</Text>
                 </Box>
                 <Box bg='pink' h={['75vh', '700px', '700px']} mb='30px' borderBottom='2px solid black'>
                     <ChatDisplay handleEdit={handleEdit} handleDelete={handleDelete} role={props.role} userId={props.userId} chat={chat} socket={socket} room={currentRoom} username={props.username} />
                 </Box>
                 <Flex flexDirection='row' px={['5px', '40px', '40px']}>
-                    <Image borderRadius='full' boxSize='40px' src={userImage} />
                     <InputGroup border='black'>
                         <Input onChange={handleChange} value={message} _hover={{border: '1px solid black'}} _placeholder={{color: 'brand.accent'}} color='brand.accent' focusBorderColor='brand.accent' ml='20px' p={['20px 105px 20px 20px','20px 160px 20px 20px','20px 160px 20px 20px']} placeholder='Write a message...' />
                         <InputRightElement 
