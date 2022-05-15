@@ -24,6 +24,7 @@ export default function RightSideBar(){
         })
 
         socket.on("online_admins", (data) => {
+            console.log('Admins: ', data);
             setAdmins(data);
         })
 

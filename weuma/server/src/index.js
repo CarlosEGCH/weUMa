@@ -51,6 +51,7 @@ io.on("connection", (socket) => {
 
     socket.on("get_online_admins", () => {
         const admins = Object.values(onlineAdmins);
+        console.log('Backend Admins: ', admins);
         socket.emit("online_admins", admins);
     })
 
