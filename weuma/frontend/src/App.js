@@ -96,7 +96,7 @@ function App() {
           <Route path="/profile/:id" element={logged ? <UserProfile socket={socket} cookies={cookies} /> : <Login onRegister={handleRegister} cookies={cookies} />} />
           <Route path="/faq/:category" element={<FAQ socket={socket} />} />
           <Route path="/signup" element={<Signup onRegister={handleRegister} cookies={cookies} />} />
-          <Route path='/login' element={<Login onRegister={handleRegister} cookies={cookies} />} />
+          <Route path='/login' element={<Login socket={socket} onRegister={handleRegister} cookies={cookies} />} />
           <Route path='/admin/tickets/:id' element={logged ? <AdminTickets categories={categories} /> : <Login onRegister={handleRegister} cookies={cookies} />} />
           <Route path="/admin/shortcuts/:id" element={logged ? <AdminShortcuts /> : <Login onRegister={handleRegister} cookies={cookies} />} />
         </Routes>

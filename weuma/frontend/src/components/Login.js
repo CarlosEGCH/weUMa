@@ -15,7 +15,7 @@ export default function Login(props){
             <GridItem h='100%' colStart={ width > 900 ? 2 : 1 } colEnd={ width > 900 ? 5 : 7 }>
                 <Center h='900px'>
                     <Box w={['100%','60%','60%']}>
-                        <LoginForm onRegister={props.onRegister} cookies={props.cookies} />
+                        <LoginForm socket={props.socket} onRegister={props.onRegister} cookies={props.cookies} />
                     </Box>
                 </Center>
             </GridItem>

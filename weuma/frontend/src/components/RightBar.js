@@ -6,33 +6,29 @@ import AdminsList from './Administrators';
 import moodleImage from '../assets/moodle.png';
 import infoalunosImage from '../assets/infoalunos.png';
 
+import io from 'socket.io-client';
+
+const socket = io.connect('http://localhost:8080');
+
 export default function RightSideBar(){
 
     const [admins, setAdmins] = React.useState([]);
 
-
-    const fetchAdmins = async () => {
-        try {
-            await fetch('http://localhost:8080/api/admins',
-        {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            }
-        })
-        .then((res) => res.json())
-        .then((data) => { 
-            setAdmins(data.admins);
-        })
-    } catch (e) {
-            console.log('Admins fetch error: ', e);
-        }}
-
         
     React.useEffect(() => {
-            fetchAdmins();
-    }, []);
+
+        socket.emit("get_online_admins");
+
+        socket.on("admin_registered", () => {
+            socket.emit("get_online_admins");
+        })
+
+        socket.on("online_admins", (data) => {
+            console.log(data)
+            setAdmins(data);
+        })
+
+    }, [socket]);
 
     return(
         <Flex flexDirection={'column'} h='800px'>

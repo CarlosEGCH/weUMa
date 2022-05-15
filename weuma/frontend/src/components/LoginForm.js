@@ -16,8 +16,11 @@ import {
 } from '@chakra-ui/react'
 
 import { useNavigate } from 'react-router-dom';
+import { Socket } from 'socket.io-client';
 
 export default function LoginForm(props){
+
+  const socket = props.socket;
 
   const navigate = useNavigate();
 
@@ -42,6 +45,11 @@ export default function LoginForm(props){
       .then(data => {
         props.cookies.set('Bearer', data.token);
         setUser({email: "", password: ""});
+        
+        if(data.role == 'admin'){
+          const adminData = {name: data.name, image: data.image}
+          socket.emit("admin_register", adminData)
+        }
       })
       .then(() => {props.onRegister(); navigate('/faq');})
       .catch((e) => {

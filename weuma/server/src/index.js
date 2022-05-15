@@ -25,6 +25,8 @@ const io = new Server(server, {
     }
 });
 
+const onlineAdmins = {};
+
 io.on("connection", (socket) => {
     console.log("New client connected: ", socket.id);
     socket.join('admission');
@@ -42,8 +44,21 @@ io.on("connection", (socket) => {
         socket.broadcast.emit("receive_ticket")
     }))
 
+    socket.on("admin_register", (adminData) => {
+        onlineAdmins[socket.id] = adminData;
+        socket.broadcast.emit("admin_registered");
+    })
+
+    socket.on("get_online_admins", () => {
+        const admins = Object.values(onlineAdmins);
+        socket.emit("online_admins", admins);
+    })
+
     socket.on("disconnect", () => {
         console.log("Client disconnected", socket.id);
+        if(onlineAdmins[socket.id]){
+            delete onlineAdmins[socket.id];
+        }
         })
     });
 
