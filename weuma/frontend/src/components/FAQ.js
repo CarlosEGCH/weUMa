@@ -1,6 +1,7 @@
 import {
   Text, 
   Center, 
+  Image,
   Grid, 
   GridItem, 
   Box,
@@ -21,6 +22,8 @@ import { useViewport } from '../hooks/Responsive.js';
 import { useParams } from 'react-router-dom';
 
 import faqImage from '../assets/faqBg.png';
+import unpinnedIcon from '../assets/unpinned-icon.svg';
+import pinnedIcon from '../assets/pinned-icon.svg';
 
 export default function FaqPage(props){
 
@@ -45,7 +48,8 @@ export default function FaqPage(props){
         })
         .then(res => res.json())
         .then(data => {
-            setFaq(data.faq);
+            console.log(data)
+            setFaq(data.faq || []);
         })
         .catch((e) => {console.log("Something went wrong ", e);})
         } catch (error) {
@@ -70,6 +74,27 @@ export default function FaqPage(props){
         .then(res => res.json())
         .then(data => {
             console.log(data);
+        })
+        .catch((e) => {console.log('Something went wrong ' + e)});
+    }
+
+    const handlePin = async (id) => {
+        setFaqChange(true);
+
+        await fetch('http://localhost:8080/api/pin-faq',{
+            method: 'POST',
+            body: JSON.stringify({
+                id: id
+                }),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            fetchFAQ()
         })
         .catch((e) => {console.log('Something went wrong ' + e)});
     }
@@ -111,6 +136,8 @@ export default function FaqPage(props){
             {/*------------ Reopen Modal ------------*/}
 
             <Box><ReopenFAQ socket={props.socket} fetchFAQ={fetchFAQ} ticketId={ticket._id} title={ticket.title} /></Box>
+
+            <Box><Button onClick={() => {handlePin(ticket._id)}}><Image src={ticket.pinned ? pinnedIcon : unpinnedIcon} h={'30px'}></Image></Button></Box>
 
             </Flex>)})
         }

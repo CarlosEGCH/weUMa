@@ -356,14 +356,36 @@ router.post("/get-shortcuts", async (req, res) => {
     }
 })
 
+router.post("/pin-faq", async (req, res) => {
+    try {
+        
+        const { id } = req.body;
+
+        const faq = await Faq.findOne({ _id: id });
+
+        await Faq.updateOne({_id: id}, {$set : {pinned: !faq.pinned}});
+
+        return res.status(200).json({ message: "FAQ pinned" });
+
+    } catch (error) {
+        console.log(error)
+    }
+})
+
 router.post("/get-faq", async (req, res) => {
     try {
         
         const { category } = req.body;
 
-        const faq = await Faq.find({ category: category }).sort({createdAt: -1});
+        const pinnedFaq = await Faq.find({ category: category.toLowerCase(), pinned: true }) || [];
+
+        const unpinnedFaq = await Faq.find({ category: category.toLowerCase(), pinned: false }).sort({createdAt: -1}) || [];
+
+        const faq = [...pinnedFaq, ...unpinnedFaq];
 
         if(!faq) return res.status(401).json({ message: "No faq found" });
+
+        if(faq.length == 0) return res.status(401).json({ message: "No faq found" });
 
         return res.status(201).json({ faq });
 
@@ -375,15 +397,19 @@ router.post("/get-faq", async (req, res) => {
 router.post("/faq-submit", async (req, res) => {
     try {
         
-        const { question, answer, category } = req.body;
+        const { question, answer, category, ticketId } = req.body;
 
         const newFaq = new Faq({
             title: question,
             response: answer,
-            category: category
+            category: category,
+            pinned: false
         })
         
-        await newFaq.save();
+        await newFaq.save(async (err, faq) => {
+            if(err) return res.status(401).send(err);
+            await Ticket.findOneAndDelete({_id: ticketId})
+        })
 
         res.status(201).json("FAQ submitted");
     } catch (error) {

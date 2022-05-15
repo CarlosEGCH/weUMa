@@ -22,7 +22,6 @@ export default function SendFaqModal(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
     const handleFAQ = async () => {
-        console.log(props.category)
     try {
         
         await fetch('http://localhost:8080/api/faq-submit',{
@@ -35,7 +34,8 @@ export default function SendFaqModal(props) {
         body: JSON.stringify({
             question: props.question,
             answer: props.answer,
-            category: props.category
+            category: props.category,
+            ticketId: props.ticketId,
     })})
     .then(res => res.json())
     .then(data => {

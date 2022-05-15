@@ -45,7 +45,7 @@ export default function QuestionsList(props){
             <Box display={props.owner ? 'initial' : 'none'}><UserDeleteModal handleDelete={props.handleDelete} faqId={ticket._id} /></Box>
 
             {/*------------ Send FAQ Modal ------------*/}
-            <Box><SendFaqModal category={ticket.category} question={ticket.title} answer={ticket.response} /></Box>
+            <Box><SendFaqModal ticketId={ticket._id} category={ticket.category} question={ticket.title} answer={ticket.response} /></Box>
 
             {/*------------ Reopen Ticket -------------*/}
             <Box><ReopenTicketModal socket={props.socket} category={ticket.category} question={ticket.title} ticketId={ticket._id} /></Box>

@@ -4,6 +4,7 @@ const faqSchema = new Schema({
     title: String,
     response: String,
     category: String,
+    pinned: Boolean,
 }, {
     timestamps: true
 })
