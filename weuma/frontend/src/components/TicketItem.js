@@ -5,13 +5,12 @@ import arrowIcon from '../assets/arrow-icon.svg';
 
 export default function TicketItem(props){
 
-
     return(
-        <Flex my='16px' bg='brand.secondary' flexDirection={'column'} p='8px' shadow={'md'}>
+        <Flex my='16px' bg='brand.secondary' flexDirection={'column'} p='8px' shadow={'md'} gap={2}>
            <Flex flexDirection='row' color='brand.accent'>
-                <Text fontSize='20px'>{props.ticket.title}</Text>
+                <Text width={'50%'} fontSize='15px'>{props.ticket.title}</Text>
                 <Spacer />
-                <Text fontSize='15px'>3 days ago</Text>
+                <Text fontSize='15px'>{props.ticket.createdAt}</Text>
            </Flex>
            <Text color='brand.accent'>{props.ticket.message}</Text>
            <Flex flexDirection='row'>

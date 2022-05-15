@@ -24,7 +24,7 @@ export default function AdminTicketUI(props){
            <Flex flexDirection='row' color='brand.accent'>
                 <Text fontSize='20px'>{props.ticket.title}</Text>
                 <Spacer />
-                <Text pr='10px' fontSize='15px'>3 days ago</Text>
+                <Text pr='10px' fontSize='15px'>{props.ticket.createdAt}</Text>
                 <Link onClick={() => {props.handleUnstage(props.ticket);}}><Image src={crossIcon}></Image></Link>
            </Flex>
            <Text color='brand.accent' p='8px'>

@@ -30,12 +30,12 @@ import Picker from 'emoji-picker-react';
 
 import RightSideBar from './RightBar.js';
 import ChatDisplay from './ChatList.js';
+import ShortcutButton from './ShortcutButton.js';
 
 import { useViewport } from '../hooks/Responsive.js';
 
 import forumImage from '../assets/forumBg.png';
 import userImage from '../assets/user.jpg';
-import shortcutIcon from '../assets/chat-shortcut-icon.svg'
 import emoteIcon from '../assets/chat-emote-icon.svg'
 import imageIcon from '../assets/chat-image-icon.svg'
 import admissionIcon from '../assets/admission-button.svg';
@@ -308,33 +308,8 @@ export default function ForumPage(props){
                             mr='55px'
                             children={
                                 <Flex flexDirection='row'>
-                                    <Image cursor={'pointer'} mr='5px' onClick={() => {fetchShortcuts(); onOpen();}} src={shortcutIcon} />
 
-                                    <Modal isOpen={isOpen} onClose={onClose}>
-                                        <ModalOverlay />
-                                        <ModalContent>
-                                        <ModalHeader>Your Shortcuts</ModalHeader>
-                                        <ModalCloseButton />
-                                        <ModalBody>
-                                            {shortcuts.map((shortcut, index) => {
-                                                return (<Flex flexDirection={'row'}>
-                                                    <Text key={index}>{shortcut.message}</Text>
-                                                    <Spacer/>
-                                                    <Button colorScheme='blue' mr={3} onClick={() => {handleShortcut(shortcut.message); onClose();}}>
-                                                        Use
-                                                    </Button>
-                                                        </Flex>)
-                                            })}
-                                        </ModalBody>
-
-                                        <ModalFooter>
-                                            <Button colorScheme='blue' mr={3} onClick={onClose}>
-                                            Close
-                                            </Button>
-                                            <Button variant='ghost'>Secondary Action</Button>
-                                        </ModalFooter>
-                                        </ModalContent>
-                                    </Modal>
+                                   <ShortcutButton fetchShortcuts={fetchShortcuts} handleShortcut={handleShortcut} shortcuts={shortcuts}></ShortcutButton>
 
                                     <Image cursor={'pointer'} onClick={() => {setEmojiToggle(!emojiToggle)}} mr='5px' src={emoteIcon} />
                                     <Box position='absolute' top="-320" left="-120" display={emojiToggle ? "none" : "initial"}><Picker onEmojiClick={onEmojiClick}></Picker></Box>

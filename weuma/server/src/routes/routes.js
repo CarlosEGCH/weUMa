@@ -462,7 +462,7 @@ router.get("/users", async (req, res) => {
 router.post("/tickets", async (req, res) => {
     const { categories } = req.body;
 
-    const tickets = await Ticket.find({adminId : {$eq : ''}, category: {$in : categories}}, { _id: 1, email: 1, category: 1, title: 1, message: 1, senderId: 1});
+    const tickets = await Ticket.find({adminId : {$eq : ''}, category: {$in : categories}}, { _id: 1, email: 1, category: 1, title: 1, message: 1, senderId: 1, createdAt: 1});
 
     res.status(200).json({"tickets": tickets});
 })

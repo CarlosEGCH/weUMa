@@ -37,6 +37,7 @@ export default function AdminTickets(props){
                         email: ticket.email,
                         staged: false,
                         category: ticket.category,
+                        createdAt: ticket.createdAt.split('T')[0]
                     }
             })
             setTickets(newTickets);
