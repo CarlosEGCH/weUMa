@@ -3,7 +3,6 @@ import * as React from 'react';
 
 import shortcutIcon from '../assets/chat-shortcut-icon.svg'
 import emoteIcon from '../assets/chat-emote-icon.svg'
-import imageIcon from '../assets/chat-image-icon.svg'
 import crossIcon from '../assets/cross-icon.svg'
 import {useParams} from 'react-router-dom';
 
@@ -37,12 +36,11 @@ export default function AdminTicketUI(props){
                 <InputGroup border='black'>
                         <Input onChange={handleChange} bg='white' _hover={{border: '1px solid black'}} _placeholder={{color: 'brand.accent'}} color='brand.accent' focusBorderColor='brand.accent' ml='20px' p={['20px 105px 20px 20px','20px 160px 20px 20px','20px 160px 20px 20px']} placeholder='Write a message...' />
                         <InputRightElement 
-                            mr='55px'
+                            mr='25px'
                             children={
                                 <Flex flexDirection='row'>
                                     <Image mr='5px' src={shortcutIcon} />
                                     <Image mr='5px' src={emoteIcon} />
-                                    <Image mr='5px' src={imageIcon} />
                                 </Flex>
                             }
                         />
