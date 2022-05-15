@@ -46,10 +46,6 @@ export default function LoginForm(props){
         props.cookies.set('Bearer', data.token);
         setUser({email: "", password: ""});
         
-        if(data.role == 'admin'){
-          const adminData = {name: data.name, image: data.image}
-          socket.emit("admin_register", adminData)
-        }
       })
       .then(() => {props.onRegister(); navigate('/faq');})
       .catch((e) => {

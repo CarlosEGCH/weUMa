@@ -28,8 +28,6 @@ function App() {
 
   const { width } = useViewport();
 
-  const didMount = useRef(false);
-
   const [logged, setLogged] = useState(false);
   const [role, setRole] = useState('user');
   const [userId, setUserId] = useState('');
@@ -52,13 +50,18 @@ function App() {
         }
       })
       .then(res => res.json())
-      .then(data => {
+      .then( async (data) => {
         setLogged(true);
         setUserId(data._id);
         setUserImage(data.image);
         setRole(data.role);
         setUsername(data.name);
         setCategories(data.categories);
+
+        if(data.role == 'admin' && data.name != ''){
+          const adminData = {name: data.name, image: data.image}
+          await socket.emit("admin_register", adminData)
+        }
       })
       .catch((e) => {
         console.log('Fetching error: ', e);
