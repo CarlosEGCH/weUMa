@@ -27,6 +27,7 @@ export default function RightSideBar(){
             setAdmins(data);
         })
 
+
     }, [socket]);
 
     return(

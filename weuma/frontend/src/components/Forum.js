@@ -206,6 +206,7 @@ export default function ForumPage(props){
     };
 
     const handleEdit = async (id, content) => {
+
         await fetch('http://localhost:8080/api/edit-message', {
             method: 'POST',
             body: JSON.stringify({
@@ -220,7 +221,7 @@ export default function ForumPage(props){
         .then(res => res.json())
         .then(data => {
             setChat(chat => chat.map(message => {
-                if(message.id === id){
+                if(message._id === id){
                     message.message = content
                 }
                 return message

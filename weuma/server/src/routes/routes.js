@@ -144,7 +144,6 @@ router.post("/save-message", async (req, res) => {
 
 router.post("/edit-message", async (req, res) => {
     try {
-        
         const { id, content } = req.body;
         await Message.updateOne({_id: id}, {$set : {message: content}});
 
