@@ -38,52 +38,82 @@ export default function Categories(){
                 <Grid templateColumns={['1fr 1fr','1fr 1fr','repeat(5, 1fr)']} templateRows={['repeat(5, 1fr)','repeat(5, 1fr)','1fr 1fr']} gap={'50px'} pt='40px' pl={['15px', '60px', '0px']}>
                     <GridItem>
                         <Link onClick={() => {navigate('/faq/admission')}}>
-                            <Image boxSize='150px' src={admissionIcon} />
+                            <Flex flexDirection={'column'}>
+                                <Image boxSize='150px' src={admissionIcon} />
+                                <Text textAlign={'center'} fontSize={'25px'} color='brand.accent'>Admission</Text>
+                            </Flex>
                         </Link>
                     </GridItem>
                     <GridItem>
                         <Link onClick={() => {navigate('/faq/education')}}>
-                            <Image boxSize='150px' src={educationIcon} />
+                            <Flex flexDirection={'column'}>
+                                <Image boxSize='150px' src={educationIcon} />
+                                <Text textAlign={'center'} fontSize={'25px'} color='brand.accent'>Education</Text>
+                            </Flex>
                         </Link>
                     </GridItem>
-                    <GridItem pt='20px'>
+                    <GridItem>
                         <Link onClick={() => {navigate('/faq/resources')}}>
-                            <Image boxSize='150px' src={resourcesIcon} />
+                            <Flex flexDir={'column'}>
+                                <Image boxSize='150px' src={resourcesIcon} />
+                                <Text textAlign={'center'} fontSize={'25px'} color='brand.accent'>Resources</Text>
+                            </Flex>
                         </Link>
                     </GridItem>
                     <GridItem>
                         <Link onClick={() => {navigate('/faq/guide')}}>
-                            <Image boxSize='150px' src={guideIcon} />
+                            <Flex flexDirection={'column'}>
+                                <Image boxSize='150px' src={guideIcon} />
+                                <Text textAlign={'center'} fontSize={'25px'} color='brand.accent'>Guide</Text>
+                            </Flex>
                         </Link>
                     </GridItem>
-                    <GridItem pt='30px'>
+                    <GridItem>
                         <Link onClick={() => {navigate('/faq/payments')}}>
-                            <Image boxSize='150px' src={paymentsIcon} />
+                            <Flex flexDirection={'column'}>
+                                <Image boxSize='150px' src={paymentsIcon} />
+                                <Text textAlign={'center'} fontSize={'25px'} color='brand.accent'>Payments</Text>
+                            </Flex>
                         </Link>
                     </GridItem>
                     <GridItem>
                         <Link onClick={() => {navigate('/faq/lostandfound')}}>
-                            <Image boxSize='150px' src={lostIcon} />
+                            <Flex flexDirection={'column'}>
+                                <Image boxSize='150px' src={lostIcon} />
+                                <Text textAlign={'center'} fontSize={'25px'} color='brand.accent'>Lost & Found</Text>
+                            </Flex>
                         </Link>
                     </GridItem>
-                    <GridItem pt='15px'>
+                    <GridItem>
                         <Link onClick={() => {navigate('/faq/documents')}}>
-                            <Image boxSize='150px' src={documentsIcon} />
+                            <Flex flexDirection={'column'}>
+                                <Image boxSize='150px' src={documentsIcon} />
+                                <Text textAlign={'center'} fontSize={'25px'} color='brand.accent'>Documents</Text>
+                            </Flex>
                         </Link>
                     </GridItem>
-                    <GridItem pt='15px'>
+                    <GridItem>
                         <Link onClick={() => {navigate('/faq/tickets')}}>
-                            <Image boxSize='150px' src={ticketIcon} />
+                            <Flex flexDirection={'column'}>
+                                <Image boxSize='150px' src={ticketIcon} />
+                                <Text textAlign={'center'} fontSize={'25px'} color='brand.accent'>Tickets</Text>
+                            </Flex>
                         </Link>
                     </GridItem>
-                    <GridItem pt='40px'>
+                    <GridItem>
                         <Link onClick={() => {navigate('/faq/transport')}}>
-                            <Image boxSize='150px' src={transportIcon} />
+                            <Flex flexDirection={'column'}>
+                                <Image boxSize='150px' src={transportIcon} />
+                                <Text textAlign={'center'} fontSize={'25px'} color='brand.accent'>Transport</Text>
+                            </Flex>
                         </Link>
                     </GridItem>
-                    <GridItem pt='20px'>
+                    <GridItem>
                         <Link onClick={() => {navigate('/faq/shop')}}>
-                            <Image boxSize='150px' src={shopIcon} />
+                            <Flex flexDirection={'column'}>
+                                <Image boxSize='150px' src={shopIcon} />
+                                <Text textAlign={'center'} fontSize={'25px'} color='brand.accent'>Shop</Text>
+                            </Flex>
                         </Link>
                     </GridItem>
                 </Grid>
