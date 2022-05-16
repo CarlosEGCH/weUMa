@@ -1,4 +1,4 @@
-import { Image, Box, Grid, GridItem, Text, Center, Link, Badge } from "@chakra-ui/react";
+import { Image, Box, Grid, GridItem, Text, Center, Link, Badge, Tooltip } from "@chakra-ui/react";
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -65,14 +65,22 @@ export default function NavUserDisplay(props){
                 </GridItem>
                 <GridItem colSpan={3}>
                     <Grid templateColumns='repeat(3, 1fr)' paddingTop='10px'>
-                        <Link onClick={() => {navigate(`/profile/${props.userId}`);}} w='40px'>
-                            <Image boxSize='40px' src={profileIcon}></Image></Link>
-                        <Link display={'flex'} flexDir={'row'} onClick={() => {navigate(`/admin/tickets/${props.userId}`)}} w='40px'>
-                            <Image boxSize='40px' src={storageIcon}></Image>
-                            <Badge height={'50%'} colorScheme={'red'} variant={'solid'}>{amtTickets}</Badge>
-                        </Link>
-                        <Link onClick={() => {navigate(`/admin/shortcuts/${props.userId}`)}} w='40px'>
-                            <Image boxSize='40px' src={inboxIcon}></Image></Link>
+                        <Tooltip label={'My Profile'} bg='brand.accent' color={'brand.primary'}>
+                            <Link onClick={() => {navigate(`/profile/${props.userId}`);}} w='40px'>
+                                <Image boxSize='40px' src={profileIcon}></Image>
+                            </Link>
+                        </Tooltip>
+                        <Tooltip label={'Unsolved Tickets'} bg='brand.accent' color={'brand.primary'}>
+                            <Link display={'flex'} flexDir={'row'} onClick={() => {navigate(`/admin/tickets/${props.userId}`)}} w='40px'>
+                                <Image boxSize='40px' src={storageIcon}></Image>
+                                <Badge height={'50%'} colorScheme={'red'} variant={'solid'}>{amtTickets}</Badge>
+                            </Link>
+                        </Tooltip>
+                        <Tooltip label={'My Shortcuts'} bg='brand.accent' color={'brand.primary'}>
+                            <Link onClick={() => {navigate(`/admin/shortcuts/${props.userId}`)}} w='40px'>
+                                <Image boxSize='40px' src={inboxIcon}></Image>
+                            </Link>
+                        </Tooltip>
                     </Grid>
                 </GridItem>
             </Grid>
