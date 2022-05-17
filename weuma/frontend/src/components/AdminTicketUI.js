@@ -22,8 +22,6 @@ export default function AdminTicketUI(props){
 
     const onEmojiClick = (event, emojiObject) => {
         setResponse(response + emojiObject.emoji);
-        console.log('response', response)
-
     };
 
 
@@ -45,12 +43,10 @@ export default function AdminTicketUI(props){
                 <InputGroup border='black'>
                         <Input value={response} onChange={handleChange} bg='white' _hover={{border: '1px solid black'}} _placeholder={{color: 'brand.accent'}} color='brand.accent' focusBorderColor='brand.accent' ml='20px' p={['20px 105px 20px 20px','20px 160px 20px 20px','20px 160px 20px 20px']} placeholder='Write a message...' />
                         <InputRightElement 
-                            mr='25px'
                             children={
                                 <Flex flexDirection='row'>
-                                    <Image mr='5px' src={shortcutIcon} />
                                     <Image onClick={() => {setEmojiToggle(!emojiToggle)}} cursor={'pointer'} mr='5px' src={emoteIcon} />
-                                    <Box position='absolute' top={'42px'} display={emojiToggle ? "none" : "initial"}><Picker onEmojiClick={onEmojiClick}></Picker></Box>
+                                    <Box position='absolute' top={'42px'} left={'35px'} display={emojiToggle ? "none" : "initial"}><Picker onEmojiClick={onEmojiClick}></Picker></Box>
                                 </Flex>
                             }
                         />
