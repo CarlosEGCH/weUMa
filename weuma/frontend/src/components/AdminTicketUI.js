@@ -5,6 +5,7 @@ import shortcutIcon from '../assets/chat-shortcut-icon.svg'
 import emoteIcon from '../assets/chat-emote-icon.svg'
 import crossIcon from '../assets/cross-icon.svg'
 import {useParams} from 'react-router-dom';
+import Picker from 'emoji-picker-react';
 
 export default function AdminTicketUI(props){
 
@@ -12,10 +13,18 @@ export default function AdminTicketUI(props){
 
     const [adminId, setAdminId] = React.useState(useParams().id);
     const [response, setResponse] = React.useState('');
+    const [emojiToggle, setEmojiToggle] = React.useState(true)
+
 
     const handleChange = (e) => {
         setResponse(e.target.value);
     }
+
+    const onEmojiClick = (event, emojiObject) => {
+        setResponse(response + emojiObject.emoji);
+        console.log('response', response)
+
+    };
 
 
     return(
@@ -34,13 +43,14 @@ export default function AdminTicketUI(props){
            </Flex>
             <Flex flexDirection={'row'}>
                 <InputGroup border='black'>
-                        <Input onChange={handleChange} bg='white' _hover={{border: '1px solid black'}} _placeholder={{color: 'brand.accent'}} color='brand.accent' focusBorderColor='brand.accent' ml='20px' p={['20px 105px 20px 20px','20px 160px 20px 20px','20px 160px 20px 20px']} placeholder='Write a message...' />
+                        <Input value={response} onChange={handleChange} bg='white' _hover={{border: '1px solid black'}} _placeholder={{color: 'brand.accent'}} color='brand.accent' focusBorderColor='brand.accent' ml='20px' p={['20px 105px 20px 20px','20px 160px 20px 20px','20px 160px 20px 20px']} placeholder='Write a message...' />
                         <InputRightElement 
                             mr='25px'
                             children={
                                 <Flex flexDirection='row'>
                                     <Image mr='5px' src={shortcutIcon} />
-                                    <Image mr='5px' src={emoteIcon} />
+                                    <Image onClick={() => {setEmojiToggle(!emojiToggle)}} cursor={'pointer'} mr='5px' src={emoteIcon} />
+                                    <Box position='absolute' top={'42px'} display={emojiToggle ? "none" : "initial"}><Picker onEmojiClick={onEmojiClick}></Picker></Box>
                                 </Flex>
                             }
                         />
