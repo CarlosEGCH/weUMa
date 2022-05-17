@@ -8,9 +8,7 @@ import {
     Input, 
     InputGroup, 
     InputRightElement, 
-    InputLeftElement, 
     Image,
-    Spacer, 
     Flex,
     Modal,
     ModalOverlay,
@@ -25,7 +23,6 @@ import {
 
 import * as React from 'react';
 import { useEffect } from 'react';
-import { useNavigate, useParams } from "react-router-dom";
 import Picker from 'emoji-picker-react';
 
 import RightSideBar from './RightBar.js';
@@ -35,12 +32,10 @@ import ShortcutButton from './ShortcutButton.js';
 import { useViewport } from '../hooks/Responsive.js';
 
 import forumImage from '../assets/forumBg.png';
-import userImage from '../assets/user.jpg';
 import emoteIcon from '../assets/chat-emote-icon.svg'
 import imageIcon from '../assets/chat-image-icon.svg'
 import admissionIcon from '../assets/admission-button.svg';
 import documentsIcon from '../assets/documents-button.svg';
-import resourcesIcon from '../assets/resources-button.svg';
 import educationIcon from '../assets/education-button.svg';
 import guideIcon from '../assets/guide-button.svg';
 import lostIcon from '../assets/lost-button.svg';

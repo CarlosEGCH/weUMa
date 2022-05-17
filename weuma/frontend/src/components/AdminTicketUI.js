@@ -1,7 +1,6 @@
-import { Button, Grid, GridItem, Text, Link, Box, Flex, Image, Spacer, Input, InputGroup, InputRightElement, } from '@chakra-ui/react';
+import { Button, Text, Link, Box, Flex, Image, Spacer, Input, InputGroup, InputRightElement, } from '@chakra-ui/react';
 import * as React from 'react';
 
-import shortcutIcon from '../assets/chat-shortcut-icon.svg'
 import emoteIcon from '../assets/chat-emote-icon.svg'
 import crossIcon from '../assets/cross-icon.svg'
 import {useParams} from 'react-router-dom';
