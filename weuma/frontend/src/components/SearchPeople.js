@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Text, Image, Flex, Grid, GridItem, Box, Input, InputGroup, InputRightElement } from '@chakra-ui/react';
+import { Center, Image, Flex, Box, Input, InputGroup, InputRightElement, Spinner } from '@chakra-ui/react';
 
 import SearchItem from './SearchItem';
 
@@ -9,6 +9,7 @@ import SearchIcon from '../assets/search-icon.svg';
 export default function PeopleSearch(){
 
     const [users, setUsers] = React.useState([]);
+    const [loading, setLoading] = React.useState(true);
     const [filteredUsers, setFilteredUsers] = React.useState([]);
 
     const fetchUsers = async () => {
@@ -24,6 +25,7 @@ export default function PeopleSearch(){
             .then((data) => {
                 setUsers(data.users);
                 setFilteredUsers(data.users);
+                setLoading(false);
             })
         }catch (error) {
             console.log('Users fetch error: ', error);
@@ -49,10 +51,10 @@ export default function PeopleSearch(){
             </InputGroup>
         <Box w='100%' bg='#FFEEF1'>
             <Flex flexDirection='column'>
-                {filteredUsers.map((user, key) => {
+                {loading ? <Center pt='20px'><Spinner color='brand.accent' size={'xl'} /></Center> : filteredUsers.map((user, key) => {
                     return(
-                        <SearchItem key={key} user={user}></SearchItem>
-                    );
+                          <SearchItem key={key} user={user} />
+                        );
                 })}
             </Flex>
         </Box>
