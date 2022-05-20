@@ -36,7 +36,6 @@ const upload = multer({storage: storage}).single('file')
  * -----------------------
  */
 
-//https://www.youtube.com/watch?v=wIOpe8S2Mk8
 
 router.post("/upload",(req, res) => {
     upload(req, res, (err) => {
@@ -115,7 +114,7 @@ router.post("/signup", async (req, res) => {
         })
         await newUser.save();
 
-        const token = jwt.sign({_id: newUser._id}, "SecretKey");
+        const token = jwt.sign({_id: newUser._id}, process.env.SECRET_KEY);
 
         res.status(200).json({ token });
     } catch (e) {
@@ -230,7 +229,7 @@ router.post("/login", async (req, res) => {
 
         //Create token after successful login
 
-        const token = jwt.sign({ _id: user._id }, "SecretKey");
+        const token = jwt.sign({ _id: user._id }, process.env.SECRET_KEY);
 
         return res.status(200).json({ token, name: user.name, image: user.image, role: user.role });
 
@@ -494,7 +493,7 @@ function verifyToken(req, res, next){
     }
 
     //Verify token and get the info that we introduced into it
-    const payload = jwt.verify(token, "SecretKey");
+    const payload = jwt.verify(token, process.env.SECRET_KEY);
 
     //Introduce the payload into the request body
     req.userId = payload._id;

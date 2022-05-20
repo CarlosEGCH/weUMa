@@ -1,6 +1,8 @@
+require('dotenv').config()
+
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://localhost/weuma",{
+mongoose.connect(process.env.BASE_URL,{
     useNewUrlParser: true,
     useUnifiedTopology: true
 })

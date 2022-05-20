@@ -1,3 +1,4 @@
 /weuma/server/node_modules
 /weuma/frontend/node_modules
 /weuma/server/src/public
+weuma/server/.env

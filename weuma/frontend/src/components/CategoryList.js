@@ -28,7 +28,7 @@ export default function Categories(){
 
     return(
         <Grid h='100%' templateColumns='repeat(6, 1fr)'>
-            <GridItem h='100%' colStart={ width > 900 ? 2 : 1 } colEnd={ width > 900 ? 5 : 7 }>
+            <GridItem h='100%' colStart={ width > 1200 ? 2 : 1 } colEnd={ width > 900 ? 5 : 7 }>
                 <Center marginTop='100px'>
                     <Flex flexDirection='column'>
                             <Text color='brand.accent' fontSize='40px' textAlign={'center'}>How can we help you?</Text>
