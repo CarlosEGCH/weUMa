@@ -1,8 +1,12 @@
+require('dotenv').config()
+
 const { Router } = require("express");
 const router = Router();
 
 //Import bcrypt
 const bcrypt = require("bcrypt");
+
+const nodemailer = require("nodemailer");
 
 //Import user model
 const User = require("../models/user");
@@ -258,7 +262,36 @@ router.post("/answer-ticket", async (req, res) => {
 
         const ticket = await Ticket.findOneAndUpdate({ _id: ticketId }, { $set: { response: response, adminId: adminId } }, { new: true });
 
+        const admin = await User.findOne({ _id: ticket.adminId });
+
+        const transport = nodemailer.createTransport({
+            host: process.env.MAIL_HOST,
+            port: process.env.MAIL_PORT,
+            secure: false,
+            auth: {
+                user: process.env.MAIL_USER,
+                pass: process.env.MAIL_PASS
+            },
+            tls: {
+               ciphers:'SSLv3'
+            }
+        })
+
         if(!ticket) return res.status(401).send("Ticket not found");
+
+        await transport.sendMail({
+            from: admin.email,
+            to: email,
+            subject: "Ticket response - WeUMa",
+            html: `<h1>Ticket response</h1>
+                    <p>${ticket.title}</p>
+                    <p>${ticket.message}</p>
+                    <p>${response}</p>
+                    <p>${admin.name}</p>
+                    <p>${admin.email}</p>
+                    `
+
+        })
 
         return res.status(200).json({ ticket });
 
