@@ -26,20 +26,20 @@ Another page called **_FAQ_** contains the Frequently Asked Questions and is div
 
 This project was created using the MERN Stack of technologies as the fundamental base, including more libraries and tools that will be explained in this section.
 
-..* Node.js: Used as the base for the server given that is compatible with many of the tools that were used on this project.
+* Node.js: Used as the base for the server given that is compatible with many of the tools that were used on this project.
 
-..* Express.js: It was used because of the simplicity that it provides in terms of routing and compatibility with Node.js and many other libraries.
+* Express.js: It was used because of the simplicity that it provides in terms of routing and compatibility with Node.js and many other libraries.
 
-..* MongoDB: Database that was used for storing and retrieving a large part of the data used on the app.
+* MongoDB: Database that was used for storing and retrieving a large part of the data used on the app.
 
-..* React: Single Page Application library used for it's flexibility in terms of implementation of user interfaces.
+* React: Single Page Application library used for it's flexibility in terms of implementation of user interfaces.
 
-..* [Chakra-UI](https://chakra-ui.com/): Component library compatible with React. Contains pre-build classes and functions that facilitate interface creation.
+* [Chakra-UI](https://chakra-ui.com/): Component library compatible with React. Contains pre-build classes and functions that facilitate interface creation.
 
-..* Axios: Used only for the image uploading function utilized in the **_forum_** and **_signup_** pages.
+* Axios: Used only for the image uploading function utilized in the **_forum_** and **_signup_** pages.
 
-..* Multer: Media handling library. Utilized to store images in the server and attribute hashed names to these.
+* Multer: Media handling library. Utilized to store images in the server and attribute hashed names to these.
 
-..* Socket.io: 
+* Socket.io: 
 
 
