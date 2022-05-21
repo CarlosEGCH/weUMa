@@ -1,3 +1,5 @@
 # FirstProjectDBW
 
-Website that simulates a helpdesk for the University of Madeira
+Website that simulates a helpdesk for the University of Madeira.
+
+# Project Description
