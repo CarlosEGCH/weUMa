@@ -58,9 +58,20 @@ This project was created using the MERN Stack of technologies as the fundamental
 
 * dotenv: Used to implement enviroment variables to save critical information of the database, email address and _bcrypt_ hashing key.
 
+* Mailtrap: This was used as inbox to receive and redirect the emails sent after a ticket is answered.
+
 ## Install and Run
 
-### **NOTE:** This project will not work if there is no **_.env_** file inside the server folder 
+### **NOTE:** This project will not work if there is no **_.env_** file inside the server folder with the following syntax:
+
+```
+BASE_URL = <URL of the database>
+SECRET_KEY = <hash key that for password encryption
+MAIL_HOST = <host for the email service>
+MAIL_PORT = <port for the email service>
+MAIL_USER = <username for the email service>
+MAIL_PASS = <password for the email service>
+```
 
 After downloading this repository, just execute `npm install` inside the **_/server_** folder. After that, execute the same command inside the **_/frontend_** folder.
 Finally, execute `npm run dev` inside the **_/server_** folder and then execute `npm start` inside the **_/frontend_** folder. The page will automatically be opened in a new tab in on the predetermined browser.
