@@ -18,7 +18,7 @@ Another page called **_FAQ_** contains the Frequently Asked Questions and is div
 
 ## Table of Contents
 - [Technologies Used](#technologies-used)
-- [Install and Run Instructions](#install)
+- [Install and Run Instructions](#install-and-run)
 - [How to Use this Project](#use)
 - [Final Notes](#final-notes)
 
@@ -40,6 +40,24 @@ This project was created using the MERN Stack of technologies as the fundamental
 
 * Multer: Media handling library. Utilized to store images in the server and attribute hashed names to these.
 
-* Socket.io: 
+* Socket.io: Event handling javascript library used to handle live events like message and ticket submitting and admin registration.
+
+* jsonwebtoken: Used to create and handle cookies and user authentication.
+
+* bcrypt: Utilized to encrypt and decrypt user passwords to store them in the database.
+
+* CORS: It was necessary to allow the communication between the client-side and server-side.
+
+* Morgan: It was used to make server interaction more visual, which helped in the development process.
+
+* Mongoose: Used to interact with the Mongo database from the server.
+
+* Nodemon: Also an assistant library. Updates the server every time that a change is made in the code. Helped to speed up the development process.
+
+* Nodemailer: Library used to send emails with the response to the tickets to the email that was specified in the ticket's description.
+
+* dotenv: Used to implement enviroment variables to save critical information of the database, email address and _bcrypt_ hashing key.
+
+## Install and Run
 
 
