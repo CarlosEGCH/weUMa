@@ -1,6 +1,6 @@
 # FirstProjectDBW
 
-Website that simulates a helpdesk for the University of Madeira.
+Website that simulates a helpdesk for the University of Madeira called **WeUMa**.
 
 ## Project Description
 
@@ -19,7 +19,7 @@ Another page called **_FAQ_** contains the Frequently Asked Questions and is div
 ## Table of Contents
 - [Technologies Used](#technologies-used)
 - [Install and Run Instructions](#install-and-run)
-- [How to Use this Project](#use)
+- [How to Use this Project](#how-to-use)
 - [Final Notes](#final-notes)
 
 ## Technologies Used
@@ -60,4 +60,11 @@ This project was created using the MERN Stack of technologies as the fundamental
 
 ## Install and Run
 
+### **NOTE:** This project will not work if there is no **_.env_** file inside the server folder 
 
+After downloading this repository, just execute `npm install` inside the **_/server_** folder. After that, execute the same command inside the **_/frontend_** folder.
+Finally, execute `npm run dev` inside the **_/server_** folder and then execute `npm start` inside the **_/frontend_** folder. The page will automatically be opened in a new tab in on the predetermined browser.
+
+## How to Use
+
+To be able to use all the available functions (including administrator functions) the user must create an account and then enter into the database using _mongo_ or _mongo-compass_ and change the *role* field from **user** to **admin** and a *category* of list of categories have to be selected from the available ones for the tickets to be sent to that account.  
