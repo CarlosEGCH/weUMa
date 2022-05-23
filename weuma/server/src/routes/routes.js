@@ -296,7 +296,7 @@ router.post("/edit-description", async (req, res) => {
 router.post("/answer-ticket", async (req, res) => {
     try {
         
-        const { ticketId, email, response, adminId } = req.body;
+        const { ticketId, email, response, adminId, faq } = req.body;
 
         const ticket = await Ticket.findOneAndUpdate({ _id: ticketId }, { $set: { response: response, adminId: adminId } }, { new: true });
 
@@ -330,6 +330,16 @@ router.post("/answer-ticket", async (req, res) => {
                     `
 
         })
+
+        if(faq){
+            const newFaq = new Faq({
+                title: ticket.title,
+                response: response,
+                pinned: false,
+                category: ticket.category
+            })
+            await newFaq.save();
+        }
 
         return res.status(200).json({ ticket });
 

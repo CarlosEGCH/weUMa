@@ -70,12 +70,12 @@ export default function AdminTickets(props){
             }
     });
 
-    const handleAnswerSubmit = async (ticketId, email, response, adminId) => {
+    const handleAnswerSubmit = async (ticketId, email, response, adminId, faq) => {
         try {
             await fetch(`http://localhost:8080/api/answer-ticket`, {
                 method: 'POST',
                 body: JSON.stringify(
-                    {ticketId, email, response, adminId}
+                    {ticketId, email, response, adminId, faq}
                 ),
                 headers: {
                     'Accept': 'application/json',
@@ -85,7 +85,6 @@ export default function AdminTickets(props){
             .then(res => res.json())
             .then(data => {
                 getTickets();
-                console.log(data);
             })
             .catch((e) => {
                 console.log('Fetching error: ', e);

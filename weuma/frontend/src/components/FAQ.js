@@ -49,7 +49,6 @@ export default function FaqPage(props){
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data)
             setFaq(data.faq || []);
         })
         .catch((e) => {console.log("Something went wrong ", e);})

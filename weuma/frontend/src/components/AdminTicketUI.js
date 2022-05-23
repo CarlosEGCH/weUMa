@@ -1,4 +1,4 @@
-import { Button, Tag, Text, Link, Box, Flex, Image, Spacer, Input, InputGroup, InputRightElement, } from '@chakra-ui/react';
+import { Checkbox, Button, Tag, Text, Link, Box, Flex, Image, Spacer, Input, InputGroup, InputRightElement, } from '@chakra-ui/react';
 import * as React from 'react';
 
 import emoteIcon from '../assets/chat-emote-icon.svg'
@@ -12,7 +12,8 @@ export default function AdminTicketUI(props){
 
     const [adminId, setAdminId] = React.useState(useParams().id);
     const [response, setResponse] = React.useState('');
-    const [emojiToggle, setEmojiToggle] = React.useState(true)
+    const [emojiToggle, setEmojiToggle] = React.useState(true);
+    const [checkbox, setCheckbox] = React.useState(false);
 
 
     const handleChange = (e) => {
@@ -22,6 +23,10 @@ export default function AdminTicketUI(props){
     const onEmojiClick = (event, emojiObject) => {
         setResponse(response + emojiObject.emoji);
     };
+
+    const handleCheckbox = () => {
+        setCheckbox(!checkbox);
+    }
 
 
     return(
@@ -51,7 +56,8 @@ export default function AdminTicketUI(props){
                             }
                         />
             </InputGroup>
-            <Button onClick={async () => {props.handleAnswerSubmit(props.ticket.id, props.ticket.email, response, adminId); props.handleUnstage(props.ticket); await socket.emit('send_ticket');}} _hover={{bg: 'brand.extra'}} ml='15px' bg='brand.accent' color='white'>Submit</Button>
+            <Button onClick={async () => {props.handleAnswerSubmit(props.ticket.id, props.ticket.email, response, adminId, checkbox); props.handleUnstage(props.ticket); await socket.emit('send_ticket');}} _hover={{bg: 'brand.extra'}} ml='15px' bg='brand.accent' color='white'>Submit</Button>
+            <Checkbox ml='10px' value={checkbox} onChange={handleCheckbox} colorScheme={'orange'} border='black' color={'brand.accent'}>Save FAQ</Checkbox>
             </Flex>
         </Flex>
     );
