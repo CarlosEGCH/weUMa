@@ -90,6 +90,8 @@ The following functions were implemented:
 
 * Ticket pool that the administrators can solve depending on their category of specialization.
 
+* When the tickets are being answered there is a checkbox that gives the option to save the question-answer pair on FAQs.
+
 * Frequently Asked Questions can be deleted, edited, pinned on the start of the list, and reopened as new tickets and are created based on the ticket's title and it's response by the admin.
 
 * Frequently Asked Questions are divided by categories and are displayed as collapsible items on a list.
