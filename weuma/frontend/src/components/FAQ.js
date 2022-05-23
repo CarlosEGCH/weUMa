@@ -17,6 +17,7 @@ import * as React from 'react';
 import UserDeleteModal from './UserDeleteModal.js';
 import RightSideBar from './RightBar.js';
 import ReopenFAQ from './ReopenFAQ.js';
+import UserEditModal from './UserEditModal.js';
 
 import { useViewport } from '../hooks/Responsive.js';
 import { useParams } from 'react-router-dom';
@@ -99,6 +100,29 @@ export default function FaqPage(props){
         .catch((e) => {console.log('Something went wrong ' + e)});
     }
 
+
+    const handleEdit = async (id, title, response) => {
+        setFaqChange(true);
+    
+        await fetch('http://localhost:8080/api/edit-faq',{
+            method: 'POST',
+            body: JSON.stringify({
+                id: id,
+                title: title,
+                response: response
+                }),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            fetchFAQ();
+        })
+    }
+
     React.useEffect(() => {
         if(faqChange){
             fetchFAQ();
@@ -136,6 +160,9 @@ export default function FaqPage(props){
             {/*------------ Reopen Modal ------------*/}
 
             <Box><ReopenFAQ socket={props.socket} fetchFAQ={fetchFAQ} ticketId={ticket._id} title={ticket.title} /></Box>
+
+            {/*------------ Edit Modal --------------*/}
+            <Box><UserEditModal handleEdit={handleEdit} pinned={ticket.pinned} content={ticket.title} response={ticket.response} ticketId={ticket._id} /></Box>
 
             <Box><Button onClick={() => {handlePin(ticket._id)}}><Image src={ticket.pinned ? pinnedIcon : unpinnedIcon} h={'30px'}></Image></Button></Box>
 

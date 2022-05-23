@@ -23,7 +23,7 @@ import { useDisclosure } from '@chakra-ui/react';
 export default function UserEditModal(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const [edit, setEdit] = React.useState({edit: props.content, response: props.response});
+  const [edit, setEdit] = React.useState({edit: props.content, response: props.response, pinned: props.pinned || false});
 
   const handleChange = (e) => {
     setEdit({...edit, [e.target.name]: e.target.value});

@@ -179,6 +179,22 @@ router.post("/edit-message", async (req, res) => {
     }
 })
 
+router.post("/edit-faq", async (req, res) => {
+    try {
+        
+        const { id, title, response, pinned } = req.body;
+
+        const editedFaq = await Faq.updateOne({_id: id}, {$set : {title: title, response: response, pinned: pinned}});
+
+        if(!editedFaq) return res.status(400).send("Something went wrong");
+
+        res.status(200).json({ message: "FAQ updated" });
+
+    } catch (error) {
+        console.log(error)
+    }
+})
+
 router.post("/edit-ticket", async (req, res) => {
     try {
         
