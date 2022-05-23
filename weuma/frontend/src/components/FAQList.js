@@ -1,5 +1,5 @@
 import {
-  Button,
+  Tooltip,
   Flex,
   Text,
   Box,
@@ -38,17 +38,33 @@ export default function QuestionsList(props){
 
             {/*------------ Edit Modal ------------*/}
             
-            <Box display={props.owner ? 'initial' : 'none'}><UserEditModal ticketId={ticket._id} content={ticket.title} response={ticket.response} handleEdit={props.handleEdit} /></Box>
+            <Tooltip label={'Edit Ticket'}>
+              <Box display={props.owner ? 'initial' : 'none'}>
+                <UserEditModal ticketId={ticket._id} content={ticket.title} response={ticket.response} handleEdit={props.handleEdit} />
+              </Box>
+            </Tooltip>
 
             {/*------------ Delete Modal ------------*/}
 
-            <Box display={props.owner ? 'initial' : 'none'}><UserDeleteModal handleDelete={props.handleDelete} faqId={ticket._id} /></Box>
+            <Tooltip label={'Delete Ticket'}>
+              <Box display={props.owner ? 'initial' : 'none'}>
+                <UserDeleteModal handleDelete={props.handleDelete} faqId={ticket._id} />
+              </Box>
+            </Tooltip>
 
             {/*------------ Send FAQ Modal ------------*/}
-            <Box><SendFaqModal ticketId={ticket._id} category={ticket.category} question={ticket.title} answer={ticket.response} /></Box>
+            <Tooltip label={'Save as FAQ'}>
+              <Box>
+                <SendFaqModal ticketId={ticket._id} category={ticket.category} question={ticket.title} answer={ticket.response} />
+              </Box>
+            </Tooltip>
 
             {/*------------ Reopen Ticket -------------*/}
-            <Box><ReopenTicketModal socket={props.socket} category={ticket.category} question={ticket.title} ticketId={ticket._id} /></Box>
+            <Tooltip label={'Reopen Ticket'}>
+              <Box>
+                <ReopenTicketModal socket={props.socket} category={ticket.category} question={ticket.title} ticketId={ticket._id} />
+              </Box>
+            </Tooltip>
 
             </Flex>)})
         }
