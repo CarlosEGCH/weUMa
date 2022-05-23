@@ -10,7 +10,7 @@ First, the administrators must always have an account and must have an area (or 
 
 On the other hand, people with or without accounts on the website are able to submit tickets, having in mind that an email address must be provided for the answer to be sent. All solved tickets are also stored in the administrator's profile where they can also be re-opened, deleted, edited or sent to Frequently Asked Questions.
 
-The website also has a **_forum_** that serves as a general chat divided by categories in which every user can participate by sending live messages including images and emojis. Messages can be deleted, edited and used to open a new ticket having the content of the message as the question in the ticket form.
+The website also has a **_forum_** that serves as a general chat divided by categories in which every user can participate by sending live messages including images and emojis. Messages can be deleted, edited and used to open a new ticket of faq having the content of the message as the question in the respective form.
 
 Administrators have the option to create **_shortcuts_** which are answers that are commonly used. These **_shortuts_** can be used in the **forum_** and to create them there is a dedicated page that can only be accessed by administrators.
 
