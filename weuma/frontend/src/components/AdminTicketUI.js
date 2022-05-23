@@ -1,4 +1,4 @@
-import { Button, Text, Link, Box, Flex, Image, Spacer, Input, InputGroup, InputRightElement, } from '@chakra-ui/react';
+import { Button, Tag, Text, Link, Box, Flex, Image, Spacer, Input, InputGroup, InputRightElement, } from '@chakra-ui/react';
 import * as React from 'react';
 
 import emoteIcon from '../assets/chat-emote-icon.svg'
@@ -35,8 +35,9 @@ export default function AdminTicketUI(props){
            <Text color='brand.accent' p='8px'>
                 {props.ticket.message}
            </Text>
-           <Flex flexDirection='row' py='5px'>
-                <Text color='brand.accent' fontSize='13px'>{props.ticket.email}</Text>
+           <Flex flexDirection='row' py='5px' gap={4}>
+                <Tag color='brand.accent' colorScheme={'black'} fontSize='15px' pr='10px'>{props.ticket.category[0].toUpperCase() + props.ticket.category.slice(1)}</Tag>
+                <Text color='brand.accent' fontSize='15px'>{props.ticket.email}</Text>
            </Flex>
             <Flex flexDirection={'row'}>
                 <InputGroup border='black'>
