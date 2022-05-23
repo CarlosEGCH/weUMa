@@ -76,6 +76,28 @@ router.post("/reopen-faq", async (req, res) => {
     }
 })
 
+router.post("/message-faq-submit", async (req, res) => {
+    try {
+        const {question, answer, pinned, category} = req.body;
+
+        const newFaq = new Faq({
+            title: question,
+            response: answer,
+            pinned: pinned,
+            category: category.toLowerCase()
+        })
+
+        const faq = await newFaq.save();
+
+        if(!faq) return res.status(400).send("Something went wrong");
+
+        res.status(200).json({ message: "Question submitted" });
+
+    } catch (error) {
+        console.log(error)
+    }
+})
+
 router.post("/reopen-ticket", async (req, res) => {
     const { ticketId, category, title, description, email } = req.body;
     const newTicket = new Ticket({

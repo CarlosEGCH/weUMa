@@ -33,6 +33,13 @@ export default function Message(props){
       adminId: '',
       response: ''
     });
+    const [faq, setFaq] = React.useState({
+        question: '',
+        answer: message,
+        category: '',
+        pinned: false
+    });
+
     const [edit, setEdit] = React.useState(message)
     
     const handleSubmit = async () => {
@@ -59,11 +66,43 @@ export default function Message(props){
       }
     }
 
+    const handleFaqSubmit = async () => {
+        try {
+
+            await fetch(`http://localhost:8080/api/message-faq-submit`, {
+                method: 'POST',
+                body: JSON.stringify(faq),
+                headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+                }
+            })
+            .then(res => res.json())
+            .then(() => {
+                console.log('Faq submitted')
+            })
+            .catch((e) => {
+                console.log('Fetching error: ', e);
+            })
+    
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     const handleChange = (e) => {
       setTicket({
         ...ticket,
         [e.target.name]: e.target.value
       });
+    }
+
+    const handleFaqChange = (e) => {
+        setFaq({
+            ...faq,
+            [e.target.name]: e.target.value
+        });
     }
 
     const handleEditChange = (e) => {
@@ -172,7 +211,7 @@ export default function Message(props){
             <ModalCloseButton />
                 <ModalBody>
                     <Text fontSize={'18px'}>Message Title:</Text>
-                    <Text pl={'10px'} pt={'5px'}>{message}</Text>
+                    <Text pl={'10px'}>{message}</Text>
 
                     <FormControl mt={4}>
                         <FormLabel >Select a Category</FormLabel>
@@ -204,6 +243,32 @@ export default function Message(props){
                         <FormLabel pt='10px' borderTop={'1px solid gray'}>Edit: </FormLabel>
                         <Input value={edit} onChange={handleEditChange} placeholder='Edit your message...' />
                     </FormControl>
+
+
+                    <FormControl mt={4}>
+                        <FormLabel borderTop={'1px solid gray'}>Create a FAQ: </FormLabel>
+                        <FormLabel pt='5px' >Question: </FormLabel>
+                        <Input value={faq.question} name={'question'} onChange={handleFaqChange} placeholder='Write a question...' />
+                    </FormControl>
+                    <FormControl mt={4}>
+                        <FormLabel pt='5px'>Answer: </FormLabel>
+                        <Input value={faq.answer} name={'answer'} onChange={handleFaqChange} placeholder='Write an answer...' />
+                    </FormControl>
+                    <FormControl mt={4}>
+                        <FormLabel>Select a Category</FormLabel>
+                    <Select value={faq.category} onChange={handleFaqChange} name='category' placeholder='Select category...' color={'gray'}>
+                        <option>Admission</option>
+                        <option>Education</option>
+                        <option>Resources</option>
+                        <option>Documents</option>
+                        <option>Guide</option>
+                        <option>Payments</option>
+                        <option>Lost & Found</option>
+                        <option>Support Tickets</option>
+                        <option>Transport</option>
+                        <option>Shop & Merch</option>
+                    </Select>
+                    </FormControl>
                 </ModalBody>
 
                 <ModalFooter>
@@ -216,8 +281,8 @@ export default function Message(props){
                     <Button colorScheme='red' mr={3} onClick={() => {props.handleDelete(props.msgId); onClose();}}>
                         Delete
                     </Button>
-                    <Button variant='ghost' onClick={() => {onClose(); handleReset();}}>
-                        Cancel
+                    <Button colorScheme='green' onClick={() => {handleFaqSubmit(); onClose();}}>
+                        Send Faq
                     </Button>
                 </ModalFooter>
             </ModalContent>
