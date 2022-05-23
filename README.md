@@ -108,7 +108,7 @@ The following functions were implemented:
 
 * The administrators that are online are shown on the right of the page when on desktop mode.
 
-* The chat was implemented with the possibility of sending emojis, images, edit and delete messages and open tickets from the messages.
+* The chat was implemented with the possibility of sending emojis, images, edit and delete messages and open tickets and FAQs from the messages.
 
 * Each administrator has the option to create _shortcuts_ that are quick answers that each admin can write to prevent writing the same answer multiple times. A shortcut can be creted, edited and deleted at any moment inside the **shortcuts** page which is available for every admin at the top-right corner of the website.
 
