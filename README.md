@@ -10,7 +10,7 @@ First, the administrators must always have an account and must have an area (or 
 
 On the other hand, people with or without accounts on the website are able to submit tickets, having in mind that an email address must be provided for the answer to be sent. All solved tickets are also stored in the administrator's profile where they can also be re-opened, deleted, edited or sent to Frequently Asked Questions.
 
-The website also has a **_forum_** that serves as a general chat divided by categories in which every user can participate by sending live messages including images and emojis. Messages can be deleted, edited and used to open a new ticket having the content of the message as the question in the ticket form.
+The website also has a **_forum_** that serves as a general chat divided by categories in which every user can participate by sending live messages including images and emojis. Messages can be deleted, edited and used to open a new ticket of faq having the content of the message as the question in the respective form.
 
 Administrators have the option to create **_shortcuts_** which are answers that are commonly used. These **_shortuts_** can be used in the **forum_** and to create them there is a dedicated page that can only be accessed by administrators.
 
@@ -108,7 +108,7 @@ The following functions were implemented:
 
 * The administrators that are online are shown on the right of the page when on desktop mode.
 
-* The chat was implemented with the possibility of sending emojis, images, edit and delete messages and open tickets from the messages.
+* The chat was implemented with the possibility of sending emojis, images, edit and delete messages and open tickets and FAQs from the messages.
 
 * Each administrator has the option to create _shortcuts_ that are quick answers that each admin can write to prevent writing the same answer multiple times. A shortcut can be creted, edited and deleted at any moment inside the **shortcuts** page which is available for every admin at the top-right corner of the website.
 
