@@ -34,7 +34,7 @@ export default function RightSideBar(){
         <Flex flexDirection={'column'} h='800px'>
             <Box h='100%' pt='70px' borderBottom='1px solid black'>
                 <Center borderBottom='1px solid black'>
-                    <Text fontSize='20px' color='brand.accent' >Administrators</Text>
+                    <Text fontSize='20px' color='brand.accent' >Online Admins:</Text>
                 </Center>
                 <AdminsList admins={admins}></AdminsList>
             </Box>
