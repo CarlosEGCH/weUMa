@@ -21,6 +21,7 @@ Another page called **_FAQ_** contains the Frequently Asked Questions and is div
 - [Install and Run Instructions](#install-and-run)
 - [How to Use this Project](#how-to-use)
 - [Final Notes](#final-notes)
+- [References](#references)
 
 ## Technologies Used:
 
@@ -115,3 +116,7 @@ The following functions were implemented:
 * Each administrator has the option to create _shortcuts_ that are quick answers that each admin can write to prevent writing the same answer multiple times. A shortcut can be creted, edited and deleted at any moment inside the **shortcuts** page which is available for every admin at the top-right corner of the website.
 
 * On the bottom-right corner there are two links to **moodle** and **infoalunos** having in mind that this website is student-oriented.
+
+## References:
+
+* Fazt-Code: https://www.youtube.com/c/FaztTech
