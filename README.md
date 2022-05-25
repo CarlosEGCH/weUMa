@@ -120,3 +120,13 @@ The following functions were implemented:
 ## References:
 
 * Fazt-Code: https://www.youtube.com/c/FaztTech
+
+* Chakra UI: https://www.youtube.com/channel/UC4TmDovH46TB4S0SM0Y4CIg
+
+* React Docs: https://es.reactjs.org/docs/getting-started.html
+
+* Chakra UI Docs: https://chakra-ui.com/
+
+* Socket.IO Docs: https://socket.io/
+
+* Node JS Tutorial JavaTPoint: https://www.javatpoint.com/nodejs-tutorial
