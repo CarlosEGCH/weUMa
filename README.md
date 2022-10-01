@@ -67,7 +67,7 @@ This project was created using the MERN Stack of technologies as the fundamental
 
 ```
 BASE_URL = <URL of the database>
-SECRET_KEY = <hash key that for password encryption
+SECRET_KEY = <hash key that for password encryption>
 MAIL_HOST = <host for the email service>
 MAIL_PORT = <port for the email service>
 MAIL_USER = <username for the email service>
