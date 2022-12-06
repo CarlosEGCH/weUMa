@@ -1,4 +1,4 @@
-# FirstProjectDBW:
+# weUMa:
 
 Website that simulates a helpdesk for the University of Madeira called **WeUMa**.
 
